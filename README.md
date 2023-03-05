@@ -12,24 +12,24 @@
 
 ## Linux System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/546/546049.png" width="40" height="40" />
 
-## Windows System Enumeration
+## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
 
-## Shell
+## Shell <img src="" width="40" height="40" />
 
-## Port Forwarding/Tunneling
+## Port Forwarding/Tunneling <img src="" width="40" height="40" />
 
-## Compiling Exploit Codes
+## Compiling Exploit Codes <img src="" width="40" height="40" />
 
-## Linux PrivEsc
+## Linux PrivEsc <img src="" width="40" height="40" />
 
-## Windows PrivEsc
+## Windows PrivEsc <img src="" width="40" height="40" />
 
-## Active Directory
+## Active Directory <img src="" width="40" height="40" />
 
-### Active Directory Enumeration
+### Active Directory Enumeration <img src="" width="40" height="40" />
 
-### Active Directory Credentials
+### Active Directory Credentials <img src="" width="40" height="40" />
 
-### Active Directory Movement
+### Active Directory Movement <img src="" width="40" height="40" />
 
 
