@@ -36,7 +36,6 @@ sudo apt update && sudo apt install rinetd
 cat /etc/rinetd.conf
 ````
 ````
-...
 # forwarding rules come here
 #
 # you may specify allow and deny rules after a specific forwarding rule
@@ -44,6 +43,10 @@ cat /etc/rinetd.conf
 #
 # bindadress    bindport  
 # connectaddress  connectport
+````
+````
+# bindadress bindport  connectaddress  connectport
+  0.0.0.0    80        216.58.207.142  80
 ````
 
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
