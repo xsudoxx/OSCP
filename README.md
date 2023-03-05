@@ -2,7 +2,7 @@
 
 ## Service Enumeration <img src="" width="40" height="40" />
 
-## Web Pentest <img src="" width="40" height="40" />
+## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
 
 ## Exploitation <img src="https://cdn-icons-png.flaticon.com/512/2147/2147286.png" width="40" height="40" /> 
 
