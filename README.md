@@ -28,11 +28,12 @@ copy me
 
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 ### Tools
+#### rinetd
 ````
 sudo apt update && sudo apt install rinetd
 ````
 ````
-copy me
+cat /etc/rinetd.conf
 ````
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
