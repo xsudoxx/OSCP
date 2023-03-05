@@ -28,7 +28,7 @@
 
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
 
-### Active Directory Credentials <img src="" width="40" height="40" />
+### Active Directory Credentials <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
 
 ### Active Directory Movement <img src="" width="40" height="40" />
 
