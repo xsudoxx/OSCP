@@ -20,7 +20,7 @@
 
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
-## Linux PrivEsc <img src="https://repository-images.githubusercontent.com/165548191/20454080-42d8-11ea-9076-57d151462f64" width="40" height="40" />
+## Linux PrivEsc <img src="https://repository-images.githubusercontent.com/165548191/20454080-42d8-11ea-9076-57d151462f64" width="60" height="40" />
 
 ## Windows PrivEsc <img src="" width="40" height="40" />
 
