@@ -4,17 +4,36 @@
   <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
 </div>
 
-# Initial Enumeration
+## Service Enumeration
 
-## Network Enumeration
+## Web Pentest
 
-## Web Application Enumeration
+## Exploitation
 
-# Linux Initial Foothold
+## Buffer Overflow
 
-# Linux Priveledge Escalation
+## File Transfer
 
-# Windows Initial Foothold
+## Linux System Enumeration
 
-# Windows Privledge Escalation
+## Windows System Enumeration
+
+## Shell
+
+## Port Forwarding/Tunneling
+
+## Compiling Exploit Codes
+
+## Linux PrivEsc
+
+## Windows PrivEsc
+
+## Active Directory
+
+### Active Directory Enumeration
+
+### Active Directory Credentials
+
+### Active Directory Movement
+
 
