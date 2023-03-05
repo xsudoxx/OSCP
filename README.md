@@ -18,7 +18,7 @@
 
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 
-## Compiling Exploit Codes <img src="" width="40" height="40" />
+## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
 ## Linux PrivEsc <img src="" width="40" height="40" />
 
