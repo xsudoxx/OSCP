@@ -26,7 +26,7 @@
 
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
 
-### Active Directory Enumeration <img src="" width="40" height="40" />
+### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
 
 ### Active Directory Credentials <img src="" width="40" height="40" />
 
