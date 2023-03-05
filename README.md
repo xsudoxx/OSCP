@@ -52,6 +52,10 @@ cat /etc/rinetd.conf
 sudo service rinetd restart
 ````
 #### SSH Tunneling
+````
+sudo ssh -N -L 0.0.0.0:445:192.168.1.110:445 student@10.11.0.128t
+````
+
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
