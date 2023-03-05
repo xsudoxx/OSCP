@@ -3,7 +3,7 @@
 ## Service Enumeration <img src="https://cdn-icons-png.flaticon.com/512/6989/6989458.png" width="40" height="40" />
 ### Network Enumeration
 ````
-nmap -p- --min-rate 1000 -sC -sV -A 192.168.129.52
+nmap -p- --min-rate 1000 -sC -sV -A $IP
 ````
 
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
