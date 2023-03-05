@@ -10,7 +10,7 @@
 
 ## File Transfer <img src="https://cdn-icons-png.flaticon.com/512/1037/1037316.png" width="40" height="40" />
 
-## Linux System Enumeration
+## Linux System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/546/546049.png" width="40" height="40" />
 
 ## Windows System Enumeration
 
