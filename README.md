@@ -52,6 +52,7 @@ cat /etc/rinetd.conf
 sudo service rinetd restart
 ````
 #### SSH Tunneling
+Accessing Windows SMB Shares
 ````
 sudo ssh -N -L 0.0.0.0:445:192.168.1.110:445 student@10.11.0.128
 ````
@@ -72,6 +73,7 @@ sudo /etc/init.d/smbd restart
 ````
 smbclient -L 127.0.0.1 -U Administrator
 ````
+Accessing Port 80 locally
 ````
 ssh -L 80:0.0.0.0:80 student@192.168.146.52 -p 2222
 ````
