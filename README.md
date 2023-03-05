@@ -53,7 +53,7 @@ sudo service rinetd restart
 ````
 #### SSH Tunneling
 ````
-sudo ssh -N -L 0.0.0.0:445:192.168.1.110:445 student@10.11.0.128t
+sudo ssh -N -L 0.0.0.0:445:192.168.1.110:445 student@10.11.0.128
 ````
 ````
 kali@kali:~$ sudo vim /etc/samba/smb.conf 
