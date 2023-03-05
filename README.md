@@ -28,7 +28,7 @@ copy me
 
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 ### Tools
-#### rinetd
+#### rinetd Port Fowarding
 ````
 sudo apt update && sudo apt install rinetd
 ````
@@ -51,6 +51,7 @@ cat /etc/rinetd.conf
 ````
 sudo service rinetd restart
 ````
+#### SSH Tunneling
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
