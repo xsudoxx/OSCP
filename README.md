@@ -16,5 +16,5 @@
 
 # Windows Initial Foothold
 
-# Windows Priveldge Escalation
+# Windows Privledge Escalation
 
