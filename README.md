@@ -56,7 +56,7 @@ sudo service rinetd restart
 sudo ssh -N -L 0.0.0.0:445:192.168.1.110:445 student@10.11.0.128t
 ````
 ````
-kali@kali:~$ sudo nano /etc/samba/smb.conf 
+kali@kali:~$ sudo vim /etc/samba/smb.conf 
 
 kali@kali:~$ cat /etc/samba/smb.conf 
 ...
