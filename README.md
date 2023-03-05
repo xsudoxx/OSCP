@@ -6,7 +6,7 @@
 
 ## Exploitation
 
-## Buffer Overflow <img src="https://nvd.nist.gov/site-media/images/LandingPage/apiGuidance800x632.png" width="40" height="40" />
+## Buffer Overflow <img src="https://imgbin.com/png/m6xfeWyp/computer-icons-stack-overflow-solution-stack-png" width="40" height="40" />
 
 ## File Transfer <img src="https://cdn-icons-png.flaticon.com/512/1037/1037316.png" width="40" height="40" />
 
