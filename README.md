@@ -14,9 +14,9 @@
 
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
 
-## Shell <img src="" width="40" height="40" />
+## Shell <img src="https://cdn-icons-png.flaticon.com/512/5756/5756857.png" width="40" height="40" />
 
-## Port Forwarding/Tunneling <img src="" width="40" height="40" />
+## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 
 ## Compiling Exploit Codes <img src="" width="40" height="40" />
 
