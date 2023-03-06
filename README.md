@@ -108,8 +108,12 @@ socks4 	127.0.0.1 8080
 ````
 proxychains nmap --top-ports=20 -sT -Pn 127.0.0.1
 ````
+non-root user
 ````
 proxychains4 firefox http://127.0.0.1/
+````
+````
+proxychains wpscan --url http://127.0.0.1:80/ --usernames usernames.txt --passwords /usr/share/wordlists/rockyou.txt
 ````
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
