@@ -97,7 +97,7 @@ SSH Dynamic Port Fowarding
 ssh -N -D 127.0.0.1:8080 student@$IP
 ````
 ````
-cat /etc/proxychains4.conf
+cat /etc/proxychains.conf
 
 [ProxyList]
 # add proxy here ...
