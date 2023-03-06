@@ -106,7 +106,7 @@ cat /etc/proxychains4.conf
 socks4 	127.0.0.1 8080 
 ````
 ````
-sudo proxychains nmap --top-ports=20 -sT -Pn $IP
+proxychains nmap --top-ports=20 -sT -Pn 127.0.0.1
 ````
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
