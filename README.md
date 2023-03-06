@@ -132,7 +132,7 @@ Re-scan network
 ````
 sudo nmap -sS -sV 127.0.0.1 -p 1234
 ````
-###NETSH
+#### NETSH
 Compromised System Access Windows 10 machine 10.11.0.2 an additional network interface 192.168.1.110
 ````
 netsh interface portproxy add v4tov4 listenport=4455 listenaddress=10.11.0.22 connectport=445 connectaddress=192.168.1.110
