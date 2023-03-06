@@ -181,6 +181,9 @@ net user /domain
 ````
 net user <user>_admin /domain
 ````
+````
+net group /domain
+````
 ### Active Directory Credentials <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
 
 ### Active Directory Movement <img src="https://cdn-icons-png.flaticon.com/512/9760/9760046.png" width="40" height="40" />
