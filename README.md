@@ -132,6 +132,18 @@ Re-scan network
 ````
 sudo nmap -sS -sV 127.0.0.1 -p 1234
 ````
+###NETSH
+Compromised System Access Windows 10 machine 10.11.0.2 an additional network interface 192.168.1.110
+````
+netsh interface portproxy add v4tov4 listenport=4455 listenaddress=10.11.0.22 connectport=445 connectaddress=192.168.1.110
+````
+````
+netstat -anp TCP | find "4455"
+````
+(Only System User Can Run)
+````
+netsh advfirewall firewall add rule name="forward_port_rule" protocol=TCP dir=in localip=10.11.0.22 localport=4455 action=allow
+````
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
