@@ -96,6 +96,15 @@ SSH Dynamic Port Fowarding
 ````
 ssh -N -D 127.0.0.1:8080 student@10.11.0.128
 ````
+````
+cat /etc/proxychains.conf
+
+[ProxyList]
+# add proxy here ...
+# meanwile
+# defaults set to "tor"
+socks4 	127.0.0.1 8080 
+````
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
