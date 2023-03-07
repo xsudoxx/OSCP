@@ -184,11 +184,13 @@ net user <user>_admin /domain
 ````
 net group /domain
 ````
-### Active Directory Credentials <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
+### Active Directory Credential Hunting <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
+
+### Active Directory Lateral Movement <img src="https://cdn-icons-png.flaticon.com/512/9760/9760046.png" width="40" height="40" />
+#### Service Account Attacks
 #### Pass the Hash
 #### Overpass the Hash
 #### Pass the Ticket
+#### Silver Ticket
 #### Distributed Component Object Model (DCOM)
-### Active Directory Lateral Movement <img src="https://cdn-icons-png.flaticon.com/512/9760/9760046.png" width="40" height="40" />
-
 
