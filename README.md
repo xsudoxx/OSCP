@@ -187,10 +187,10 @@ net group /domain
 ### Active Directory Credential Hunting <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
 
 ### Active Directory Lateral Movement <img src="https://cdn-icons-png.flaticon.com/512/9760/9760046.png" width="40" height="40" />
-#### Service Account Attacks
-#### Pass the Hash
-#### Overpass the Hash
-#### Pass the Ticket
-#### Silver Ticket
-#### Distributed Component Object Model (DCOM)
+#### Service Account Attacks <img src="" width="40" height="40" />
+#### Pass the Hash <img src="" width="40" height="40" />
+#### Overpass the Hash <img src="" width="40" height="40" />
+#### Pass the Ticket <img src="" width="40" height="40" />
+#### Silver Ticket <img src="https://cdn-icons-png.flaticon.com/512/3702/3702979.png" width="40" height="40" />
+#### Distributed Component Object Model (DCOM) <img src="" width="40" height="40" />
 
