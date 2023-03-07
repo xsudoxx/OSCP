@@ -187,7 +187,8 @@ net group /domain
 ### Active Directory Credential Hunting <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
 
 ### Active Directory Lateral Movement <img src="https://cdn-icons-png.flaticon.com/512/9760/9760046.png" width="40" height="40" />
-#### Service Account Attacks <img src="" width="40" height="40" />
+#### Service Account Attacks <img src="![image](https://user-images.githubusercontent.com/127046919/223288689-1286c822-176f-4164-85a6-e212b74fb754.png)
+" width="40" height="40" />
 #### Pass the Hash <img src="" width="40" height="40" />
 #### Overpass the Hash <img src="" width="40" height="40" />
 #### Pass the Ticket <img src="" width="40" height="40" />
