@@ -19,7 +19,7 @@ For background the DNS Querying Service is running nslookup and then querying th
 ````
 && whoami
 ````
-<img src="https://user-images.githubusercontent.com/127046919/223559962-d008b8d1-cea6-4982-976a-16fe0ef1746d.png" width="80" height="80" />
+<img src="https://user-images.githubusercontent.com/127046919/223559962-d008b8d1-cea6-4982-976a-16fe0ef1746d.png" width="160" height="160" />
 
 
 ## Exploitation <img src="https://cdn-icons-png.flaticon.com/512/2147/2147286.png" width="40" height="40" /> 
