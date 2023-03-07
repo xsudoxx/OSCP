@@ -203,4 +203,5 @@ The Microsoft Component Object Model (COM) is a system for creating software com
 Going back to the explanation of Kerberos authentication, we recall that when a user submits a request for a TGT, the KDC encrypts the TGT with a secret key known only to the KDCs in the domain. This secret key is actually the password hash of a domain user account called krbtgt.1
 
 If we are able to get our hands on the krbtgt password hash, we could create our own self-made custom TGTs, or golden tickets.
-#### Domain Controller Synchronization
+#### Domain Controller Synchronization <img src="https://cdn-icons-png.flaticon.com/128/9405/9405206.png" width="40" height="40" /> 
+To do this, we could move laterally to the domain controller and run Mimikatz to dump the password hash of every user. We could also steal a copy of the NTDS.dit database file,1 which is a copy of all Active Directory accounts stored on the hard drive, similar to the SAM database used for local accounts.
