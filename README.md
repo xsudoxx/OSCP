@@ -188,7 +188,7 @@ net group /domain
 
 ### Active Directory Lateral Movement <img src="https://cdn-icons-png.flaticon.com/512/9760/9760046.png" width="40" height="40" />
 #### Service Account Attacks <img src="https://cdn-icons-png.flaticon.com/128/720/720234.png" width="40" height="40" />
-#### Pass the Hash <img src="" width="40" height="40" />
+#### Pass the Hash <img src="https://cdn-icons-png.flaticon.com/128/6107/6107027.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/6050/6050858.png" width="40" height="40" />
 #### Overpass the Hash <img src="" width="40" height="40" />
 #### Pass the Ticket <img src="" width="40" height="40" />
 #### Silver Ticket <img src="https://cdn-icons-png.flaticon.com/512/3702/3702979.png" width="40" height="40" />
