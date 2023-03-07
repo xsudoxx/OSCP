@@ -13,6 +13,13 @@ copy me
 ````
 
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
+### Command Injection
+#### DNS Querying Service
+For background the DNS Querying Service is running nslookup and then querying the output. The way we figured this out was by inputing our own IP and getting back an error that is similar to one that nslookup would produce. With this in mind we can add the && character to append another command to the query:
+````
+&& whoami
+````
+![image](https://user-images.githubusercontent.com/127046919/223559962-d008b8d1-cea6-4982-976a-16fe0ef1746d.png)
 
 ## Exploitation <img src="https://cdn-icons-png.flaticon.com/512/2147/2147286.png" width="40" height="40" /> 
 
