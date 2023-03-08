@@ -298,6 +298,10 @@ Get-NetUser -SPN | select serviceprincipalname #Kerberoastable users
 Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'} #Domain admins kerberostable
 Find-LocalAdminAccess #Asks DC for all computers, and asks every compute if it has admin access (very noisy). You need RCP and SMB ports opened.
 ````
+##### Rubeus Exploitation
+````
+cp /opt/Ghostpack-CompiledBinaries/Rubeus.exe .
+````
 ##### MimiKatz <img src="https://cdn-icons-png.flaticon.com/128/1864/1864514.png" width="40" height="40" /> 
 ````
 https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip
