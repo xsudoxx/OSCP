@@ -319,6 +319,10 @@ cp /usr/share/windows-resources/mimikatz/Win32/mimikatz.exe .
 ````
 cp /usr/share/windows-resources/mimikatz/x64/mimikatz.exe .
 ````
+To download the service ticket with Mimikatz, we use the kerberos::list command, which yields the equivalent output of the klist command above. We also specify the /export flag to download to disk as shown in Listing 33.
+````
+kerberos::list /export
+`````
 ##### Powershell
 This lists current cached tickets
 ````
