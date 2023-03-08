@@ -249,6 +249,7 @@ privilege::debug
 ````
 sekurlsa::logonpasswords
 ````
+Notice that we have two types of hashes highlighted in the output above. This will vary based on the functional level of the AD implementation. For AD instances at a functional level of Windows 2003, NTLM is the only available hashing algorithm. For instances running Windows Server 2008 or later, both NTLM and SHA-1 (a common companion for AES encryption) may be available. On older operating systems like Windows 7, or operating systems that have it manually set, WDigest,9 will be enabled. When WDigest is enabled, running Mimikatz will reveal cleartext password alongside the password hashes.
 
 
 #### Service Account Attacks <img src="https://cdn-icons-png.flaticon.com/128/720/720234.png" width="40" height="40" />
