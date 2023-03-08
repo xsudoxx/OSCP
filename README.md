@@ -99,10 +99,10 @@ move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)
 ?>
 ````
 ````
-mv upload.php /var/www/uploads
-````
-````
 sudo mkdir /var/www/uploads
+````
+````
+mv upload.php /var/www/uploads
 ````
 ````
 service apache2 start
