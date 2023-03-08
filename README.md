@@ -63,6 +63,11 @@ hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
 ````
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ````
+### Logging in/Changing users
+#### Crackmapexec
+````
+rdesktop -u Nathan -p abc123// 192.168.129.58 -g 94%
+````
 ## Buffer Overflow <img src="https://w7.pngwing.com/pngs/331/576/png-transparent-computer-icons-stack-overflow-encapsulated-postscript-stacking-angle-text-stack-thumbnail.png" width="40" height="40" />
 
 ## MSFVENOM
