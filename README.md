@@ -372,6 +372,7 @@ klist
 #### Credential Dumping SAM
 SAM is short for the Security Account Manager which manages all the user accounts and their passwords. It acts as a database. All the passwords are hashed and then stored SAM. It is the responsibility of LSA (Local Security Authority) to verify user login by matching the passwords with the database maintained in SAM. SAM starts running in the background as soon as the Windows boots up. SAM is found in C:\Windows\System32\config and passwords that are hashed and saved in SAM can found in the registry, just open the Registry Editor and navigate yourself to HKEY_LOCAL_MACHINE\SAM.
 ````
+#cmd.exe
 reg save hklm\sam c:\sam
 reg save hklm\system c:\system
 ````
