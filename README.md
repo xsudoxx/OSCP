@@ -362,7 +362,7 @@ C:\Windows\SysNative\fodhelper.exe #64 bit
 REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command
 REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /v DelegateExecute /t REG_SZ
 REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /d "cmd.exe" /f
-
+````
 
 
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
