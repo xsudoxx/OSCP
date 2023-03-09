@@ -55,6 +55,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 ````
 ````
 http://192.168.119.146/test.html
+http://192.168.119.146/test.hta
 ````
 ## Exploitation <img src="https://cdn-icons-png.flaticon.com/512/2147/2147286.png" width="40" height="40" />
 ### Windows rce techniques
