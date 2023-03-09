@@ -330,6 +330,7 @@ Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'} #Domain admins kerberos
 Find-LocalAdminAccess #Asks DC for all computers, and asks every compute if it has admin access (very noisy). You need RCP and SMB ports opened.
 ````
 ##### Rubeus Exploitation
+When we ran Rubeus it triggered a Kerneros Auth request and we were able to use mimikatz after to get the ticket as well.
 ````
 cp /opt/Ghostpack-CompiledBinaries/Rubeus.exe .
 ````
