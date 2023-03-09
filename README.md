@@ -343,7 +343,20 @@ smbclient -L 10.11.0.22 --port=4455 --user=Administrator
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
 
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
-
+### User Account Control (UAC) Bypass
+UAC can be bypassed in various ways. In this first example, we will demonstrate a technique that
+allows an administrator user to bypass UAC by silently elevating our integrity level from medium
+to high. As we will soon demonstrate, the fodhelper.exe509 binary runs as high integrity on Windows 10
+1709. We can leverage this to bypass UAC because of the way fodhelper interacts with the
+Windows Registry. More specifically, it interacts with registry keys that can be modified without
+administrative privileges. We will attempt to find and modify these registry keys in order to run a
+command of our choosing with high integrity
+````
+whoami /groups #check your integrity level
+````
+````
+C:\Windows\System32\fodhelper.exe
+````
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
 
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
