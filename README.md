@@ -610,6 +610,22 @@ exit
 klist
 ````
 ````
+net group "domain controllers" /domain
+````
+````
+net group "domain controllers" /domain
+The request will be processed at a domain controller for domain exam.com.
+
+Group name     Domain Controllers
+Comment        All domain controllers in the domain
+
+Members
+
+-------------------------------------------------------------------------------
+DC02$                    
+The command completed successfully.
+````
+````
 net use \\dc02.exam.com
 ````
 We have now converted our NTLM hash into a Kerberos TGT, allowing us to use any tools that rely on Kerberos authentication (as opposed to NTLM) such as the official PsExec application from Microsoft. PsExec can run a command remotely but does not accept password hashes. Since we have generated Kerberos tickets and operate in the context of Jeff_Admin in the PowerShell session, we may reuse the TGT to obtain code execution on the domain controller.
