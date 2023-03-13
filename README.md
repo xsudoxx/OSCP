@@ -612,9 +612,6 @@ klist
 ````
 ````
 net group "domain controllers" /domain
-````
-````
-net group "domain controllers" /domain
 The request will be processed at a domain controller for domain exam.com.
 
 Group name     Domain Controllers
