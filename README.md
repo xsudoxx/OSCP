@@ -466,16 +466,16 @@ shutdown /r /t 0 #wait for a shell to comeback
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
 #### Traditional Approach
 ````
-net user
+net user #users on current computer
 ````
 ````
-net user /domain
+net user /domain #users in the current domain
 ````
 ````
-net user <user>_admin /domain
+net user <user>_admin /domain #Look for specific users on the domain
 ````
 ````
-net group /domain
+net group /domain #global groups in domains
 ````
 ### Active Directory Credential Hunting <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
 #### cached storage credential attacks <img src="https://cdn-icons-png.flaticon.com/128/1486/1486513.png" width="40" height="40" />
