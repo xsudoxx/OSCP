@@ -162,7 +162,7 @@ hashid <paste your hash here>
 ````
 https://hashcat.net/wiki/doku.php?id=example_hashes
 ````
-#### Cracking
+#### Cracking hashes
 ````
 https://crackstation.net/
 ````
@@ -171,6 +171,17 @@ hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
 ````
 ````
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+````
+#### Cracking Zip files
+````
+unzip <file>
+unzip bank-account.zip 
+Archive:  bank-account.zip
+[bank-account.zip] bank-account.xls password: 
+````
+````
+zip2john file.zip zip.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt zip.txt
 ````
 ### Logging in/Changing users
 #### rdp
