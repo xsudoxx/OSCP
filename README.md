@@ -20,9 +20,39 @@ NetBIOS stands for Network Basic Input Output System. It is a software protocol 
 Port 445
 While Port 139 is known technically as ‘NBT over IP’, Port 445 is ‘SMB over IP’. SMB stands for ‘Server Message Blocks’. Server Message Block in modern language is also known as Common Internet File System. The system operates as an application-layer network protocol primarily used for offering shared access to files, printers, serial ports, and other sorts of communications between nodes on a network.
 ##### Enumeration
+nmap
 ````
 nmap --script smb-enum-shares.nse -p445 $IP
+nmap –script smb-enum-users.nse -p445 $IP
+nmap --script smb-enum-domains.nse,smb-enum-groups.nse,smb-enum-processes.nse,smb-enum-services.nse,smb-enum-sessions.nse,smb-enum-shares.nse,smb-enum-users.nse -p445 $IP
+nmap --script smb-vuln-conficker.nse,smb-vuln-cve2009-3103.nse,smb-vuln-cve-2017-7494.nse,smb-vuln-ms06-025.nse,smb-vuln-ms07-029.nse,smb-vuln-ms08-067.nse,smb-vuln-ms10-054.nse,smb-vuln-ms10-061.nse,smb-vuln-ms17-010.nse,smb-vuln-regsvc-dos.nse,smb-vuln-webexec.nse -p445 $IP
 ````
+smbmap
+````
+smbmap -H $IP
+smbmap -u "user" -p "pass" -H $IP
+smbmap -H $IP -u null
+smbmap -H $IP -P 139 2>&1
+smbmap -H $IP -P 445 2>&1
+smbmap -u null -p "" -H $IP -P 139 -x "ipconfig /all" 2>&1
+smbmap -u null -p "" -H $IP -P 445 -x "ipconfig /all" 2>&1
+````
+rpcclient
+````
+rpcclient -U "" -N $IP
+````
+enum4linux
+````
+enum4linux -a -M -l -d $IP 2>&1
+enum4linux -a -u "" -p "" 192.168.180.71 && enum4linux -a -u "guest" -p "" $IP
+````
+crackmapexec
+````
+crackmapexec smb $IP
+crackmapexec smb $IP -u "guest" -p ""
+crackmapexec smb $IP --shares -u "" -p ""
+````
+
 
 
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
