@@ -229,6 +229,10 @@ service apache2 stop
 ## Linux System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/546/546049.png" width="40" height="40" />
 
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
+### Windows Binaries
+````
+sudo apt install windows-binaries
+````
 ### Basic Enumeration of the System
 ````
 # Basics
