@@ -12,7 +12,7 @@ nmap -p <ports> -sV -sC -A $IP
 copy me
 ````
 ### Port Enumeration
-#### msrpc port 135
+#### MSRPC port 135
 #### SMB port 139,445
 Port 139
 NetBIOS stands for Network Basic Input Output System. It is a software protocol that allows applications, PCs, and Desktops on a local area network (LAN) to communicate with network hardware and to transmit data across the network. Software applications that run on a NetBIOS network locate and identify each other via their NetBIOS names. A NetBIOS name is up to 16 characters long and usually, separate from the computer name. Two applications start a NetBIOS session when one (the client) sends a command to “call” another client (the server) over TCP Port 139. (extracted from here)
