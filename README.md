@@ -19,6 +19,11 @@ NetBIOS stands for Network Basic Input Output System. It is a software protocol 
 
 Port 445
 While Port 139 is known technically as ‘NBT over IP’, Port 445 is ‘SMB over IP’. SMB stands for ‘Server Message Blocks’. Server Message Block in modern language is also known as Common Internet File System. The system operates as an application-layer network protocol primarily used for offering shared access to files, printers, serial ports, and other sorts of communications between nodes on a network.
+##### Enumeration
+````
+nmap --script smb-enum-shares.nse -p445 $IP
+````
+
 
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
 ### Command Injection
