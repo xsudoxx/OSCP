@@ -311,6 +311,9 @@ dir /s *pass* == *cred* == *vnc* == *.config*
 findstr /spin "password" *.*
 findstr /spin "password" *.*
 ````
+````
+dir /s /p proof.txt
+````
 
 ## Shell <img src="https://cdn-icons-png.flaticon.com/512/5756/5756857.png" width="40" height="40" />
 ### Linux
