@@ -81,6 +81,12 @@ crackmapexec smb $IP -u "guest" -p ""
 crackmapexec smb $IP --shares -u "" -p ""
 ````
 
+#### NFS port 2049
+##### Enumeration
+````
+showmount $IP
+showmount -e $IP
+````
 #### RDP port 3389
 ##### Enumeration
 ````
