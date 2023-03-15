@@ -20,10 +20,6 @@ NetBIOS stands for Network Basic Input Output System. It is a software protocol 
 
 Port 445
 While Port 139 is known technically as ‘NBT over IP’, Port 445 is ‘SMB over IP’. SMB stands for ‘Server Message Blocks’. Server Message Block in modern language is also known as Common Internet File System. The system operates as an application-layer network protocol primarily used for offering shared access to files, printers, serial ports, and other sorts of communications between nodes on a network.
-#### RDP port 3389
-````
-nmap --script "rdp-enum-encryption or rdp-vuln-ms12-020 or rdp-ntlm-info" -p 3389 -T4 $IP -Pn
-````
 ##### Enumeration
 nmap
 ````
@@ -58,6 +54,15 @@ crackmapexec smb $IP -u "guest" -p ""
 crackmapexec smb $IP --shares -u "" -p ""
 ````
 
+#### RDP port 3389
+##### Enumeration
+````
+nmap --script "rdp-enum-encryption or rdp-vuln-ms12-020 or rdp-ntlm-info" -p 3389 -T4 $IP -Pn
+````
+##### Password Spray
+````
+crowbar -b rdp -s 10.11.1.7/32 -U users.txt -C rockyou.txt
+````
 
 
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
