@@ -290,6 +290,15 @@ service apache2 stop
 ````
 
 ## Linux System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/546/546049.png" width="40" height="40" />
+### Finding Writable Directories
+````
+find / -xdev -type d -perm -0002 -ls 2> /dev/null
+find / -xdev -type f -perm -0002 -ls 2> /dev/null
+````
+### Finding SUID Binaries
+````
+find / -perm -4000 -user root -exec ls -ld {} \; 2> /dev/null
+````
 
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
 ### Windows Binaries
