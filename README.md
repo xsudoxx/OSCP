@@ -13,6 +13,28 @@ nmap -p <ports> -sV -sC -A $IP
 copy me
 ````
 ### Port Enumeration
+#### HTTP(S) port 80,443
+##### FingerPrinting
+````
+whatweb -a 3 $IP
+````
+##### Directory Busting
+##### Dirb
+````
+dirb http://target.com
+````
+###### gobuster
+````
+gobuster dir -u http://10.11.1.71:80/site/ -w /usr/share/seclists/Discovery/Web-Content/common.txt -e txt,php,html,htm
+gobuster dir -u http://10.11.1.71:80/site/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e txt,php,html,htm
+````
+###### feroxbuster
+````
+feroxbuster -u http://<$IP> -t 30 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x "txt,html,php,asp,aspx,jsp" -v -k -n -e -o 
+````
+
+
+
 #### MSRPC port 135
 #### SMB port 139,445
 Port 139
