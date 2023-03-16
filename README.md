@@ -110,6 +110,18 @@ sudo usermod -aG 1014 root
 
 
 #### RDP port 3389
+#### Unkown Port
+##### Enumeration
+````
+nc -nv $IP 4555
+JAMES Remote Administration Tool 2.3.2
+Please enter your login and password
+````
+##### Passwords Guessed
+````
+root:root
+````
+
 ##### Enumeration
 ````
 nmap --script "rdp-enum-encryption or rdp-vuln-ms12-020 or rdp-ntlm-info" -p 3389 -T4 $IP -Pn
