@@ -90,8 +90,8 @@ showmount -e $IP
 ##### Mounting
 ````
 sudo mount -o [options] -t nfs ip_address:share directory_to_mount
-mkdir temp
-sudo mount -t nfs -o vers=4 10.11.1.72:home temp -o nolock
+mkdir temp 
+mount -t nfs -o vers=3 10.11.1.72:/home temp -o nolock
 ````
 #### RDP port 3389
 ##### Enumeration
