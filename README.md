@@ -93,6 +93,17 @@ sudo mount -o [options] -t nfs ip_address:share directory_to_mount
 mkdir temp 
 mount -t nfs -o vers=3 10.11.1.72:/home temp -o nolock
 ````
+##### Changing permissions
+````
+sudo groupadd -g 1014 <group name>
+sudo groupadd -g 1014 1014
+sudo useradd -u 1014 -g 1014 <user>
+sudo useradd -u 1014 -g 1014 test
+sudo passwd <user>
+sudo passwd test
+````
+
+
 #### RDP port 3389
 ##### Enumeration
 ````
