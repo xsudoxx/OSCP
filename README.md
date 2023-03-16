@@ -38,7 +38,16 @@ gobuster dir -u http://10.11.1.71:80/site/ -w /usr/share/wordlists/dirbuster/dir
 feroxbuster -u http://<$IP> -t 30 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x "txt,html,php,asp,aspx,jsp" -v -k -n -e -o 
 ````
 
-
+#### POP3 port 110
+##### Enumerate
+In this situation we used another service on port 4555 and reset the password of ryuu to test in order to login into pop3 and grab credentials for ssh. SSH later triggered an exploit which caught us a restricted shell as user ryuu
+````
+telnet $IP 110 #Connect to pop3
+USER ryuu #Login as user
+PASS test #Authorize as user
+list #List every message
+retr 1 #retrieve the first email
+````
 
 #### MSRPC port 135
 #### SMB port 139,445
