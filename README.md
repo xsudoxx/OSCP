@@ -13,6 +13,14 @@ nmap -p <ports> -sV -sC -A $IP
 copy me
 ````
 ### Port Enumeration
+#### FTP port 21
+##### Emumeration
+````
+ftp -A $IP
+anonymous:anonymous
+put test.txt #check if it is reflected in a http port
+````
+
 #### SMTP port 25
 ````
 nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25
