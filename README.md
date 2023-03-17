@@ -442,7 +442,10 @@ export PATH=$PATH:/bin
 The command could not be located because '/usr/bin' is not included in the PATH environment variable.
 export PATH=$PATH:/usr/bin
 ````
-
+````
+-rbash: $'\r': command not found
+BASH_CMDS[a]=/bin/sh;a
+````
 ````
 https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
 ````
