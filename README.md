@@ -545,6 +545,7 @@ BASH_CMDS[a]=/bin/sh;a
 ````
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ````
+#### Reverse shells
 ````
 https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
 ````
