@@ -109,6 +109,9 @@ crackmapexec smb $IP --shares -u "" -p ""
 smbclient
 ````
 smbclient -U '%' -N \\\\<smb $IP>\\<share name>
+prompt off
+recurse on
+mget *
 ````
 
 #### NFS port 2049
