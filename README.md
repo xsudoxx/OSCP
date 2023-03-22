@@ -106,6 +106,10 @@ crackmapexec smb $IP
 crackmapexec smb $IP -u "guest" -p ""
 crackmapexec smb $IP --shares -u "" -p ""
 ````
+smbclient
+````
+smbclient -U '%' -N \\\\<smb $IP>\\<share name>
+````
 
 #### NFS port 2049
 ##### Enumeration
