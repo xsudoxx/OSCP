@@ -5,6 +5,7 @@
 ````
 ping $IP #63 ttl = linux
 ````
+````
 nmap -p- --min-rate 1000 $IP
 nmap -p- --min-rate 1000 $IP -Pn #disables the ping command and only scans ports
 ````
