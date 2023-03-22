@@ -158,18 +158,6 @@ sudo usermod -aG 1014 root
 
 
 #### RDP port 3389
-#### Unkown Port
-##### Enumeration
-````
-nc -nv $IP 4555
-JAMES Remote Administration Tool 2.3.2
-Please enter your login and password
-````
-##### Passwords Guessed
-````
-root:root
-````
-
 ##### Enumeration
 ````
 nmap --script "rdp-enum-encryption or rdp-vuln-ms12-020 or rdp-ntlm-info" -p 3389 -T4 $IP -Pn
@@ -178,8 +166,18 @@ nmap --script "rdp-enum-encryption or rdp-vuln-ms12-020 or rdp-ntlm-info" -p 338
 ````
 crowbar -b rdp -s 10.11.1.7/32 -U users.txt -C rockyou.txt
 ````
-
-
+#### Unkown Port
+##### Enumeration
+````
+nc -nv $IP 4555
+JAMES Remote Administration Tool 2.3.2
+Please enter your login and password
+````
+#### Passwords Guessed
+````
+root:root
+admin@xor.com:admin
+````
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
 ### Shellshock
 ````
