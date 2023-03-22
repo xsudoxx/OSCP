@@ -3,6 +3,8 @@
 ## Service Enumeration <img src="https://cdn-icons-png.flaticon.com/512/6989/6989458.png" width="40" height="40" />
 ### Network Enumeration
 ````
+ping $IP #63 ttl = linux
+````
 nmap -p- --min-rate 1000 $IP
 nmap -p- --min-rate 1000 $IP -Pn #disables the ping command and only scans ports
 ````
