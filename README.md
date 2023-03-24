@@ -81,7 +81,10 @@ wpscan --url http://$IP/wp/wp-login.php -U Admin --passwords /usr/share/wordlist
 ````
 droopescan scan drupal -u http://10.11.1.50:80
 ````
-
+##### Exploitation CVEs
+````
+CVE-2014-6287 https://www.exploit-db.com/exploits/49584
+````
 #### POP3 port 110
 ##### Enumerate
 In this situation we used another service on port 4555 and reset the password of ryuu to test in order to login into pop3 and grab credentials for ssh. SSH later triggered an exploit which caught us a restricted shell as user ryuu
