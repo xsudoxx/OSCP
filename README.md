@@ -83,7 +83,7 @@ droopescan scan drupal -u http://10.11.1.50:80
 ````
 ##### Exploitation CVEs
 ````
-CVE-2014-6287 https://www.exploit-db.com/exploits/49584
+CVE-2014-6287 https://www.exploit-db.com/exploits/49584 #HFS (HTTP File Server) 2.3.x - Remote Command Execution
 ````
 #### POP3 port 110
 ##### Enumerate
