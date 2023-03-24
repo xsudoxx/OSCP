@@ -68,14 +68,20 @@ gobuster dir -u http://10.11.1.71:80/site/ -w /usr/share/wordlists/dirbuster/dir
 ````
 feroxbuster -u http://<$IP> -t 30 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x "txt,html,php,asp,aspx,jsp" -v -k -n -e -o 
 ````
-##### WP Scan
+##### CMS 
+###### WP Scan
 ````
 wpscan --url http://$IP/wp/
 ````
-##### WP Brute Forcing
+###### WP Brute Forcing
 ````
 wpscan --url http://$IP/wp/wp-login.php -U Admin --passwords /usr/share/wordlists/rockyou.txt --password-attack wp-login
 ````
+###### Drupal scan
+````
+droopescan scan drupal -u http://10.11.1.50:80
+````
+
 #### POP3 port 110
 ##### Enumerate
 In this situation we used another service on port 4555 and reset the password of ryuu to test in order to login into pop3 and grab credentials for ssh. SSH later triggered an exploit which caught us a restricted shell as user ryuu
