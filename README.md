@@ -91,6 +91,13 @@ CVE-2015-6518 https://www.exploit-db.com/exploits/24044 phpliteadmin <= 1.9.3 Re
 ````
 CVE-XXXX-XXXX https://www.exploit-db.com/exploits/25971 Cuppa CMS - '/alertConfigField.php' Local/Remote File Inclusion
 ````
+````
+CVE-2009-4623 https://www.exploit-db.com/exploits/9623  Advanced comment system1.0  Remote File Inclusion Vulnerability
+https://github.com/hupe1980/CVE-2009-4623/blob/main/exploit.py
+````
+````
+CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System 1.0 - SQL Injection
+````
 #### POP3 port 110
 ##### Enumerate
 In this situation we used another service on port 4555 and reset the password of ryuu to test in order to login into pop3 and grab credentials for ssh. SSH later triggered an exploit which caught us a restricted shell as user ryuu
@@ -101,7 +108,11 @@ PASS test #Authorize as user
 list #List every message
 retr 1 #retrieve the first email
 ````
-
+#### RPC port 111
+##### Enumerate
+````
+nmap -sV -p 111 --script=rpcinfo $IP
+````
 #### MSRPC port 135
 #### SMB port 139,445
 Port 139
@@ -150,6 +161,11 @@ prompt off
 recurse on
 mget *
 ````
+````
+protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
+smbclient -U '%' -N \\\\$IP\\<share name> -m SMB2
+smbclient -U '%' -N \\\\$IP\\<share name> -m SMB3
+````
 
 #### NFS port 2049
 ##### Enumeration
@@ -176,6 +192,11 @@ sudo passwd test
 The user cannot be logged in or active
 ````
 sudo usermod -aG 1014 root
+````
+#### MYSQL port 3306
+##### Enumeration
+````
+nmap -sV -p 3306 --script mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 10.11.1.8 
 ````
 #### RDP port 3389
 ##### Enumeration
