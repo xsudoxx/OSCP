@@ -645,6 +645,14 @@ gunzip -d *.gz
 chmod +x chisel_1.7.3_windows_amd64
 mv chisel_1.7.3_windows_amd64 chisel.exe
 ````
+##### Chisel Linux 32bit
+````
+https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_linux_386.gz
+cp /home/kali/Downloads/chisel_1.8.1_linux_386.gz .
+chmod +x chisel_1.8.1_linux_386.gz
+gunzip -d *.gz
+mv chisel_1.8.1_linux_386 chisel32
+````
 ##### Chisel Nix
 ````
 locate chisel
