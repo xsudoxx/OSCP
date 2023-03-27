@@ -105,6 +105,9 @@ CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System
 ##### Enumerate
 In this situation we used another service on port 4555 and reset the password of ryuu to test in order to login into pop3 and grab credentials for ssh. SSH later triggered an exploit which caught us a restricted shell as user ryuu
 ````
+nmap --script "pop3-capabilities or pop3-ntlm-info" -sV -p 110 $IP
+````
+````
 telnet $IP 110 #Connect to pop3
 USER ryuu #Login as user
 PASS test #Authorize as user
