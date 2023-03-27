@@ -172,7 +172,11 @@ protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
 smbclient -U '%' -N \\\\$IP\\<share name> -m SMB2
 smbclient -U '%' -N \\\\$IP\\<share name> -m SMB3
 ````
-
+#### IMAP port 143/993
+##### Enumeration
+````
+nmap -p 143 --script imap-ntlm-info $IP
+````
 #### NFS port 2049
 ##### Enumeration
 ````
