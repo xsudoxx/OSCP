@@ -708,6 +708,10 @@ arp -A
 # How well patched is the system?
 wmic qfe get Caption,Description,HotFixID,InstalledOn
 ````
+````
+dir /a-r-d /s /b
+move "C:\Inetpub\wwwroot\winPEASx86.exe" "C:\Directory\thatisWritable\winPEASx86.exe"
+````
 ### Clear text passwords
 ````
 findstr /si password *.txt
