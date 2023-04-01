@@ -34,6 +34,12 @@ ftp -A $IP
 anonymous:anonymous
 put test.txt #check if it is reflected in a http port
 ````
+###### Upload binaries
+````
+ftp> binary
+200 Type set to I.
+ftp> put winPEASx86.exe
+````
 
 #### SMTP port 25
 ````
