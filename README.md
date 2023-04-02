@@ -718,6 +718,10 @@ wmic qfe get Caption,Description,HotFixID,InstalledOn
 dir /a-r-d /s /b
 move "C:\Inetpub\wwwroot\winPEASx86.exe" "C:\Directory\thatisWritable\winPEASx86.exe"
 ````
+#### Windows Services - insecure file persmissions
+````
+accesschk.exe /accepteula -uwcqv "Authenticated Users" * #command refer to exploits below
+````
 ### Clear text passwords
 ````
 findstr /si password *.txt
@@ -960,7 +964,7 @@ nc -nlvp 636 #wait 5 minutes
 ````
 
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
-### Windows Services
+### Windows Service - Insecure Service Permissions
 #### Windows XP SP0/SP1 Privilege Escalation
 ````
 C:\>systeminfo
