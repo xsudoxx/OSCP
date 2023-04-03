@@ -661,6 +661,10 @@ service apache2 stop
 ````
 
 ## Linux System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/546/546049.png" width="40" height="40" />
+### Use this guide first
+````
+https://sirensecurity.io/blog/linux-privilege-escalation-resources/
+````
 ### Finding Writable Directories
 ````
 find / -xdev -type d -perm -0002 -ls 2> /dev/null
