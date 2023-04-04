@@ -182,6 +182,9 @@ recurse on
 mget *
 ````
 ````
+smbclient -U null -N \\\\<smb $IP>\\<share name>
+````
+````
 protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
 smbclient -U '%' -N \\\\$IP\\<share name> -m SMB2
 smbclient -U '%' -N \\\\$IP\\<share name> -m SMB3
