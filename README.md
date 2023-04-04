@@ -172,6 +172,7 @@ crackmapexec
 ````
 crackmapexec smb $IP
 crackmapexec smb $IP -u "guest" -p ""
+crackmapexec smb $IP --shares -u "guest" -p ""
 crackmapexec smb $IP --shares -u "" -p ""
 ````
 smbclient
