@@ -76,6 +76,11 @@ nikto -ask=no -h http://$IP 2>&1
 ````
 dirb http://target.com
 ````
+##### ffuf
+````
+ffuf -w /usr/share/wordlists/dirb/common.txt -u http://$IP/FUZZ
+ffuf -w /usr/share/wordlists/dirb/big.txt -u http://$IP/FUZZ
+````
 ###### gobuster
 ````
 gobuster dir -u http://10.11.1.71:80/site/ -w /usr/share/seclists/Discovery/Web-Content/common.txt -e txt,php,html,htm
