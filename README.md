@@ -875,6 +875,20 @@ ssh -NfD 80 sean@10.11.1.251 10.1.1.0/24
 [7:07 PM]
 proxychains4 nmap -p- --min-rate=1000 10.1.1.27 -Pn #best used for nmap only
 ````
+#### ssh Local port fowarding
+##### Info 
+````
+In local port forwarding, you are forwarding a port on your local machine to a remote machine. This means that when you connect to a remote server using SSH and set up local port forwarding, any traffic sent to the specified local port will be forwarded over the SSH connection to the remote machine and then forwarded to the target service or application.
+````
+##### Example
+````
+ssh -L 6070:127.0.0.1:2049 megan@10.1.1.27 -N
+````
+````
+This command creates an SSH tunnel between your local computer and a remote computer at IP address 10.1.1.27, with the user "megan". The tunnel forwards all traffic sent to port 6070 on your local computer to port 2049 on the remote computer, which is only accessible via localhost (127.0.0.1). The "-N" flag tells SSH to not execute any commands after establishing the connection, so it will just stay open and forward traffic until you manually terminate it. This is commonly used for securely accessing network services that are not directly accessible outside of a certain network or firewall.
+
+#notes we did not use proxychains on this. just as the setup was above
+````
 #### Chisel
 ##### Chisel Windows
 ````
