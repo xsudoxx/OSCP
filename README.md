@@ -103,6 +103,14 @@ gobuster dir -u http://10.11.1.71:80/site/ -w /usr/share/wordlists/dirbuster/dir
 ````
 feroxbuster -u http://<$IP> -t 30 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x "txt,html,php,asp,aspx,jsp" -v -k -n -e -o 
 ````
+##### Files of interest
+````
+Configuration files such as .ini, .config, and .conf files.
+Application source code files such as .php, .aspx, .jsp, and .py files.
+Log files such as .log, .txt, and .xml files.
+Backup files such as .bak, .zip, and .tar.gz files.
+Database files such as .mdb, .sqlite, .db, and .sql files.
+````
 ##### CMS 
 ###### WP Scan
 ````
