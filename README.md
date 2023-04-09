@@ -31,6 +31,7 @@ nmap -p "$ports" -sC -sV -A "$target"
 ##### Emumeration
 ````
 ftp -A $IP
+ftp $IP
 anonymous:anonymous
 put test.txt #check if it is reflected in a http port
 ````
