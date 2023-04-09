@@ -200,6 +200,7 @@ crackmapexec smb $IP
 crackmapexec smb $IP -u "guest" -p ""
 crackmapexec smb $IP --shares -u "guest" -p ""
 crackmapexec smb $IP --shares -u "" -p ""
+crackmapexec smb 10.1.1.68 -u 'guest' -p '' --users
 ````
 smbclient
 ````
