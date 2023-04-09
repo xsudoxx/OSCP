@@ -879,6 +879,7 @@ ssh -NfD 80 sean@10.11.1.251 10.1.1.0/24
 [7:07 PM]
 proxychains nmap -p- --min-rate=1000 10.1.1.27 -Pn #best used for nmap only
 proxychains nmap -sT --top-ports 1000 --min-rate=1000 -Pn  10.1.1.68 -v # better scan
+proxychains nmap -A -sT -p445 -Pn 10.1.1.68 # direct scans of ports this is best used when enumerating each port
 ````
 #### ssh Local port fowarding
 ##### Info 
