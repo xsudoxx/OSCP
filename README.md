@@ -1568,6 +1568,8 @@ hashcat -m 13100 hashes.txt /usr/share/wordlists/rockyou.txt --force
 ##### MimiKatz <img src="https://cdn-icons-png.flaticon.com/128/1864/1864514.png" width="40" height="40" /> 
 ````
 https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip
+or
+https://github.com/allandev5959/mimikatz-2.1.1
 ````
 ````
 unzip mimikatz_trunk.zip 
