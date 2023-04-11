@@ -627,8 +627,6 @@ Sub MyMacro()
 
 End Sub
 ````
-
-<img src="https://user-images.githubusercontent.com/127046919/224577298-3aaaf97f-e340-4ef8-a593-b24168ee8cd2.png" width="250" height="240" />
 ### Linux rce techniques
 ````
 cp /usr/share/webshells/php/php-reverse-shell.php .
