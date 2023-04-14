@@ -428,9 +428,11 @@ nc -nlvp 22
 ````
 
 ### SQL Injection
-Background information on sqli: scanning the network for different services that may be installed. A mariaDB was installed however the same logic can be used depending on what services are running on the network
 #### SQL and php login page
 ##### vulnerable code
+````
+found a db.php file/directory. In this case fuzzed with ffuf, the example in our ffuf bruteforcing login pages will help on this
+````
 ````
 <?php
 
@@ -456,7 +458,9 @@ admin' -- ' --
 ````
 #### Research Repo MariaDB
 <img src="https://user-images.githubusercontent.com/127046919/224163239-b67fbb66-e3b8-4ea4-8437-d0fe2839a166.png" width="250" height="240" />
-
+````
+Background information on sqli: scanning the network for different services that may be installed. A mariaDB was installed however the same logic can be used depending on what services are running on the network
+````
 ````
 admin ' OR 1=1 --
 ````
