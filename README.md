@@ -2013,3 +2013,14 @@ Credentials:
 ````
 impacket-psexec -hashes 6ba75a670ee56eaf5cdf102fabb7bd4c:d098fa8675acd7d26ab86eb2581233e5 zensvc@192.168.183.170
 ````
+### Sources to try
+````
+https://tryhackme.com/room/attacktivedirectory
+HTB AD
+powerup (win enum)
+````
+````
+mine was Kali workstation -> public Box 1  client -> Internal Box 2 client -> DC
+[8:36 PM]
+it just depends, my last AD i didnt have to pivot because all IP's were public facing, but this time 2 were internal
+````
