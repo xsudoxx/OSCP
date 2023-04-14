@@ -151,7 +151,14 @@ Upgrade-Insecure-Requests: 1
 
 
 
-username=admin&password=<b>FUZZ<b>&submit=Log+In
+username=admin&password=FUZZ&submit=Log+In
+````
+````
+[Status: 302, Size: 63, Words: 10, Lines: 1, Duration: 165ms]
+    * FUZZ: asdfghjkl;'
+
+[Status: 302, Size: 63, Words: 10, Lines: 1, Duration: 172ms]
+    * FUZZ: asdfghjkl;\\'
 ````
 ##### CMS 
 ###### WP Scan
