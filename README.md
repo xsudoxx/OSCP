@@ -160,6 +160,9 @@ username=admin&password=FUZZ&submit=Log+In
 [Status: 302, Size: 63, Words: 10, Lines: 1, Duration: 172ms]
     * FUZZ: asdfghjkl;\\'
 ````
+````
+https://cybersecnerds.com/ffuf-everything-you-need-to-know/
+````
 ##### CMS 
 ###### WP Scan
 ````
