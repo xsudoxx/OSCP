@@ -75,6 +75,11 @@ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1\
 ````
 hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 4 ssh
 ````
+#### Telnet port 23
+##### Login
+````
+telnet -l james 10.2.2.23
+````
 #### SMTP port 25
 ````
 nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25
