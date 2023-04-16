@@ -1833,6 +1833,9 @@ Since Microsoft's implementation of Kerberos makes use of single sign-on, passwo
 https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip
 ````
 ````
+https://gist.github.com/insi2304/484a4e92941b437bad961fcacda82d49
+````
+````
 unzip mimikatz_trunk.zip 
 ````
 ````
