@@ -441,6 +441,10 @@ nc -nlvp 22
 
 ### SQL Injection
 #### SQL and php login page
+##### Testing sqli in every input field
+````
+';#---
+````
 ##### vulnerable code
 
 ````
