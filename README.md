@@ -959,6 +959,11 @@ cat /etc/crontab
 cat /etc/exports
 ````
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
+### PowerUp.ps1
+````
+Import-Module .\PowerUp.ps1
+. .\PowerUp.ps1
+````
 ### Windows Binaries
 ````
 sudo apt install windows-binaries
