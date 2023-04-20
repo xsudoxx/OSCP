@@ -1675,11 +1675,19 @@ whoami
 james\administrator
 ````
 ### Service Information Binary Exploitation
-#### Winpeas
+#### Winpeas - Interesting Services -non Microsoft-
 ````
 auditTracker(auditTracker)[C:\DevelopmentExecutables\auditTracker.exe] - Autoload
 File Permissions: Everyone [AllAccess], Authenticated Users [WriteData/CreateFiles]
 Possible DLL Hijacking in binary folder: C:\DevelopmentExectuables (Everyone [AllAccess], Authenticated Users [WriteData/CreateFiles])
+````
+````
+icacls auditTracker.exe
+auditTracker.exe Everyone:(I)(F)
+		 BUILTIN\Administrators:(I)(F)
+		 NT AUTHORITY\SYSTEM:(I)(F)
+		 BUILTIN\USERS:(I)(RX)
+		 NT AUTHORITY\Authenticated Users:(I)(M)
 ````
 #### Exploitation
 ````
