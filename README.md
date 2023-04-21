@@ -75,8 +75,14 @@ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1\
  -oCiphers=+aes256-cbc\
  admin@10.11.1.252 -p 22000
 ````
+##### Brute Force
 ````
 hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 4 ssh
+````
+##### Private key obtained
+````
+chmod 600 id_rsa
+ssh mario@172.16.138.14 -i id_rsa
 ````
 #### Telnet port 23
 ##### Login
