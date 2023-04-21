@@ -2114,6 +2114,11 @@ SAM is short for the Security Account Manager which manages all the user account
 ````
 whoami /all #BUILTIN\Administrators
 ````
+##### Cached domain hashes
+````
+reg save hklm\security security
+````
+##### local admin and users ntlm
 ````
 #cmd.exe
 reg save hklm\sam c:\sam
