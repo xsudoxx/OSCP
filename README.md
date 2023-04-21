@@ -2026,13 +2026,14 @@ hashcat -m 2100 hashes.txt /usr/share/wordlists/rockyou.txt
 This hash does not allow pass-the-hash style attacks, and instead requires Password Cracking to recover the plaintext password
 ````
 ##### Errors
+###### #1
 ````
 INFO: All hashes found as potfile and/or empty entries! Use --show to display them.
 ````
 ````
 hashcat -m 2100 hashes.txt /usr/share/wordlists/rockyou.txt --force --potfile-disable
 ````
-##### Taking to long
+###### #2
 ````
 hashcat -m 2100 '$DCC2$10240#yoshi#cd21be418f01f5591ac8df1fdeaa54b6' /usr/share/wordlists/rockyou.txt --show
 ````
