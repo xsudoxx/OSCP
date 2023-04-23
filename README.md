@@ -1081,6 +1081,7 @@ dir /s /p proof.txt
 dir /s /p local.txt
 ````
 ### Powershell password hunting
+#### Viewing Powershell History
 ````
 PS C:\> (Get-PSReadlineOption).HistorySavePath
 C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
@@ -1089,6 +1090,16 @@ type C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Con
 echo "Let's check if this script works running as damon and password i6yuT6tym@"
 echo "Don't forget to clear history once done to remove the password!"
 Enter-PSSession -ComputerName LEGACY -Credential $credshutdown /s
+````
+#### Interesting Files
+````
+Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue
+
+Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue
+type C:\xampp\passwords.txt
+
+Get-ChildItem -Path C:\Users\dave\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx -File -Recurse -ErrorAction SilentlyContinue
+cat Desktop\asdf.txt
 ````
 ## Shell <img src="https://cdn-icons-png.flaticon.com/512/5756/5756857.png" width="40" height="40" />
 ### Linux
