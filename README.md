@@ -1080,7 +1080,16 @@ findstr /spin "password" *.*
 dir /s /p proof.txt
 dir /s /p local.txt
 ````
+### Powershell password hunting
+````
+PS C:\> (Get-PSReadlineOption).HistorySavePath
+C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 
+type C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+echo "Let's check if this script works running as damon and password i6yuT6tym@"
+echo "Don't forget to clear history once done to remove the password!"
+Enter-PSSession -ComputerName LEGACY -Credential $credshutdown /s
+````
 ## Shell <img src="https://cdn-icons-png.flaticon.com/512/5756/5756857.png" width="40" height="40" />
 ### Linux
 #### Pimp my shell
