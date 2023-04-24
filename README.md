@@ -304,6 +304,7 @@ crackmapexec smb 10.1.1.68 -u 'guest' -p '' --users
 smbclient
 ````
 smbclient -U '%' -N \\\\<smb $IP>\\<share name>
+smbclient -U 'guest' \\\\<smb $IP>\\<share name>
 prompt off
 recurse on
 mget *
