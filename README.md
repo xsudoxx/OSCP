@@ -8,16 +8,20 @@ https://github.com/0xsyr0/oscp
 ````
 ping $IP #63 ttl = linux #127 ttl = windows
 ````
+
 ````
 nmap -p- --min-rate 1000 $IP
 nmap -p- --min-rate 1000 $IP -Pn #disables the ping command and only scans ports
 ````
+
 ````
 nmap -p <ports> -sV -sC -A $IP
 ````
+
 ````
 nmap -sS -p- --min-rate=1000 10.11.1.229 -Pn #stealth scans
 ````
+
 ````
 target/release/rustscan -a 10.11.1.252
 ````
