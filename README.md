@@ -95,6 +95,16 @@ john --wordlist=/usr/share/wordlists/rockyou.txt id_ecdsa.hash
 
 fireball         (id_ecdsa)
 ````
+##### Finding Private keys
+````
+/etc/ssh/*pub #Use this to view the type of key you have aka (ecdsa)
+
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
+````
+````
+/home/anita/.ssh/id_ecdsa.pub #public key
+/home/anita/.ssh/id_ecdsa #private key
+````
 #### Telnet port 23
 ##### Login
 ````
