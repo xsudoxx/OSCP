@@ -85,17 +85,20 @@ chmod 600 id_rsa
 ssh mario@172.16.138.14 -i id_rsa
 ````
 ##### Cracking Private key
+
 ````
 ssh2john id_ecdsa > id_ecdsa.hash
 john --wordlist=/usr/share/wordlists/rockyou.txt id_ecdsa.hash
 fireball         (id_ecdsa)
 ````
 ##### Path to keys
+
 ````
 /etc/ssh/*pub #Use this to find the type of key
 
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
 `````
+
 `````
 /home/anita/.ssh/id_ecdsa.pub #Use this to confirm the above exists
 /home/anita/.ssh/id_ecdsa #Use this to confirm the private key exists
