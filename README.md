@@ -1235,6 +1235,67 @@ findstr /spin "password" *.*
 dir /s /p proof.txt
 dir /s /p local.txt
 ````
+### Git commands
+````
+C:\Users\damon> type .gitconfig
+[safe]
+        directory = C:/staging
+[user]
+        email = damian
+        name = damian
+````
+````
+C:\Users\damon> cd C:/staging
+````
+````
+C:\staging> git log
+fatal: detected dubious ownership in repository at 'C:/staging'
+'C:/staging/.git' is owned by:
+        'S-1-5-21-464543310-226837244-3834982083-1003'
+but the current user is:
+        'S-1-5-18'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory C:/staging
+````
+````
+C:\staging> git config --global --add safe.directory C:/staging
+````
+````
+C:\staging> git log
+commit 8b430c17c16e6c0515e49c4eafdd129f719fde74
+Author: damian <damian>
+Date:   Thu Oct 20 02:07:42 2022 -0700
+
+    Email config not required anymore
+
+commit 967fa71c359fffcbeb7e2b72b27a321612e3ad11
+Author: damian <damian>
+Date:   Thu Oct 20 02:06:37 2022 -0700
+
+    V1
+````
+````
+C:\staging> git show
+commit 8b430c17c16e6c0515e49c4eafdd129f719fde74
+Author: damian <damian>
+Date:   Thu Oct 20 02:07:42 2022 -0700
+
+    Email config not required anymore
+
+diff --git a/htdocs/cms/data/email.conf.bak b/htdocs/cms/data/email.conf.bak
+deleted file mode 100644
+index 77e370c..0000000
+--- a/htdocs/cms/data/email.conf.bak
++++ /dev/null
+@@ -1,5 +0,0 @@
+-Email configuration of the CMS
+-maildmz@relia.com:DPuBT9tGCBrTbR
+-
+-If something breaks contact jim@relia.com as he is responsible for the mail server. 
+-Please don't send any office or executable attachments as they get filtered out for security reasons.
+\ No newline at end of file
+````
 ### Powershell password hunting
 #### Viewing Powershell History
 ````
