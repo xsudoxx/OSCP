@@ -1421,6 +1421,9 @@ This command creates an SSH tunnel between your local computer and a remote comp
 #notes we did not use proxychains on this. just as the setup was above
 ````
 #### Chisel
+````
+https://github.com/jpillora/chisel/releases/ #where you can find newer versions
+````
 ##### Chisel Windows
 ````
 https://github.com/jpillora/chisel/releases/download/v1.7.3/chisel_1.7.3_windows_amd64.gz #Windows Client
