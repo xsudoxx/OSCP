@@ -1430,11 +1430,11 @@ https://github.com/jpillora/chisel/releases/ #where you can find newer versions
 ````
 ##### Chisel Windows
 ````
-https://github.com/jpillora/chisel/releases/download/v1.7.3/chisel_1.7.3_windows_amd64.gz #Windows Client
-cp /home/kali/Downloads/chisel_1.7.3_windows_amd64.gz .
+https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_windows_386.gz #Windows Client
+cp /home/kali/Downloads/chisel_1.8.1_windows_386.gz .
 gunzip -d *.gz
-chmod +x chisel_1.7.3_windows_amd64
-mv chisel_1.7.3_windows_amd64 chisel.exe
+chmod +x chisel_1.8.1_windows_386.gz
+mv chisel_1.8.1_windows_386.gz chisel.exe
 ````
 ##### Chisel Linux 32bit
 ````
