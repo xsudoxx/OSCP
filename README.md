@@ -536,6 +536,11 @@ nmap --script "rdp-enum-encryption or rdp-vuln-ms12-020 or rdp-ntlm-info" -p 338
 ````
 crowbar -b rdp -s 10.11.1.7/32 -U users.txt -C rockyou.txt
 ````
+###### logging in
+````
+xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:dmzadmin /p:SlimGodhoodMope
+xfreerdp /u:dmzadmin  /v:192.168.238.191 /cert:ignore /p:"SlimGodhoodMope"  /timeout:20000 /drive:home,/tmp
+````
 #### Unkown Port
 ##### Enumeration
 ````
