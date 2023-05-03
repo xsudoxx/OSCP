@@ -1028,6 +1028,11 @@ john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt $IP -t 4 ssh
 hydra -l megan -P /usr/share/wordlists/rockyou.txt $IP -t 4 ssh
 ````
+#### Cracking kdbx files
+````
+keepass2john Database.kdbx > key.hash
+john --wordlist=/usr/share/wordlists/rockyou.txt key.hash
+````
 #### Cracking Zip files
 ````
 unzip <file>
