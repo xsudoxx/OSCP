@@ -2248,12 +2248,13 @@ The command completed successfully.
 https://github.com/brianlam38/OSCP-2022/blob/main/cheatsheet-active-directory.md#AD-Lateral-Movement-1
 ````
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
-#### nmap
+#### External Network
+##### nmap goodes
 ````
 nmap -p80 --min-rate 1000 10.11.1.20-24 #looking for initial foothold
 nmap -p88 --min-rate 1000 10.11.1.20-24 #looking for DC
 ````
-#### Traditional Approach
+#### Foothold Enumeration Legacy
 ````
 net user #users on current computer
 ````
@@ -2287,6 +2288,16 @@ ipconfig #ethernet adapter
 
 ![image](https://user-images.githubusercontent.com/127046919/236584915-a817ff3b-c6fa-4e4b-a83c-b550c4f2011e.png)
 
+#### Foothold Enumeration Powerview
+````
+Import-Module .\PowerView.ps1
+````
+````
+Get-NetDomain
+Get-NetUser
+````
+
+**
 
 ### Active Directory Credential Hunting <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
 #### cached storage credential attacks <img src="https://cdn-icons-png.flaticon.com/128/1486/1486513.png" width="40" height="40" />
