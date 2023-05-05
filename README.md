@@ -1481,6 +1481,19 @@ sudo apt-get install libx11-dev:i386 libx11-dev
 gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
+### Monitor processes/cron jobs
+#### pspy
+````
+https://github.com/DominicBreuker/pspy
+````
+````
+/opt/pspy/pspy64 #transfer over to victim
+````
+````
+chmod +x pspy64
+./pspy64
+````
+
 ### Active Ports
 ````
 ╔══════════╣ Active Ports
