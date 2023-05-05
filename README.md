@@ -1443,8 +1443,8 @@ https://github.com/jpillora/chisel/releases/ #where you can find newer versions
 https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_windows_386.gz #Windows Client
 cp /home/kali/Downloads/chisel_1.8.1_windows_386.gz .
 gunzip -d *.gz
-chmod +x chisel_1.8.1_windows_386.gz
-mv chisel_1.8.1_windows_386.gz chisel.exe
+chmod +x chisel_1.8.1_windows_386
+mv chisel_1.8.1_windows_386 chisel.exe
 ````
 ##### Chisel Linux 32bit
 ````
