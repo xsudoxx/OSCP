@@ -2278,6 +2278,16 @@ tree /f C:\Users\ #look for interesting files, backups etc.
 ````
 dir /s *.bak #looking for bak files
 ````
+````
+arp -a #map out network and connection
+````
+````
+ipconfig #ethernet adapter
+````
+
+![image](https://user-images.githubusercontent.com/127046919/236584915-a817ff3b-c6fa-4e4b-a83c-b550c4f2011e.png)
+
+
 ### Active Directory Credential Hunting <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
 #### cached storage credential attacks <img src="https://cdn-icons-png.flaticon.com/128/1486/1486513.png" width="40" height="40" />
 Since Microsoft's implementation of Kerberos makes use of single sign-on, password hashes must be stored somewhere in order to renew a TGT request. In current versions of Windows, these hashes are stored in the Local Security Authority Subsystem Service (LSASS)1 memory space. If we gain access to these hashes, we could crack them to obtain the cleartext password or reuse them to perform various actions.
