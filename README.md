@@ -1168,8 +1168,7 @@ https://sirensecurity.io/blog/linux-privilege-escalation-resources/
 ````
 ### Finding Writable Directories
 ````
-find / -xdev -type d -perm -0002 -ls 2> /dev/null
-find / -xdev -type f -perm -0002 -ls 2> /dev/null
+find / -type d -writable -user $(whoami) 2>/dev/null
 ````
 ### Finding SUID Binaries
 ````
