@@ -1782,6 +1782,9 @@ nc -nlvp 636 #wait 5 minutes
 ````
 
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
+````
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md #Last Resort
+````
 ### Windows Service - Insecure Service Permissions
 #### Windows XP SP0/SP1 Privilege Escalation
 ````
