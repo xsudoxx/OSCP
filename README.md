@@ -1185,6 +1185,7 @@ cat /etc/exports
 ## Windows System Enumeration <img src="https://cdn-icons-png.flaticon.com/512/232/232411.png" width="40" height="40" />
 ### PowerUp.ps1
 ````
+cp /opt/PowerUp/PowerUp.ps1 .
 Import-Module .\PowerUp.ps1
 . .\PowerUp.ps1
 ````
@@ -2147,6 +2148,9 @@ shutdown /r /t 0 #wait for a shell to comeback
 ##### Enumeration
 ````
 https://juggernaut-sec.com/unquoted-service-paths/#:~:text=Enumerating%20Unquoted%20Service%20Paths%20by%20Downloading%20and%20Executing,bottom%20of%20the%20script%3A%20echo%20%27Invoke-AllChecks%27%20%3E%3E%20PowerUp.ps1 # follow this
+````
+````
+cp /opt/PowerUp/PowerUp.ps1 .
 ````
 ````
 Get-WmiObject -class Win32_Service -Property Name, DisplayName, PathName, StartMode | Where {$_.PathName -notlike "C:\Windows*" -and $_.PathName -notlike '"*'} | select Name,DisplayName,StartMode,PathName
