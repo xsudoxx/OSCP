@@ -1516,7 +1516,7 @@ https://github.com/DominicBreuker/pspy
 ````
 ````
 chmod +x pspy64
-./pspy64
+./pspy64 -pf -i 1000
 ````
 
 ### Active Ports
