@@ -1078,8 +1078,38 @@ Archive:  bank-account.zip
 [bank-account.zip] bank-account.xls password: 
 ````
 ````
-zip2john file.zip zip.txt
-john --wordlist=/usr/share/wordlists/rockyou.txt zip.txt
+zip2john file.zip > test.hash
+john --wordlist=/usr/share/wordlists/rockyou.txt test.hash
+````
+#### Testing for passwords
+##### Background
+````
+We typically know we can unzip files and get de-compress the results, in this case we unzipped the zip file and got almost nothing back it was weird, we used instead the commands below to test for a password on the zip file and it did indeed prompt us to enter a zip file password, we used our cracking technique of hashes above was able to login with su chloe with the password we found in the file
+````
+````
+sudo 7z x sitebackup3.zip
+````
+````
+7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,128 CPUs AMD Ryzen 5 5500U with Radeon Graphics          (860F81),ASM,AES-NI)
+
+Scanning the drive for archives:
+1 file, 25312 bytes (25 KiB)
+
+Extracting archive: sitebackup3.zip
+--
+Path = sitebackup3.zip
+Type = zip
+Physical Size = 25312
+
+    
+Enter password (will not be echoed):
+Everything is Ok         
+
+Folders: 17
+Files: 19
+Size:       67063
+Compressed: 25312
 ````
 ### Logging in/Changing users
 #### rdp
