@@ -601,6 +601,9 @@ nc -nv $IP 4555
 JAMES Remote Administration Tool 2.3.2
 Please enter your login and password
 ````
+````
+help #always run this after your nc -nv command
+````
 #### Passwords Guessed
 ````
 root:root
