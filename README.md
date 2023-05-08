@@ -1228,6 +1228,10 @@ service apache2 stop
 ````
 https://sirensecurity.io/blog/linux-privilege-escalation-resources/
 ````
+### Checking interesting folders
+````
+/opt #lead us to chloe which lead us to root
+````
 ### Finding Writable Directories
 ````
 find / -type d -writable -user $(whoami) 2>/dev/null
