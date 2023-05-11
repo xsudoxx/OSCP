@@ -1108,6 +1108,17 @@ Archive:  bank-account.zip
 zip2john file.zip > test.hash
 john --wordlist=/usr/share/wordlists/rockyou.txt test.hash
 ````
+#### Cracking with CyberChef
+````
+https://gchq.github.io/CyberChef/
+````
+##### hashcat output
+If hashcat gives back some sort of Hex Encoding you can use cyber chef to finish off the hash and give you back the password
+````
+$HEX[7261626269743a29]
+````
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/88bc13a2-ec53-4a91-8ce1-c484fde12886)
+
 #### Testing for passwords
 ##### Background
 ````
