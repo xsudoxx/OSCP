@@ -2540,11 +2540,14 @@ net group "Music Department" / domain #Enumerating specific domain group for mem
 ````
 ##### Credential hunting
 ###### Interesting Files
-`````
+````
 Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue
 Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue
 Get-ChildItem -Path C:\Users\dave\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx -File -Recurse -ErrorAction
-`````
+````
+````
+tree /f C:\Users\ #look for interesting files, backups etc.
+````
 ###### Sam, System, Security Files
 ````
 whoami /all #BUILTIN\Administrators
