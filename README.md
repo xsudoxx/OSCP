@@ -105,6 +105,10 @@ ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5
 /home/anita/.ssh/id_ecdsa.pub #public key
 /home/anita/.ssh/id_ecdsa #private key
 ````
+##### Downloading files
+````
+scp -r -i id_rsa john@192.168.214.149:/path/to/file/you/want .
+````
 #### Telnet port 23
 ##### Login
 ````
