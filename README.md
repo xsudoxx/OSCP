@@ -283,6 +283,18 @@ index 55b1645..8ad08b0 100644
      public function getConnection() {
          $this->conn = null;
 ````
+##### API
+````
+http://192.168.214.150:8080/search
+{"query":"*","result":""}
+````
+````
+curl -X GET "http://192.168.214.150:8080/search?query=*"
+{"query":"*","result":""}
+
+curl -X GET "http://192.168.214.150:8080/search?query=lol"
+{"query":"lol","result":""}
+````
 ##### Exploitation CVEs
 ````
 CVE-2014-6287 https://www.exploit-db.com/exploits/49584 #HFS (HTTP File Server) 2.3.x - Remote Command Execution
