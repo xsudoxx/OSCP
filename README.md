@@ -90,6 +90,11 @@ hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 
 chmod 600 id_rsa
 ssh mario@172.16.138.14 -i id_rsa
 ````
+##### Public key obtained
+````
+cat id_rsa.pub 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8J1/BFjH/Oet/zx+bKUUop1IuGd93QKio7Dt7Xl/J91c2EvGkYDKL5xGbfQRxsT9IePkVINONXQHmzARaNS5lE+SoAfFAnCPnRJ+KrnJdPxYf4OQEiAxHwRJHvbYaxEEuye7GKP6V0MdSvDtqKsFk0YRFVdPKuforL/8SYtSfqYUywUJ/ceiZL/2ffGGBJ/trQJ2bBL4QcOg05ZxrEoiTJ09+Sw3fKrnhNa5/NzYSib+0llLtlGbagBh3F9n10yqqLlpgTjDp5PKenncFiKl1llJlQGcGhLXxeoTI59brTjssp8J+z6A48h699CexyGe02GZfKLLLE+wKn/4luY0Ve8tnGllEdNFfGFVm7WyTmAO2vtXMmUbPaavDWE9cJ/WFXovDKtNCJxpyYVPy2f7aHYR37arLL6aEemZdqzDwl67Pu5y793FLd41qWHG6a4XD05RHAD0ivsJDkypI8gMtr3TOmxYVbPmq9ecPFmSXxVEK8oO3qu2pxa/e4izXBFc= john@oscp #new user found
+````
 ##### Cracking Private Key
 ````
 ssh2john id_ecdsa > id_ecdsa.hash
@@ -656,6 +661,7 @@ help #always run this after your nc -nv command
 root:root
 admin@xor.com:admin
 admin:admin
+kiero:kiero #name of the box
 ````
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
 ### Shellshock
