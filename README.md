@@ -2718,6 +2718,20 @@ impacket-secretsdump Administrator:'password'@$IP -outputfile hashes
 https://crackstation.net/
 hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
 ````
+````
+$DCC2$10240#username#hash
+````
+````
+$DCC2$10240#Administrator#a7c5480e8c1ef0ffec54e99275e6e0f7
+$DCC2$10240#yoshi#cd21be418f01f5591ac8df1fdeaa54b6
+$DCC2$10240#wario#b82706aff8acf56b6c325a6c2d8c338a
+$DCC2$10240#joe#464f388c3fe52a0fa0a6c8926d62059c
+````
+````
+hashcat -m 2100 hashes.txt /usr/share/wordlists/rockyou.txt
+
+This hash does not allow pass-the-hash style attacks, and instead requires Password Cracking to recover the plaintext password
+````
 ###### Powershell
 ````
 PS C:\> (Get-PSReadlineOption).HistorySavePath
