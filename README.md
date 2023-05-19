@@ -38,6 +38,10 @@ echo "Running second nmap scan with open ports: $ports"
 
 nmap -p "$ports" -sC -sV -A "$target"
 ````
+### Autorecon
+````
+autorecon 192.168.238.156 --nmap-append="--min-rate=2500" --exclude-tags="top-100-udp-ports" --dirbuster.threads=30 -vv
+````
 ### Port Enumeration
 #### FTP port 21
 ##### Emumeration
