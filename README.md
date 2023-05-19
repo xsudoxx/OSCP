@@ -2764,6 +2764,58 @@ cluddy                                                2020-11-04 00:35:05.703274
 agitthouse                                            2020-11-04 00:35:05.760273  <never>             
 fmcsorley                                             2020-11-04 00:35:05.815275  2021-02-16 08:39:34.483491
 ````
+###### Creds
+````
+impacket-GetADUsers -dc-ip 192.168.214.122 hutch.offsec/fmcsorley:CrabSharkJellyfish192 -all
+````
+````
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+
+[*] Querying 192.168.214.122 for information about domain.
+Name                  Email                           PasswordLastSet      LastLogon           
+--------------------  ------------------------------  -------------------  -------------------
+Administrator                                         2023-05-19 17:01:26.839372  2020-11-04 00:58:40.654236 
+Guest                                                 <never>              <never>             
+krbtgt                                                2020-11-04 00:26:23.099902  <never>             
+rplacidi                                              2020-11-04 00:35:05.106274  <never>             
+opatry                                                2020-11-04 00:35:05.216273  <never>             
+ltaunton                                              2020-11-04 00:35:05.264272  <never>             
+acostello                                             2020-11-04 00:35:05.315273  <never>             
+jsparwell                                             2020-11-04 00:35:05.377272  <never>             
+oknee                                                 2020-11-04 00:35:05.433274  <never>             
+jmckendry                                             2020-11-04 00:35:05.492273  <never>             
+avictoria                                             2020-11-04 00:35:05.545279  <never>             
+jfrarey                                               2020-11-04 00:35:05.603273  <never>             
+eaburrow                                              2020-11-04 00:35:05.652273  <never>             
+cluddy                                                2020-11-04 00:35:05.703274  <never>             
+agitthouse                                            2020-11-04 00:35:05.760273  <never>             
+fmcsorley                                             2020-11-04 00:35:05.815275  2021-02-16 08:39:34.483491 
+domainadmin                                           2021-02-16 00:24:22.190351  2023-05-19 16:58:10.073764
+````
+##### Bloodhound.py
+````
+/opt/BloodHound.py/bloodhound.py -d hutch.offsec -u fmcsorley -p CrabSharkJellyfish192 -c all -ns 192.168.214.122
+````
+````
+INFO: Found AD domain: hutch.offsec
+INFO: Getting TGT for user
+WARNING: Failed to get Kerberos TGT. Falling back to NTLM authentication. Error: [Errno Connection error (hutch.offsec:88)] [Errno 111] Connection refused
+INFO: Connecting to LDAP server: hutchdc.hutch.offsec
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 1 computers
+INFO: Connecting to LDAP server: hutchdc.hutch.offsec
+INFO: Found 18 users
+INFO: Found 52 groups
+INFO: Found 2 gpos
+INFO: Found 1 ous
+INFO: Found 19 containers
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: hutchdc.hutch.offsec
+INFO: Done in 00M 12S
+
+````
 ##### Network commands
 ````
 arp -a #look for IPs that your victim is connected
