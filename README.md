@@ -2739,6 +2739,31 @@ https://github.com/brianlam38/OSCP-2022/blob/main/cheatsheet-active-directory.md
 nmap -p80 --min-rate 1000 10.11.1.20-24 #looking for initial foothold
 nmap -p88 --min-rate 1000 10.11.1.20-24 #looking for DC
 ````
+##### Impacket
+````
+impacket-GetADUsers -dc-ip 192.168.214.122 "hutch.offsec/" -all 
+````
+````
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+
+[*] Querying 192.168.214.122 for information about domain.
+Name                  Email                           PasswordLastSet      LastLogon           
+--------------------  ------------------------------  -------------------  -------------------
+Guest                                                 <never>              <never>             
+rplacidi                                              2020-11-04 00:35:05.106274  <never>             
+opatry                                                2020-11-04 00:35:05.216273  <never>             
+ltaunton                                              2020-11-04 00:35:05.264272  <never>             
+acostello                                             2020-11-04 00:35:05.315273  <never>             
+jsparwell                                             2020-11-04 00:35:05.377272  <never>             
+oknee                                                 2020-11-04 00:35:05.433274  <never>             
+jmckendry                                             2020-11-04 00:35:05.492273  <never>             
+avictoria                                             2020-11-04 00:35:05.545279  <never>             
+jfrarey                                               2020-11-04 00:35:05.603273  <never>             
+eaburrow                                              2020-11-04 00:35:05.652273  <never>             
+cluddy                                                2020-11-04 00:35:05.703274  <never>             
+agitthouse                                            2020-11-04 00:35:05.760273  <never>             
+fmcsorley                                             2020-11-04 00:35:05.815275  2021-02-16 08:39:34.483491
+````
 ##### Network commands
 ````
 arp -a #look for IPs that your victim is connected
