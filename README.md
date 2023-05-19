@@ -586,6 +586,57 @@ $ cat /etc/snmp/snmp.conf
 sudo snmpbulkwalk -c public -v2c $IP .
 sudo snmpbulkwalk -c public -v2c $IP NET-SNMP-EXTEND-MIB::nsExtendOutputFull 
 ````
+#### LDAP port Port 389,636,3268,3269
+````
+ldapsearch -x -H ldap://192.168.214.122
+
+# extended LDIF
+#
+# LDAPv3
+# base <> (default) with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# search result
+search: 2
+result: 32 No such object
+text: 0000208D: NameErr: DSID-0310021C, problem 2001 (NO_OBJECT), data 0, best 
+ match of:
+        ''
+
+
+# numResponses: 1
+````
+````
+ldapsearch -x -H ldap://192.168.214.122 -s base namingcontexts
+
+# extended LDIF
+#
+# LDAPv3
+# base <> (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts 
+#
+
+#
+dn:
+namingcontexts: DC=hutch,DC=offsec
+namingcontexts: CN=Configuration,DC=hutch,DC=offsec
+namingcontexts: CN=Schema,CN=Configuration,DC=hutch,DC=offsec
+namingcontexts: DC=DomainDnsZones,DC=hutch,DC=offsec
+namingcontexts: DC=ForestDnsZones,DC=hutch,DC=offsec
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
+````
+````
+ldapsearch -x -H ldap://192.168.214.122 -b "DC=hutch,DC=offsec"
+````
 #### MSSQL port 1433
 ##### Enumeration
 ````
