@@ -504,6 +504,19 @@ smbmap -u null -p "" -H $IP -P 445 -x "ipconfig /all" 2>&1
 rpcclient
 ````
 rpcclient -U "" -N $IP
+enumdomusers
+enumdomgroups
+queryuser 0x450
+enumprinters
+querydominfo
+createdomuser
+deletedomuser
+lookupnames
+lookupsids
+lsaaddacctrights
+lsaremoveacctrights
+dsroledominfo
+dsenumdomtrusts
 ````
 enum4linux
 ````
