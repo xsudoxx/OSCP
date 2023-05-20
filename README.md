@@ -1251,6 +1251,9 @@ https://revshells.com/
 hashid <paste your hash here>
 ````
 ````
+https://www.onlinehashcrack.com/hash-identification.php
+````
+````
 https://hashcat.net/wiki/doku.php?id=example_hashes
 ````
 #### Cracking hashes
