@@ -186,6 +186,13 @@ Log files such as .log, .txt, and .xml files.
 Backup files such as .bak, .zip, and .tar.gz files.
 Database files such as .mdb, .sqlite, .db, and .sql files.
 ````
+##### java/apk files
+````
+jadx-gui
+````
+````
+APK stands for Android Package Kit. It is the file format used by the Android operating system to distribute and install applications. An APK file contains all the necessary components and resources of an Android application, such as code, assets, libraries, and manifest files.
+````
 ##### Brute Forcing / Fuzzing logins techniques
 ###### ffuf
 ````
