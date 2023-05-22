@@ -722,6 +722,16 @@ The user cannot be logged in or active
 ````
 sudo usermod -aG 1014 root
 ````
+##### Changing owners
+````
+-rw------- 1 root root 3381 Sep 24  2020 id_rsa
+````
+````
+sudo chown kali id_rsa
+````
+````
+-rw------- 1 kali root 3381 Sep 24  2020 id_rsa
+````
 
 #### cgms? port 3003
 ##### Enumeration
