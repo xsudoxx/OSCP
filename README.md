@@ -1537,6 +1537,14 @@ find / -type d -writable -user $(whoami) 2>/dev/null
 ### Finding SUID Binaries
 ````
 find / -perm -4000 -user root -exec ls -ld {} \; 2> /dev/null
+find / -perm /4000 2>/dev/null
+````
+### start-stop-daemon
+````
+/usr/sbin/start-stop-daemon
+````
+````
+/usr/sbin/start-stop-daemon -n foo -S -x /bin/sh -- -p
 ````
 ### Crontab 
 ````
