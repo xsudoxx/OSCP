@@ -326,6 +326,18 @@ wpscan --url http://$IP/wp/
 ````
 wpscan --url http://$IP/wp/wp-login.php -U Admin --passwords /usr/share/wordlists/rockyou.txt --password-attack wp-login
 ````
+###### simple-file-list
+````
+[+] simple-file-list
+ | Location: http://192.168.192.105/wp-content/plugins/simple-file-list/
+ | Last Updated: 2023-05-17T17:12:00.000Z
+ | [!] The version is out of date, the latest version is 6.1.7
+````
+````
+https://www.exploit-db.com/exploits/48979
+
+Simple File List < 4.2.3 - Unauthenticated Arbitrary File Upload
+````
 ###### Malicous Plugins
 ````
 https://github.com/wetw0rk/malicious-wordpress-plugin
