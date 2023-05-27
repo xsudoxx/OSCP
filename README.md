@@ -120,6 +120,29 @@ ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5
 /home/anita/.ssh/id_ecdsa.pub #public key
 /home/anita/.ssh/id_ecdsa #private key
 ````
+##### Errors
+this means no password! Use it to login as a user on the box
+````
+ssh2john id_rsa > id_rsa.hash             
+id_rsa has no password!
+````
+This means you are most likely using the private key for the wrong user, try doing a cat /etc/passwd in order to find other users to try it on. This error came from me trying a private key on the wrong user and private key which has no password asking for a password
+````
+ssh root@192.168.214.125 -p43022 -i id_rsa  
+Warning: Identity file id_rsa not accessible: No such file or directory.
+The authenticity of host '[192.168.214.125]:43022 ([192.168.214.125]:43022)' can't be established.
+ED25519 key fingerprint is SHA256:rNaauuAfZyAq+Dhu+VTKM8BGGiU6QTQDleMX0uANTV4.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[192.168.214.125]:43022' (ED25519) to the list of known hosts.
+root@192.168.214.125's password: 
+Permission denied, please try again.
+root@192.168.214.125's password: 
+Permission denied, please try again.
+root@192.168.214.125's password: 
+root@192.168.214.125: Permission denied (publickey,password).
+
+````
 ##### Downloading files
 ````
 scp -r -i id_rsa john@192.168.214.149:/path/to/file/you/want .
