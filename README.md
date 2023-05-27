@@ -224,6 +224,19 @@ feroxbuster -u http://192.168.138.249:8000/cms/ -t 30 -w /usr/share/wordlists/di
 
 feroxbuster -u http://192.168.138.249:8000/cms/ -t 30 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x "txt,html,php,asp,aspx,jsp" -v -k -n -e -C 404,302 #if website redirects
 ````
+##### api
+````
+curl http://$ip/api/
+````
+````
+[{"string":"/api/","id":13},{"string":"/article/","id":14},{"string":"/article/?","id":15},{"string":"/user/","id":16},{"string":"/user/?","id":17}] 
+````
+````
+curl http://$ip/api/user/ 
+````
+````
+[{"login":"rjackson","password":"yYJcgYqszv4aGQ","firstname":"Richard","lastname":"Jackson","description":"Editor","id":1},{"login":"jsanchez","password":"d52cQ1BzyNQycg","firstname":"Jennifer","lastname":"Sanchez","description":"Editor","id":3},{"login":"dademola","password":"ExplainSlowQuest110","firstname":"Derik","lastname":"Ademola","description":"Admin","id":6},{"login":"jwinters","password":"KTuGcSW6Zxwd0Q","firstname":"Julie","lastname":"Winters","description":"Editor","id":7},{"login":"jvargas","password":"OuQ96hcgiM5o9w","firstname":"James","lastname":"Vargas","description":"Editor","id":10}]
+````
 ##### Files of interest
 ````
 Configuration files such as .ini, .config, and .conf files.
@@ -643,6 +656,24 @@ smbclient -U null -N \\\\<smb $IP>\\<share name>
 protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
 smbclient -U '%' -N \\\\$IP\\<share name> -m SMB2
 smbclient -U '%' -N \\\\$IP\\<share name> -m SMB3
+````
+##### smblient random port
+````
+smbclient -L \\192.168.214.125 -U "" -N -p 12445
+Sharename       Type      Comment
+        ---------       ----      -------
+        Commander       Disk      Dademola Files
+        IPC$            IPC       IPC Service (Samba 4.13.2)
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 192.168.214.125 failed (Error NT_STATUS_IO_TIMEOUT)
+Unable to connect with SMB1 -- no workgroup available
+````
+````
+smbclient '//192.168.214.125/Commander' -p 12445
+Password for [WORKGROUP\root]:
+Anonymous login successful
+Try "help" to get a list of possible commands.
+smb: \> dir
 ````
 #### IMAP port 143/993
 ##### Enumeration
