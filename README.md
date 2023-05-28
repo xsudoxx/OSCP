@@ -2146,6 +2146,10 @@ Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
 To 192.168.214.125:/git-server
    b50f4e5..872aa26  master -> master
 ````
+
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/44038636-d0c0-46a9-94a3-aa1e7613eea8)
+
+
 ### Exiftool priv esc
 ````
 SHELL=/bin/sh
