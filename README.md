@@ -998,6 +998,7 @@ root:root
 admin@xor.com:admin
 admin:admin
 kiero:kiero #name of the box
+cassie:cassie #Found users with exiftool
 ````
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
 ### Nodes.js(express)
