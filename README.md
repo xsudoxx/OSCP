@@ -70,6 +70,82 @@ wget -r ftp://anonymous:anonymous@192.168.204.157/
 ````
 find / -name Settings.*  2>/dev/null #looking through the files
 ````
+##### Exiftool
+````
+ls
+BROCHURE-TEMPLATE.pdf  CALENDAR-TEMPLATE.pdf  FUNCTION-TEMPLATE.pdf  NEWSLETTER-TEMPLATE.pdf  REPORT-TEMPLATE.pdf
+````
+````
+exiftool *                                             
+
+======== FUNCTION-TEMPLATE.pdf
+ExifTool Version Number         : 12.57
+File Name                       : FUNCTION-TEMPLATE.pdf
+Directory                       : .
+File Size                       : 337 kB
+File Modification Date/Time     : 2022:11:02 00:00:00-04:00
+File Access Date/Time           : 2023:05:28 22:42:28-04:00
+File Inode Change Date/Time     : 2023:05:28 22:40:43-04:00
+File Permissions                : -rw-r--r--
+File Type                       : PDF
+File Type Extension             : pdf
+MIME Type                       : application/pdf
+PDF Version                     : 1.5
+Linearized                      : No
+Page Count                      : 1
+Language                        : en-US
+Tagged PDF                      : Yes
+Author                          : Cassie
+Creator                         : Microsoft® Word 2016
+Create Date                     : 2022:11:02 11:38:02+02:00
+Modify Date                     : 2022:11:02 11:38:02+02:00
+Producer                        : Microsoft® Word 2016
+======== NEWSLETTER-TEMPLATE.pdf
+ExifTool Version Number         : 12.57
+File Name                       : NEWSLETTER-TEMPLATE.pdf
+Directory                       : .
+File Size                       : 739 kB
+File Modification Date/Time     : 2022:11:02 00:00:00-04:00
+File Access Date/Time           : 2023:05:28 22:42:37-04:00
+File Inode Change Date/Time     : 2023:05:28 22:40:44-04:00
+File Permissions                : -rw-r--r--
+File Type                       : PDF
+File Type Extension             : pdf
+MIME Type                       : application/pdf
+PDF Version                     : 1.5
+Linearized                      : No
+Page Count                      : 2
+Language                        : en-US
+Tagged PDF                      : Yes
+Author                          : Mark
+Creator                         : Microsoft® Word 2016
+Create Date                     : 2022:11:02 11:11:56+02:00
+Modify Date                     : 2022:11:02 11:11:56+02:00
+Producer                        : Microsoft® Word 2016
+======== REPORT-TEMPLATE.pdf
+ExifTool Version Number         : 12.57
+File Name                       : REPORT-TEMPLATE.pdf
+Directory                       : .
+File Size                       : 889 kB
+File Modification Date/Time     : 2022:11:02 00:00:00-04:00
+File Access Date/Time           : 2023:05:28 22:42:49-04:00
+File Inode Change Date/Time     : 2023:05:28 22:40:45-04:00
+File Permissions                : -rw-r--r--
+File Type                       : PDF
+File Type Extension             : pdf
+MIME Type                       : application/pdf
+PDF Version                     : 1.5
+Linearized                      : No
+Page Count                      : 2
+Language                        : en-US
+Tagged PDF                      : Yes
+Author                          : Robert
+Creator                         : Microsoft® Word 2016
+Create Date                     : 2022:11:02 11:08:26+02:00
+Modify Date                     : 2022:11:02 11:08:26+02:00
+Producer                        : Microsoft® Word 2016
+    5 image files read
+````
 
 #### SSH port 22
 ##### Emumeration
