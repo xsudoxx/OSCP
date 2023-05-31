@@ -2124,6 +2124,16 @@ This command creates an SSH tunnel between your local computer and a remote comp
 
 #notes we did not use proxychains on this. just as the setup was above
 ````
+##### Example #2
+````
+Lets say you have compromised host 192.168.236.147 which has access to 10.10.126.148, you could access the mssql server on port 1433 locally by doing a local port forward as seen below. This will essence allow you to access to the mssql port on your local machine with out needing proxychains.
+````
+````
+ssh -L 1433:10.10.126.148:1433 Administrator@192.168.236.147 -N
+````
+````
+sqsh -S 127.0.0.1 -U oscp.exam\\sql_svc -P Dolphin1 -D msdb
+````
 #### Chisel
 ````
 https://github.com/jpillora/chisel/releases/ #where you can find newer versions
