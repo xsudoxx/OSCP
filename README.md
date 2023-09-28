@@ -1723,6 +1723,13 @@ Possible password: ●_dgr●d med fl●de
 Possible password: ●cdgr●d med fl●de
 Possible password: ●Mdgr●d med fl●de
 ````
+#### Downloading keepassxc
+````
+sudo apt update && sudo apt-get install keepassxc
+````
+
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/7aa67384-ba6b-4a94-b522-99349a987e3d)
+
 #### Cracking Zip files
 ````
 unzip <file>
