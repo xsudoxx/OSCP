@@ -1730,6 +1730,9 @@ sudo apt update && sudo apt-get install keepassxc
 
 ![image](https://github.com/xsudoxx/OSCP/assets/127046919/7aa67384-ba6b-4a94-b522-99349a987e3d)
 
+![image](https://github.com/xsudoxx/OSCP/assets/127046919/1b97a744-63ab-4264-b3b3-e32485edfceb)
+
+
 #### Cracking Zip files
 ````
 unzip <file>
