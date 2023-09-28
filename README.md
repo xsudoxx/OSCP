@@ -148,6 +148,10 @@ Producer                        : Microsoft® Word 2016
 ````
 
 #### SSH port 22
+#### putty tools
+````
+sudo apt upgrade && sudo apt install putty-tools
+````
 ##### Emumeration
 ##### Exploitation
 ````
