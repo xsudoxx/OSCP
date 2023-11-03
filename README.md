@@ -600,19 +600,19 @@ CAH+RLndklWU8DpYtB4cOJG/f9Jd7Xtwg3bi1rkRKsyp8yHbA+wsfc2yLWM=
 ##### /etc/hosts FQDN
 ###### Background
 ````
-on our initial scan we were able to find a pdf file that included credentials and instructions to setup an umbraco cms. "IIS is configured to only allow access to Umbraco the server is FQDN at the moment e.g. web02.relia.com, not just web02"
+on our initial scan we were able to find a pdf file that included credentials and instructions to setup an umbraco cms. "IIS is configured to only allow access to Umbraco the server is FQDN at the moment e.g. web02.example.com, not just web02"
 ````
 ###### Initial Scan
 ````
 nmap -p 80,443,5985,14080,47001 -sC -sV -A 192.168.138.247                                                  
 Starting Nmap 7.93 ( https://nmap.org ) at 2023-04-25 18:58 EDT
-Nmap scan report for web02.relia.com (192.168.138.247)
+Nmap scan report for web02.example.com (192.168.138.247)
 Host is up (0.067s latency).
 
 PORT      STATE SERVICE  VERSION
 80/tcp    open  http     Apache httpd 2.4.54 ((Win64) OpenSSL/1.1.1p PHP/8.1.10)
 |_http-server-header: Apache/2.4.54 (Win64) OpenSSL/1.1.1p PHP/8.1.10
-|_http-title: RELIA - New Hire Information
+|_http-title: example - New Hire Information
 443/tcp   open  ssl/http Apache httpd 2.4.54 ((Win64) OpenSSL/1.1.1p PHP/8.1.10)
 |_http-server-header: Apache/2.4.54 (Win64) OpenSSL/1.1.1p PHP/8.1.10
 | ssl-cert: Subject: commonName=localhost
@@ -621,7 +621,7 @@ PORT      STATE SERVICE  VERSION
 | tls-alpn: 
 |_  http/1.1
 |_ssl-date: TLS randomness does not represent time
-|_http-title: RELIA - New Hire Information
+|_http-title: example - New Hire Information
 5985/tcp  open  http     Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
 |_http-server-header: Microsoft-HTTPAPI/2.0
 |_http-title: Not Found
@@ -633,7 +633,7 @@ PORT      STATE SERVICE  VERSION
 47001/tcp open  http     Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
 |_http-server-header: Microsoft-HTTPAPI/2.0
 |_http-title: Not Found
-Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Warning: OSScan results may be unexampleble because we could not find at least 1 open and 1 closed port
 Device type: general purpose
 Running (JUST GUESSING): Microsoft Windows 2016|10|2012 (89%)
 OS CPE: cpe:/o:microsoft:windows_server_2016 cpe:/o:microsoft:windows_10 cpe:/o:microsoft:windows_server_2012:r2
@@ -645,7 +645,7 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 TRACEROUTE (using port 80/tcp)
 HOP RTT      ADDRESS
 1   51.93 ms 192.168.119.1
-2   51.88 ms web02.relia.com (192.168.138.247)
+2   51.88 ms web02.example.com (192.168.138.247)
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 27.34 seconds
@@ -654,19 +654,19 @@ Nmap done: 1 IP address (1 host up) scanned in 27.34 seconds
 ````
 127.0.0.1       localhost
 127.0.1.1       kali
-192.168.138.247 web02.relia.com
+192.168.138.247 web02.example.com
 ````
 ###### New Nmap Scan
 ````
-nmap -p 80,443,5985,14080,47001 -sC -sV -A web02.relia.com
+nmap -p 80,443,5985,14080,47001 -sC -sV -A web02.example.com
 Starting Nmap 7.93 ( https://nmap.org ) at 2023-04-25 19:00 EDT
-Nmap scan report for web02.relia.com (192.168.138.247)
+Nmap scan report for web02.example.com (192.168.138.247)
 Host is up (0.092s latency).
 
 PORT      STATE SERVICE  VERSION
 80/tcp    open  http     Apache httpd 2.4.54 ((Win64) OpenSSL/1.1.1p PHP/8.1.10)
 |_http-server-header: Apache/2.4.54 (Win64) OpenSSL/1.1.1p PHP/8.1.10
-|_http-title: RELIA - New Hire Information
+|_http-title: example - New Hire Information
 443/tcp   open  ssl/http Apache httpd 2.4.54 (OpenSSL/1.1.1p PHP/8.1.10)
 |_http-server-header: Apache/2.4.54 (Win64) OpenSSL/1.1.1p PHP/8.1.10
 |_ssl-date: TLS randomness does not represent time
@@ -675,7 +675,7 @@ PORT      STATE SERVICE  VERSION
 |_Not valid after:  2019-11-08T23:48:47
 | tls-alpn: 
 |_  http/1.1
-|_http-title: RELIA - New Hire Information
+|_http-title: example - New Hire Information
 5985/tcp  open  http     Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
 |_http-server-header: Microsoft-HTTPAPI/2.0
 |_http-title: Not Found
@@ -698,7 +698,7 @@ Service Info: Host: www.example.com; OS: Windows; CPE: cpe:/o:microsoft:windows
 TRACEROUTE (using port 80/tcp)
 HOP RTT       ADDRESS
 1   100.83 ms 192.168.119.1
-2   100.82 ms web02.relia.com (192.168.138.247)
+2   100.82 ms web02.example.com (192.168.138.247)
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 32.21 seconds
@@ -2144,9 +2144,9 @@ index 77e370c..0000000
 +++ /dev/null
 @@ -1,5 +0,0 @@
 -Email configuration of the CMS
--maildmz@relia.com:DPuBT9tGCBrTbR
+-maildmz@example.com:DPuBT9tGCBrTbR
 -
--If something breaks contact jim@relia.com as he is responsible for the mail server. 
+-If something breaks contact jim@example.com as he is responsible for the mail server. 
 -Please don't send any office or executable attachments as they get filtered out for security reasons.
 \ No newline at end of file
 ````
