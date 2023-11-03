@@ -1,4 +1,4 @@
-## example Cheat Sheet <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
+## Example Cheat Sheet <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
 ## If anything is missing refer here
 ````
 https://github.com/0xsyr0/oscp
